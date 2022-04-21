@@ -1,0 +1,25 @@
+{
+  "name": "instagram",
+  "version": "1.0.0",
+  "description": "Servidor graphql y node de Instagram",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevLop-EC/Instagram.git"
+  },
+  "author": "Christian Lopez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevLop-EC/Instagram/issues"
+  },
+  "homepage": "https://github.com/DevLop-EC/Instagram#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.7",
+    "dotenv": "^16.0.0",
+    "mariadb": "^3.0.0",
+    "mysql": "^2.18.1"
+  }
+}
