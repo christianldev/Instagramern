@@ -1,6 +1,10 @@
 //conect mysql database
 let mysql = require('mysql');
 
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require('./gql/schema');
+const resolvers = require('./gql/resolver');
+
 //import dotenv
 require('dotenv').config();
 
@@ -12,8 +16,21 @@ let connection = mysql.createConnection({
 });
 
 try {
-  connection.connect();
-  console.log('Connected to database');
+  connection.connect(() => server());
 } catch (error) {
   console.log(error);
+}
+
+function server() {
+  const serverApollo = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+
+  serverApollo.listen().then(({ url }) => {
+    console.log('##########################');
+    console.log(`Servidor listo en: ${url}`);
+    console.log('##########################');
+    console.log('Servidor ON');
+  });
 }
