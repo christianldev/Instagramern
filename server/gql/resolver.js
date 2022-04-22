@@ -7,7 +7,8 @@ const resolvers = {
   },
   Mutation: {
     //User
-    register: async (_, { input }) => UserController.register(input),
+    register: (_, { input }) => UserController.register(input),
+    login: (_, { input }) => UserController.login(input),
   },
 };
 

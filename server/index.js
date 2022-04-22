@@ -34,6 +34,5 @@ function server() {
     console.log('##########################');
     console.log(`Servidor listo en: ${url}`);
     console.log('##########################');
-    console.log('Servidor ON');
   });
 }
