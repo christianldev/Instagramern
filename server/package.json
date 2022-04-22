@@ -18,6 +18,7 @@
   "homepage": "https://github.com/DevLop-EC/Instagram#readme",
   "dependencies": {
     "apollo-server": "^3.6.7",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "mongoose": "^6.3.1"
   }

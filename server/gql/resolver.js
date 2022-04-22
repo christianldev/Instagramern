@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 const resolvers = {
   Query: {
@@ -30,6 +31,8 @@ const resolvers = {
       }
 
       //Encriptar password
+      const salt = await bcrypt.genSaltSync(10);
+      newUser.password = await bcrypt.hashSync(password, salt);
 
       try {
         const user = new User(newUser);
