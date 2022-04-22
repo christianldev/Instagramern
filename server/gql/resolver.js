@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 const resolvers = {
   Query: {
     //User
@@ -8,9 +10,34 @@ const resolvers = {
   },
   Mutation: {
     //User
-    register: (_, { input }) => {
-      console.log('Registrando usuario');
-      return null;
+    register: async (_, { input }) => {
+      const newUser = input;
+
+      newUser.email = newUser.email.toLowerCase();
+      newUser.username = newUser.username.toLowerCase();
+
+      const { email, username, password } = newUser;
+
+      // Revisar si el email ya existe
+      const foundEmail = await User.findOne({ email });
+      if (foundEmail) {
+        throw new Error('El email ya existe');
+      }
+      // Revisar si el username ya existe
+      const foundUsername = await User.findOne({ username });
+      if (foundUsername) {
+        throw new Error('El usuario ya existe');
+      }
+
+      //Encriptar password
+
+      try {
+        const user = new User(newUser);
+        await user.save();
+        return user;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

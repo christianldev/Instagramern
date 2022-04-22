@@ -1,25 +1,28 @@
 //conect mysql database
-let mysql = require('mysql');
+const mongoose = require('mongoose');
 
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./gql/schema');
 const resolvers = require('./gql/resolver');
 
 //import dotenv
-require('dotenv').config();
+require('dotenv').config({ path: '.env' });
 
-let connection = mysql.createConnection({
-  host: process.env.DBHOST,
-  user: process.env.DBUSER,
-  password: process.env.DBPASSWD,
-  database: process.env.DBNAME,
-});
-
-try {
-  connection.connect(() => server());
-} catch (error) {
-  console.log(error);
-}
+mongoose.connect(
+  process.env.BBDD,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err, _) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Conectado a la base de datos');
+    }
+  },
+  server(),
+);
 
 function server() {
   const serverApollo = new ApolloServer({
