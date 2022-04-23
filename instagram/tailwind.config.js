@@ -1,9 +1,10 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'dark-theme': {
+        darktheme: {
           100: '#fafafa',
           200: '#f5f5f5',
           300: '#eeeeee',
@@ -13,24 +14,8 @@ module.exports = {
           700: '#757575',
           800: '#616161',
           900: '#424242',
-          A100: '#d5d5d5',
-          A200: '#aaaaaa',
-          A400: '#303030',
-          A700: '#616161',
-          contrastDefaultColor: 'dark',
-          contrastDarkColors: ['50', '100', '200', '300', '400', 'A100'],
-          contrastLightColors: [
-            '500',
-            '600',
-            '700',
-            '800',
-            '900',
-            'A200',
-            'A400',
-            'A700',
-          ],
         },
-        'light-theme': {
+        lightheme: {
           100: '#ffffff',
           200: '#eeeeee',
           300: '#e0e0e0',
@@ -40,23 +25,6 @@ module.exports = {
           700: '#616161',
           800: '#424242',
           900: '#303030',
-          A100: '#ffffff',
-          A200: '#eeeeee',
-          A400: '#303030',
-          A700: '#616161',
-          contrastDefaultColor: 'dark',
-          contrastDarkColors: ['50', '100', '200', '300', '400', 'A100'],
-          contrastLightColors: [
-            '500',
-            '600',
-            '700',
-
-            '800',
-            '900',
-            'A200',
-            'A400',
-            'A700',
-          ],
         },
       },
     },
