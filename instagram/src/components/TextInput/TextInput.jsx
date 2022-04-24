@@ -1,9 +1,11 @@
 import React from 'react';
+import { Field } from 'formik';
 
 import { FaExclamationCircle } from 'react-icons/fa';
 
 export function TextInput({ useField, label, ...rest }) {
   const [field, meta] = useField(rest);
+
   return (
     <>
       <label
@@ -14,7 +16,7 @@ export function TextInput({ useField, label, ...rest }) {
       </label>
 
       <div className="mt-1 relative">
-        <input
+        <Field
           className="block w-full rounded-xl p-2 text-sm bg-black"
           {...field}
           {...rest}

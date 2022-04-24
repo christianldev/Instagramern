@@ -2,13 +2,16 @@ import * as Yup from 'yup';
 
 export const validationSchemaRegister = Yup.object({
   name: Yup.string().required('Tu nombre es requerido'),
-  username: Yup.string().required('Tu nombre de usuario es requerido'),
+  username: Yup.string()
+    .required('Tu nombre de usuario es requerido')
+    .matches(/^[a-zA-Z0-9]*$/, 'El nombre de usuario no puede tener espacios'),
   email: Yup.string()
     .required('Tu correo es requerido')
     .email('Ingresa un correo valido'),
 
   password: Yup.string()
     .required('La contraseña es requerida')
+    .oneOf([Yup.ref('repeatPassword'), null], 'Las contraseñas no coinciden')
     .matches(
       /(?=.*?[A-Z])/,
       'La contraseña debe tener al menos una letra mayuscula',

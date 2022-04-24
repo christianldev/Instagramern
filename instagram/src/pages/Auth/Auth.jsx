@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { useField, Formik } from 'formik';
 
 import { FaFacebookSquare, FaGooglePlay, FaApple } from 'react-icons/fa';
 import './Auth.css';
-import { TextInput } from '../../components/TextInput/TextInput';
+
 import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
-import {
-  validationSchemaLogin,
-  validationSchemaRegister,
-} from '../../helpers/validationSchema';
+
 import { InstagramLogo } from '../../components/InstagramLogo/InstagramLogo';
 
 export default function Auth() {
@@ -81,39 +77,11 @@ export default function Auth() {
             </div>
           )}
           {loginForm && <p className="text-gray-100">o usa tu cuenta</p>}
-          <Formik
-            initialValues={{
-              name: '',
-              username: '',
-              email: '',
-              password: '',
-              repeatPassword: '',
-            }}
-            validationSchema={
-              loginForm ? validationSchemaLogin : validationSchemaRegister
-            }
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-          >
-            {(formik) =>
-              loginForm ? (
-                <LoginForm
-                  useField={useField}
-                  formik={formik}
-                  loginForm={loginForm}
-                  setLoginForm={setLoginForm}
-                />
-              ) : (
-                <RegisterForm
-                  useField={useField}
-                  formik={formik}
-                  loginForm={loginForm}
-                  setLoginForm={setLoginForm}
-                />
-              )
-            }
-          </Formik>
+          {loginForm ? (
+            <LoginForm loginForm={loginForm} setLoginForm={setLoginForm} />
+          ) : (
+            <RegisterForm loginForm={loginForm} setLoginForm={setLoginForm} />
+          )}
         </div>
       </div>
     </section>
