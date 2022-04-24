@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput } from '../TextInput/TextInput';
 
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+
 export const LoginForm = ({ useField, formik, loginForm, setLoginForm }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
       <div className="pb-2 pt-4">
@@ -12,13 +20,28 @@ export const LoginForm = ({ useField, formik, loginForm, setLoginForm }) => {
           label="Correo electronico"
         />
       </div>
-      <div className="pb-2 pt-4">
+      <div className="relative pb-2 pt-4">
         <TextInput
           useField={useField}
-          label="Contraseña"
+          type={showPassword ? 'text' : 'password'}
           name="password"
-          type="password"
+          label="Contraseña"
         />
+
+        <div
+          onClick={handleShowPassword}
+          class="absolute inset-y-0 right-0 pr-3 pt-7 flex items-center text-sm leading-5 cursor-pointer"
+        >
+          {showPassword ? (
+            <FaRegEye
+              className={!formik.isValid && !formik.dirty ? 'hidden' : ''}
+            />
+          ) : (
+            <FaRegEyeSlash
+              className={!formik.isValid && !formik.dirty ? 'hidden' : ''}
+            />
+          )}
+        </div>
       </div>
       <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
         <a href="#" className="text-sm">

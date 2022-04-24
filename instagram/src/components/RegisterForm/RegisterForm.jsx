@@ -40,6 +40,14 @@ export const RegisterForm = ({
           type="password"
         />
       </div>
+      <div className="pb-2 pt-2">
+        <TextInput
+          useField={useField}
+          label="Repetir contraseña"
+          name="repeatPassword"
+          type="password"
+        />
+      </div>
       <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
         <a href="#" className="text-sm">
           Olvidaste tu constraseña?

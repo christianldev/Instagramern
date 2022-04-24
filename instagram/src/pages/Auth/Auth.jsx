@@ -87,6 +87,7 @@ export default function Auth() {
               username: '',
               email: '',
               password: '',
+              repeatPassword: '',
             }}
             validationSchema={
               loginForm ? validationSchemaLogin : validationSchemaRegister

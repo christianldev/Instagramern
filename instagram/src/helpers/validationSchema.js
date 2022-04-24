@@ -20,6 +20,9 @@ export const validationSchemaRegister = Yup.object({
     .matches(/(?=.*?[0-9])/, 'La contraseña debe tener al menos un numero')
 
     .min(8, 'La contraseña debe tener minimo 8 caracteres'),
+  repeatPassword: Yup.string()
+    .required('La contraseña es requerida')
+    .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden'),
 });
 
 export const validationSchemaLogin = Yup.object({
