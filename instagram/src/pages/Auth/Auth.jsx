@@ -1,123 +1,148 @@
 import React from 'react';
 import Toggle from '../../components/Toggle/Toggle';
 
+import { FaFacebookSquare } from 'react-icons/fa';
+import './Auth.css';
+
 export default function Auth() {
   return (
-    <div className="relative">
-      <img
-        src="https://images.pexels.com/photos/3228766/pexels-photo-3228766.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-        className="absolute inset-0 object-cover w-full h-full"
-        alt=""
-      />
-      <div className="relative bg-opacity-75 bg-gradient-to-r from-indigo-500 ">
-        <svg
-          className="absolute inset-x-0 bottom-0 text-white"
-          viewBox="0 0 1160 163"
-        >
-          <path
-            fill="currentColor"
-            d="M-164 13L-104 39.7C-44 66 76 120 196 141C316 162 436 152 556 119.7C676 88 796 34 916 13C1036 -8 1156 2 1216 7.7L1276 13V162.5H1216C1156 162.5 1036 162.5 916 162.5C796 162.5 676 162.5 556 162.5C436 162.5 316 162.5 196 162.5C76 162.5 -44 162.5 -104 162.5H-164V13Z"
-          />
-        </svg>
-        <div className="relative px-4 py-16 mx-auto overflow-hidden sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div className="flex flex-col items-center justify-between xl:flex-row">
-            <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-                The quick, brown fox <br className="hidden md:block" />
-                jumps over a lazy dog
-              </h2>
-
-              <p className="max-w-xl mb-4 text-base text-gray-200  md:text-lg">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudan, totam rem aperiam, eaque ipsa
-                quae.
-              </p>
-              <a
-                href="/"
-                aria-label=""
-                className="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-teal-accent-400 hover:text-teal-accent-700"
-              >
-                Learn more
-                <svg
-                  className="inline-block w-3 ml-2"
-                  fill="currentColor"
-                  viewBox="0 0 12 12"
-                >
-                  <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
-                </svg>
-              </a>
-            </div>
-            <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
-              <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
-                <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
-                  Sign up for updates
-                </h3>
-                <form>
-                  <div className="mb-1 sm:mb-2">
-                    <label
-                      htmlFor="firstName"
-                      className="inline-block mb-1 font-medium"
-                    >
-                      First name
-                    </label>
-                    <input
-                      placeholder="John"
-                      required
-                      type="text"
-                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="firstName"
-                      name="firstName"
-                    />
-                  </div>
-                  <div className="mb-1 sm:mb-2">
-                    <label
-                      htmlFor="lastName"
-                      className="inline-block mb-1 font-medium"
-                    >
-                      Last name
-                    </label>
-                    <input
-                      placeholder="Doe"
-                      required
-                      type="text"
-                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="lastName"
-                      name="lastName"
-                    />
-                  </div>
-                  <div className="mb-1 sm:mb-2">
-                    <label
-                      htmlFor="email"
-                      className="inline-block mb-1 font-medium"
-                    >
-                      E-mail
-                    </label>
-                    <input
-                      placeholder="john.doe@example.org"
-                      required
-                      type="text"
-                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="email"
-                      name="email"
-                    />
-                  </div>
-                  <div className="mt-4 mb-2 sm:mb-4">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                  <p className="text-xs text-gray-600 sm:text-sm">
-                    We respect your privacy. Unsubscribe at any time.
-                  </p>
-                </form>
+    <section className="min-h-screen flex items-stretch text-white ">
+      <div className="bg__auth lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
+        <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
+        <div className="w-full px-24 z-10">
+          <h1 className="text-5xl font-bold text-left tracking-wide">
+            Keep it special
+          </h1>
+          <p className="text-3xl my-4">
+            Capture your personal memory in unique way, anywhere.
+          </p>
+        </div>
+        <div className="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4">
+          <a
+            href="#"
+            class="w-full sm:w-auto bg-darktheme-900 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+          >
+            <svg
+              class="mr-3 w-7 h-7"
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="apple"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 384 512"
+            >
+              <path
+                fill="currentColor"
+                d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+              ></path>
+            </svg>
+            <div class="text-left">
+              <div class="mb-1 text-xs">Download on the</div>
+              <div class="-mt-1 font-sans text-sm font-semibold">
+                Mac App Store
               </div>
             </div>
-          </div>
+          </a>
+          <a
+            href="#"
+            class="w-full sm:w-auto bg-darktheme-900  hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+          >
+            <svg
+              class="mr-3 w-7 h-7"
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="google-play"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"
+              ></path>
+            </svg>
+            <div class="text-left">
+              <div class="mb-1 text-xs">Get in on</div>
+              <div class="-mt-1 font-sans text-sm font-semibold">
+                Google Play
+              </div>
+            </div>
+          </a>
         </div>
       </div>
-    </div>
+      <div
+        className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
+        style={{ backgroundColor: '#161616' }}
+      >
+        <div className="bg__auth absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
+          <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
+        </div>
+        <div className="w-full py-6 z-20">
+          <div className="my-6">
+            {/* <img
+              className="w-auto lg:h-14 h-14 inline-flex"
+              src="./img/instagram-light.png"
+            /> */}
+            <div className="box inline-flex">
+              <div className="dot"></div>
+              <div className="ring"></div>
+            </div>
+          </div>
+          <div className="py-6 space-x-2">
+            <a
+              href="#"
+              class="inline-flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none"
+            >
+              <span>
+                <FaFacebookSquare class="text-blue-500 group-hover:text-white" />
+              </span>
+              <span class="text-sm font-medium text-blue-500 group-hover:text-white">
+                Sign in with Facebook
+              </span>
+            </a>
+          </div>
+          <p className="text-gray-100">or use your account email</p>
+          <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+            <div className="pb-2 pt-4">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                className="block w-full rounded-xl p-4 text-sm bg-black"
+              />
+            </div>
+            <div className="pb-2 pt-4">
+              <input
+                className="block w-full rounded-xl p-4 text-sm bg-black"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
+              <a href="#">Forgot your password?</a>
+            </div>
+            <div
+              type="submit"
+              className="relative inline-flex group w-full mt-5"
+            >
+              <div className="absolute transitiona-all duration-1000 opacity-50 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg filter  group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200"></div>{' '}
+              <button
+                aria-label="Primary button"
+                title=""
+                role="button"
+                className="w-full relative inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              >
+                Log in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }
