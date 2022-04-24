@@ -6,7 +6,10 @@ import './Auth.css';
 import { TextInput } from '../../components/TextInput/TextInput';
 import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
-import { validationSchema } from '../../helpers/validationSchema';
+import {
+  validationSchemaLogin,
+  validationSchemaRegister,
+} from '../../helpers/validationSchema';
 import { InstagramLogo } from '../../components/InstagramLogo/InstagramLogo';
 
 export default function Auth() {
@@ -85,7 +88,9 @@ export default function Auth() {
               email: '',
               password: '',
             }}
-            validationSchema={!loginForm && validationSchema}
+            validationSchema={
+              loginForm ? validationSchemaLogin : validationSchemaRegister
+            }
             onSubmit={(values) => {
               console.log(values);
             }}
