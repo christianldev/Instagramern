@@ -8,10 +8,14 @@ import { LOGIN } from '../../gql/user';
 import { useMutation } from '@apollo/client';
 import { setToken } from '../../utils/token';
 
+import useAuth from '../../hooks/useAuth';
+
 export const LoginForm = ({ loginForm, setLoginForm }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, seterror] = useState('');
   const [login] = useMutation(LOGIN);
+
+  const { setUser } = useAuth();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -34,6 +38,7 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
           });
           const { token } = data.login;
           setToken(token);
+          setUser(token);
         } catch (error) {
           seterror(error.message);
         }
