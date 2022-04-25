@@ -6,6 +6,7 @@ import { validationSchemaLogin } from '../../helpers/validationSchema';
 
 import { LOGIN } from '../../gql/user';
 import { useMutation } from '@apollo/client';
+import { setToken } from '../../utils/token';
 
 export const LoginForm = ({ loginForm, setLoginForm }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +32,8 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               input: values,
             },
           });
-          console.log(data);
+          const { token } = data.login;
+          setToken(token);
         } catch (error) {
           seterror(error.message);
         }
