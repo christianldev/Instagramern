@@ -4,7 +4,10 @@ export const validationSchemaRegister = Yup.object({
   name: Yup.string().required('Tu nombre es requerido'),
   username: Yup.string()
     .required('Tu nombre de usuario es requerido')
-    .matches(/^[a-zA-Z0-9]*$/, 'El nombre de usuario no puede tener espacios'),
+    .matches(
+      /^[a-zA-Z0-9-_.]*$/,
+      'El nombre de usuario no puede tener espacios',
+    ),
   email: Yup.string()
     .required('Tu correo es requerido')
     .email('Ingresa un correo valido'),

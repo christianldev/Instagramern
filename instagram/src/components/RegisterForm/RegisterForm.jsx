@@ -31,6 +31,8 @@ export const RegisterForm = ({ loginForm, setLoginForm }) => {
               },
             });
             console.log(result);
+
+            setLoginForm(true);
           } catch (error) {
             console.log('error', error);
           }

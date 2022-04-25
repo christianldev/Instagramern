@@ -4,8 +4,13 @@ import { Form, useField, Formik } from 'formik';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { validationSchemaLogin } from '../../helpers/validationSchema';
 
+import { LOGIN } from '../../gql/user';
+import { useMutation } from '@apollo/client';
+
 export const LoginForm = ({ loginForm, setLoginForm }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, seterror] = useState('');
+  const [login] = useMutation(LOGIN);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -14,14 +19,21 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
   return (
     <Formik
       initialValues={{
-        username: '',
         email: '',
         password: '',
       }}
       validationSchema={validationSchemaLogin}
       onSubmit={async (values) => {
-        if (loginForm) {
-          console.log('login', values);
+        seterror('');
+        try {
+          const { data } = await login({
+            variables: {
+              input: values,
+            },
+          });
+          console.log(data);
+        } catch (error) {
+          seterror(error.message);
         }
       }}
     >
@@ -36,6 +48,8 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               type="email"
               name="email"
               label="Correo electronico"
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
           </div>
           <div className="relative pb-2 pt-4">
@@ -44,7 +58,9 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               label="Contraseña"
-              autoComplete="on"
+              autoComplete="off"
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
 
             <div
@@ -52,13 +68,9 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               className="absolute inset-y-0 right-0 pr-3 pt-7 flex items-center text-sm leading-5 cursor-pointer"
             >
               {showPassword ? (
-                <FaRegEye
-                  className={!formik.isValid && !formik.dirty ? 'hidden' : ''}
-                />
+                <FaRegEye className={!formik.isValid ? 'hidden' : ''} />
               ) : (
-                <FaRegEyeSlash
-                  className={!formik.isValid && !formik.dirty ? 'hidden' : ''}
-                />
+                <FaRegEyeSlash className={!formik.isValid ? 'hidden' : ''} />
               )}
             </div>
           </div>
@@ -67,6 +79,7 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               Olvidaste tu constraseña?
             </a>
           </div>
+          <p className="text-center text-red-500 text-xs">{error}</p>
           <div type="submit" className="relative inline-flex group w-full mt-5">
             <div
               className={
