@@ -1,0 +1,17 @@
+@import url('http://fonts.cdnfonts.com/css/billabong');
+
+.logo__font {
+    font-family: 'Billabong', sans-serif;
+
+}
+
+.post__img {
+    height: 70vh;
+}
+
+/* media query */
+@media screen and (max-width: 768px) {
+    .phone__stories {
+        width: 100%;
+    }
+}

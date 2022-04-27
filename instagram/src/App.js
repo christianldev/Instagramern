@@ -3,8 +3,9 @@ import './App.css';
 import client from './config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import Auth from './pages/Auth';
-import { getToken } from './utils/token';
+import { getToken, removeToken } from './utils/token';
 import AuthContext from './context/AuthContext';
+import Home from './pages/Home';
 
 function App() {
   const [auth, setAuth] = useState(undefined);
@@ -20,7 +21,8 @@ function App() {
   }, []);
 
   const logout = () => {
-    console.log('Sesion cerrada');
+    removeToken();
+    setAuth(null);
   };
 
   const setUser = (user) => {
@@ -39,7 +41,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AuthContext.Provider value={authData}>
-        {!auth ? <Auth /> : <div>Hello</div>}
+        {!auth ? <Auth /> : <Home />}
       </AuthContext.Provider>
     </ApolloProvider>
   );
