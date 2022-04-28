@@ -26,45 +26,6 @@
 
 
 
-/* estilos stories */
-
-
-
-.circle {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-.circle svg {
-  fill: none;
-  stroke: #8a3ab9;
-  stroke-linecap: round;
-  stroke-width: 3;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  animation: stroke-draw 6s ease-out infinite alternate;
-}
-.circle img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  border-radius: 50%;
-}
-@keyframes stroke-draw {
-  from {
-    stroke: #8a3ab9;
-    stroke-dasharray: 1;
-  }
-  to {
-    stroke: #cd486b;
-    transform: rotate(180deg);
-    stroke-dasharray: 8;
-  }
-}
-
-
 /* estilo de like corazon */
 :root {
 	--bg: #444857;

@@ -1,3 +1,9 @@
+import React from 'react';
+
+//Layouts
+
+import NavbarLayout from '../layouts/NavbarLayout';
+
 // pages
 
 import Home from '../pages/Home';
@@ -6,12 +12,14 @@ import Error404 from '../pages/Error404';
 
 const routes = [
   {
-    path: '/',
+    index: true,
+    layout: <NavbarLayout />,
     element: <Home />,
     exact: true,
   },
   {
-    path: '/:username',
+    path: ':username',
+    layout: <NavbarLayout />,
     element: <User />,
     exact: true,
   },
