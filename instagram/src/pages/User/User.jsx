@@ -1,5 +1,8 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function User() {
-  return <div>User Page</div>;
+  const { username } = useParams();
+
+  return <div>Perfil: {username}</div>;
 }
