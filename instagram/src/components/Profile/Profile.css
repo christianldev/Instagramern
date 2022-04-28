@@ -1,0 +1,9 @@
+
+
+/* media query entre 768px et 992px */
+@media only screen and (min-width: 768px) and (max-width: 892px) {
+    .__profile {
+        display: flex;
+      flex-wrap: wrap ;
+    }
+}
