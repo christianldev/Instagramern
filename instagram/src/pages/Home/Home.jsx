@@ -218,15 +218,15 @@ export default function Home() {
                     />
                   </button> */}
 
-                  <div class="button">
+                  <div className="button">
                     <input
                       onClick={likef}
                       className="input__like"
-                      checked={likeactive ? 'checked' : ''}
+                      defaultChecked={likeactive ? 'checked' : ''}
                       type="checkbox"
                       id="liked"
                     />
-                    <label className="label__like" for="liked">
+                    <label className="label__like" htmlFor="liked">
                       <FaHeart
                         name="heart"
                         className={'m-1 cursor-pointer dark:text-white'}

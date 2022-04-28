@@ -5,7 +5,8 @@ import { ApolloProvider } from '@apollo/client';
 import Auth from './pages/Auth';
 import { getToken, removeToken } from './utils/token';
 import AuthContext from './context/AuthContext';
-import Home from './pages/Home';
+
+import Navigation from './routes/Navigation';
 
 function App() {
   const [auth, setAuth] = useState(undefined);
@@ -41,7 +42,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AuthContext.Provider value={authData}>
-        {!auth ? <Auth /> : <Home />}
+        {!auth ? <Auth /> : <Navigation />}
       </AuthContext.Provider>
     </ApolloProvider>
   );
