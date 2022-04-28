@@ -64,7 +64,23 @@ async function login(input) {
   return { token: generateToken(userFound, process.env.SECRET_KEY, '24h') };
 }
 
+async function getUser(id, username) {
+  let user = null;
+  if (id) {
+    user = await User.findById(id);
+    user.password = undefined;
+  } else if (username) {
+    user = await User.findOne({ username: username });
+    user.password = undefined;
+  }
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+  return user;
+}
+
 module.exports = {
   register,
   login,
+  getUser,
 };
