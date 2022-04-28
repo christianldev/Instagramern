@@ -3,7 +3,7 @@ import './App.css';
 import client from './config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import Auth from './pages/Auth';
-import { getToken, removeToken } from './utils/token';
+import { decodeToken, getToken, removeToken } from './utils/token';
 import AuthContext from './context/AuthContext';
 
 import Navigation from './routes/Navigation';
@@ -17,7 +17,7 @@ function App() {
     if (!token) {
       setAuth(null);
     } else {
-      setAuth(token);
+      setAuth(decodeToken(token));
     }
   }, []);
 

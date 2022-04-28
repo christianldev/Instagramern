@@ -3,8 +3,11 @@ import { FaRegHeart, FaRegBell, FaSearch, FaRegCompass } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 
 import { InstagramLogo } from '../components/InstagramLogo/InstagramLogo';
+import useAuth from '../hooks/useAuth';
 
 export default function NavbarLayout() {
+  const { auth } = useAuth();
+
   return (
     <header>
       <nav className="  border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-darktheme-navbar">
@@ -18,9 +21,9 @@ export default function NavbarLayout() {
           <div className="flex items-center md:order-2">
             <div className="flex items-center relative">
               <div className="dropdown relative">
-                <a
+                <Link
                   className="dropdown-toggle flex items-center hidden-arrow mr-4"
-                  href="#"
+                  to={`/${auth.username}`}
                   id="dropdownMenuButton2"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -32,7 +35,7 @@ export default function NavbarLayout() {
                     alt=""
                     loading="lazy"
                   />
-                </a>
+                </Link>
               </div>
 
               <div className="dropdown relative">
