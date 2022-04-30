@@ -10,8 +10,8 @@ export default function NavbarLayout() {
 
   return (
     <header>
-      <nav className="  border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-darktheme-navbar">
-        <div className="container flex flex-wrap justify-between items-center mx-auto">
+      <nav className="border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-darktheme-navbar">
+        <div className="fixed z-20 container flex flex-wrap justify-between items-center mx-auto">
           <Link to="/" className="flex items-center">
             <InstagramLogo />
             <span className="logo__font self-center text-2xl ml-3 font-light whitespace-nowrap text-white dark:text-white">
