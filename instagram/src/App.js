@@ -5,8 +5,13 @@ import { ApolloProvider } from '@apollo/client';
 import Auth from './pages/Auth';
 import { decodeToken, getToken, removeToken } from './utils/token';
 import AuthContext from './context/AuthContext';
-
+import { authentication } from './firebase.config.js';
 import Navigation from './routes/Navigation';
+import {
+  FacebookAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from 'firebase/auth';
 
 function App() {
   const [auth, setAuth] = useState(undefined);
@@ -16,8 +21,13 @@ function App() {
 
     if (!token) {
       setAuth(null);
-    } else {
+    } else if (token) {
       setAuth(decodeToken(token));
+    } else {
+      onAuthStateChanged(authentication, (currentUser) => {
+        console.log({ currentUser });
+        setAuth(currentUser);
+      });
     }
   }, []);
 
@@ -30,11 +40,17 @@ function App() {
     setAuth(user);
   };
 
+  const loginWithFacebook = () => {
+    const facebookProvider = new FacebookAuthProvider();
+    return signInWithPopup(authentication, facebookProvider);
+  };
+
   const authData = useMemo(
     () => ({
       auth,
       setUser,
       logout,
+      loginWithFacebook,
     }),
     [auth],
   );

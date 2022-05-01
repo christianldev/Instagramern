@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import { FaFacebookSquare, FaGooglePlay, FaApple } from 'react-icons/fa';
 import './Auth.css';
 
@@ -7,9 +8,42 @@ import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
 
 import { InstagramLogo } from '../../components/InstagramLogo/InstagramLogo';
+import { authentication } from '../../firebase.config';
+import { setToken } from '../../utils/token';
+import useAuth from '../../hooks/useAuth';
 
 export default function Auth() {
   const [loginForm, setLoginForm] = useState(true);
+  const [error, seterror] = useState('');
+
+  const { setUser, loginWithFacebook } = useAuth();
+
+  const handleFacebookSignin = async () => {
+    try {
+      const result = await loginWithFacebook();
+
+      const { user } = result;
+      console.log(user.accessToken);
+      setUser(user.accessToken);
+      setToken(user.accessToken);
+    } catch (error) {
+      seterror(error.message);
+    }
+  };
+
+  // const signInWithFacebook = async () => {
+  //   const provider = new FacebookAuthProvider();
+  //   const response = await signInWithPopup(authentication, provider);
+  //   seterror('');
+  //   try {
+  //     const { _tokenResponse } = await response;
+  //     setToken(_tokenResponse.idToken);
+  //     setUser(_tokenResponse);
+  //   } catch (error) {
+  //     console.log(error);
+  //     seterror(error.message);
+  //   }
+  // };
 
   return (
     <section className="min-h-screen flex items-stretch text-white ">
@@ -62,7 +96,7 @@ export default function Auth() {
         <div className="w-full py-6 z-20">
           <InstagramLogo />
           {loginForm && (
-            <div className="py-6 space-x-2">
+            <div onClick={handleFacebookSignin} className="py-6 space-x-2">
               <a
                 href="#"
                 className="inline-flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 rounded-md group bg-blue-500 focus:outline-none"
