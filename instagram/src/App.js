@@ -7,11 +7,7 @@ import { decodeToken, getToken, removeToken } from './utils/token';
 import AuthContext from './context/AuthContext';
 import { authentication } from './firebase.config.js';
 import Navigation from './routes/Navigation';
-import {
-  FacebookAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-} from 'firebase/auth';
+import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
 
 function App() {
   const [auth, setAuth] = useState(undefined);
@@ -23,11 +19,6 @@ function App() {
       setAuth(null);
     } else if (token) {
       setAuth(decodeToken(token));
-    } else {
-      onAuthStateChanged(authentication, (currentUser) => {
-        console.log({ currentUser });
-        setAuth(currentUser);
-      });
     }
   }, []);
 
@@ -40,9 +31,19 @@ function App() {
     setAuth(user);
   };
 
-  const loginWithFacebook = () => {
-    const facebookProvider = new FacebookAuthProvider();
-    return signInWithPopup(authentication, facebookProvider);
+  /**
+   * This function will create a new FacebookAuthProvider object, then use the signInWithPopup function
+   * to sign in with Facebook, and then set the auth state to the user that was returned from the
+   * signInWithPopup function.
+   * @returns The user object.
+   */
+  const loginWithFacebook = async () => {
+    const provider = new FacebookAuthProvider();
+    const facebookUser = await signInWithPopup(authentication, provider);
+
+    setAuth(facebookUser);
+
+    return facebookUser;
   };
 
   const authData = useMemo(
@@ -54,6 +55,8 @@ function App() {
     }),
     [auth],
   );
+
+  if (auth === undefined) return null;
 
   return (
     <ApolloProvider client={client}>

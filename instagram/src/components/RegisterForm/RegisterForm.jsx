@@ -19,23 +19,18 @@ export const RegisterForm = ({ loginForm, setLoginForm }) => {
       }}
       validationSchema={validationSchemaRegister}
       onSubmit={async (values) => {
-        if (loginForm) {
-          console.log('login', values);
-        } else {
-          try {
-            const newUser = values;
-            delete newUser.repeatPassword;
-            const result = await register({
-              variables: {
-                input: newUser,
-              },
-            });
-            console.log(result);
+        try {
+          const newUser = values;
+          delete newUser.repeatPassword;
+          await register({
+            variables: {
+              input: newUser,
+            },
+          });
 
-            setLoginForm(true);
-          } catch (error) {
-            console.log('error', error);
-          }
+          setLoginForm(true);
+        } catch (error) {
+          console.log('error', error);
         }
       }}
     >

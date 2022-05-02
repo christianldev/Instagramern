@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Profile.css';
 
-export default function Profile() {
+export default function Profile({ getUser, auth }) {
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3 py-10 pl-4  min-w-min   border-r border-indigo-900/20 hidden md:block ">
       <div className="shadow rounded-lg p-2">
@@ -14,7 +14,9 @@ export default function Profile() {
               alt=""
             />
           </span>
-          <p className="text-gray-200 font-semibold">John Doe</p>
+          <p className="text-gray-200 font-semibold">
+            {getUser.name ? getUser.name : auth.name}
+          </p>
         </div>
         <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
           <div className="font-semibold text-center mx-4">
@@ -38,20 +40,27 @@ export default function Profile() {
       </div>
 
       <article className="flex flex-col p-4 text-gray-500 justify-center items-center rounded-lg shadow-lg ">
-        <h4 className="font-bold">Biografia</h4>
-        <p className=" text-center text-sm">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo
-          neque eos vero alias voluptatibus eius ratione vel? Nemo consequuntur
-        </p>
+        {getUser.description && (
+          <>
+            <h4 className="font-bold">Biografia</h4>
+            <p className=" text-center text-sm">{getUser.description}</p>
+          </>
+        )}
       </article>
 
       <div className=" flex flex-col   text-sm leading-normal text-gray-400  justify-center items-center">
-        <h4 className="font-bold">Ubicacion</h4>
-        Los Angeles, California
+        {getUser.siteWeb && (
+          <>
+            <h4 className="font-bold">Informacion</h4>
+            <a href={getUser.siteWeb} target="_blank">
+              {getUser.siteWeb}
+            </a>
+          </>
+        )}
       </div>
 
       <div className="mt-0 flex flex-col space-y-7 text-gray-500 font-medium">
-        <a className=" flex items-center p-4 lg:p-6" href="#">
+        <div className=" flex items-center p-4 lg:p-6" href="#">
           <div className=" shadow  rounded-lg p-2">
             <h3 className="text-gray-600 text-sm font-semibold mb-4">
               Following
@@ -91,7 +100,7 @@ export default function Profile() {
               </li>
             </ul>
           </div>
-        </a>
+        </div>
       </div>
     </aside>
   );
