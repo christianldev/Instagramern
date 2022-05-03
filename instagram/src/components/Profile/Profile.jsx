@@ -1,10 +1,29 @@
 import React from 'react';
-import ModalAvatar from '../ModalAvatar/ModalAvatar';
+import AvatarForm from '../AvatarForm/AvatarForm';
+import ModalStructure from '../ModalAvatar/ModalStructure';
 
 import './Profile.css';
 
-export default function Profile({ getUser, auth }) {
+export default function Profile({ getUser, auth, username }) {
   const [showModal, setShowModal] = React.useState(false);
+  const [titleModal, setTitleModal] = React.useState('');
+  const [childreModal, setChildreModal] = React.useState(null);
+
+  console.log(auth);
+
+  const handlerModal = (type) => {
+    switch (type) {
+      case 'avatar':
+        setTitleModal('Editar foto de perfil');
+        setChildreModal(<AvatarForm setShowModal={setShowModal} />);
+        setShowModal(true);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3 py-10 pl-4  min-w-min   border-r border-indigo-900/20 hidden md:block ">
       <div className="shadow rounded-lg p-2">
@@ -13,10 +32,13 @@ export default function Profile({ getUser, auth }) {
             <img
               className="h-32 w-32 p-2 rounded-full shadow cursor-pointer"
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80"
-              onClick={() => setShowModal(true)}
+              onClick={() =>
+                username === auth.username && handlerModal('avatar')
+              }
               alt=""
             />
           </span>
+          <p class="font-semibold text-gray-500">{getUser.name}</p>
         </div>
         <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
           <div className="font-semibold text-center mx-4">
@@ -102,7 +124,15 @@ export default function Profile({ getUser, auth }) {
           </div>
         </div>
       </div>
-      {showModal ? <ModalAvatar setShowModal={setShowModal} /> : null}
+      {showModal ? (
+        <ModalStructure
+          showModal={showModal}
+          setShowModal={setShowModal}
+          titleModal={titleModal}
+        >
+          {childreModal}
+        </ModalStructure>
+      ) : null}
     </aside>
   );
 }

@@ -20,7 +20,7 @@ export default function User() {
 
   return (
     <div className=" flex min-h-screen 2xl:max-w-7xl 2xl:mx-auto 2xl:border-x-2 2xl:border-indigo-50 ">
-      <Profile getUser={getUser} auth={auth} />
+      <Profile getUser={getUser} auth={auth} username={username} />
       <UserGallery getUser={getUser} auth={auth} />
     </div>
   );
