@@ -9,8 +9,6 @@ export default function Profile({ getUser, auth, username }) {
   const [titleModal, setTitleModal] = React.useState('');
   const [childreModal, setChildreModal] = React.useState(null);
 
-  console.log(auth);
-
   const handlerModal = (type) => {
     switch (type) {
       case 'avatar':
