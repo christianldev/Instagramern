@@ -12,6 +12,16 @@ const typeDefs = gql`
     password: String
     createAt: String
   }
+  type Token {
+    token: String
+  }
+
+  type UpdateAvatar {
+    status: Boolean
+    urlAvatar: String
+  }
+
+  scalar Upload
 
   input UserInput {
     name: String!
@@ -25,10 +35,6 @@ const typeDefs = gql`
     password: String!
   }
 
-  type Token {
-    token: String
-  }
-
   type Query {
     #USER
     getUser(id: ID, username: String): User
@@ -38,6 +44,7 @@ const typeDefs = gql`
     #Create a new User
     register(input: UserInput): User
     login(input: LoginInput): Token
+    updateAvatar(file: Upload): UpdateAvatar
   }
 `;
 

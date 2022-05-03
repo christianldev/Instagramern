@@ -36,7 +36,7 @@ export default function Profile({ getUser, auth, username }) {
               alt=""
             />
           </span>
-          <p class="font-semibold text-gray-500">{getUser.name}</p>
+          <p className="font-semibold text-gray-500">{getUser.name}</p>
         </div>
         <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
           <div className="font-semibold text-center mx-4">

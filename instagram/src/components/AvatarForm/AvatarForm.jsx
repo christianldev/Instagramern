@@ -1,13 +1,26 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useMutation } from '@apollo/client';
+import { UPDATE_AVATAR } from '../../gql/user';
 
 export default function AvatarForm({ setShowModal }) {
-  const onDropFile = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
+  const [updateAvatar] = useMutation(UPDATE_AVATAR);
+
+  const onDropFile = useCallback(async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    try {
+      const result = await updateAvatar({ variables: { file } });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/png, image/jpeg',
+    accept: {
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpg', '.jpeg'],
+    },
     noKeyboard: true,
     multiple: false,
     onDrop: onDropFile,
