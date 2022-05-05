@@ -13,7 +13,7 @@ export default function Profile({ getUser, auth, username }) {
     switch (type) {
       case 'avatar':
         setTitleModal('Editar foto de perfil');
-        setChildreModal(<AvatarForm setShowModal={setShowModal} />);
+        setChildreModal(<AvatarForm setShowModal={setShowModal} auth={auth} />);
         setShowModal(true);
         break;
 

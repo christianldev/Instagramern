@@ -1,17 +1,45 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
-import { UPDATE_AVATAR } from '../../gql/user';
+import { UPDATE_AVATAR, GET__USER } from '../../gql/user';
 
-export default function AvatarForm({ setShowModal }) {
-  const [updateAvatar] = useMutation(UPDATE_AVATAR);
+import { toast } from 'react-toastify';
 
-  const onDropFile = useCallback(async (acceptedFiles) => {
-    const file = acceptedFiles[0];
+export default function AvatarForm({ setShowModal, auth }) {
+  const [loading, setLoading] = useState(false);
+
+  const [updateAvatar] = useMutation(UPDATE_AVATAR, {
+    update(cache, { data: { updateAvatar } }) {
+      const { getUser } = cache.readQuery({
+        query: GET__USER,
+        variables: { username: auth.username },
+      });
+
+      cache.writeQuery({
+        query: GET__USER,
+        variables: { username: auth.username },
+        data: {
+          getUser: { ...getUser, avatar: updateAvatar.urlAvatar },
+        },
+      });
+    },
+  });
+
+  const onDrop = useCallback(async (acceptedFile) => {
+    const file = acceptedFile[0];
+
     try {
+      setLoading(true);
       const result = await updateAvatar({ variables: { file } });
-      console.log(result);
-      setShowModal(false);
+      const { data } = result;
+
+      if (!data.updateAvatar.status) {
+        toast.warning('Error al actualizar el avatar');
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setShowModal(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -19,12 +47,12 @@ export default function AvatarForm({ setShowModal }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/png': ['.png'],
       'image/jpeg': ['.jpg', '.jpeg'],
+      'image/png': ['.png'],
     },
     noKeyboard: true,
     multiple: false,
-    onDrop: onDropFile,
+    onDrop,
   });
 
   return (

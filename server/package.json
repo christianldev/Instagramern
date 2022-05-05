@@ -18,9 +18,12 @@
   "homepage": "https://github.com/DevLop-EC/Instagram#readme",
   "dependencies": {
     "apollo-server": "^3.6.7",
+    "apollo-server-express": "^3.7.0",
     "aws-sdk": "^2.1127.0",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
+    "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.1"
   },

@@ -35,7 +35,7 @@ export const GET__USER = gql`
 `;
 
 export const UPDATE_AVATAR = gql`
-  mutation UpdateAvatar($file: Upload) {
+  mutation updateAvatar($file: Upload) {
     updateAvatar(file: $file) {
       status
       urlAvatar
