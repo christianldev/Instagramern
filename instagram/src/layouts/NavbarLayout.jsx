@@ -26,7 +26,7 @@ export default function NavbarLayout() {
         <div className="fixed z-20 container flex flex-wrap justify-between items-center mx-auto">
           <Link to="/" className="flex items-center">
             <InstagramLogo />
-            <span className="logo__font self-center text-2xl ml-3 font-light whitespace-nowrap text-white dark:text-white">
+            <span className="logo__font self-center text-3xl ml-3 font-light whitespace-nowrap text-white dark:text-white">
               Instagram
             </span>
           </Link>
