@@ -12,6 +12,7 @@ const resolvers = {
     register: (_, { input }) => UserController.register(input),
     login: (_, { input }) => UserController.login(input),
     updateAvatar: (_, { file }, ctx) => UserController.updateAvatar(file, ctx),
+    deleteAvatar: (_, __, ctx) => UserController.deleteAvatar(ctx),
   },
 };
 

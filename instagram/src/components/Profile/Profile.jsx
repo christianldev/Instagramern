@@ -3,6 +3,7 @@ import AvatarForm from '../AvatarForm/AvatarForm';
 import ModalStructure from '../ModalAvatar/ModalStructure';
 
 import './Profile.css';
+import avatarNotFound from '../../assets/avatarnotfound.jpg';
 
 export default function Profile({ getUser, auth, username }) {
   const [showModal, setShowModal] = React.useState(false);
@@ -28,8 +29,8 @@ export default function Profile({ getUser, auth, username }) {
         <div className="flex flex-col gap-1 text-center items-center">
           <span className=" rounded-full bg-gradient-to-r from-purple-800  to-blue-800">
             <img
-              className="h-32 w-32 p-2 rounded-full shadow cursor-pointer"
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80"
+              className="h-32 w-32 p-2 rounded-full shadow cursor-pointer object-cover"
+              src={getUser.avatar ? getUser.avatar : avatarNotFound}
               onClick={() =>
                 username === auth.username && handlerModal('avatar')
               }
@@ -53,7 +54,7 @@ export default function Profile({ getUser, auth, username }) {
           </div>
         </div>
         <div className="font-semibold text-center mx-4">
-          <button className="px-8 py-1 border-2 border-indigo-600 bg-indigo-600 rounded-full text-gray-50 font-semibold">
+          <button className="px-8 py-1 border-2 border-blue-500 bg-blue-500 rounded-full text-gray-50 font-semibold">
             Follow
           </button>
         </div>

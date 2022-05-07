@@ -1,0 +1,87 @@
+
+#button {
+  background: #FF4700;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  height: 44px;
+  width: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 20px;
+  position: relative;
+  transition: width 0.25s ease 0.25s, border-radius 0.25s ease 0.25s, color 0.25s ease 0.5s, background 0.25s ease;
+}
+#button i {
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 64px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+#button .fa-check {
+  transform: scale(0);
+  transition: transform 0.25s ease;
+}
+#button.publishing {
+  width: 44px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0);
+  border-radius: 44px;
+  transition: color 0.25s ease, width 0.25s ease 0.25s, border-radius 0.25s ease 0.25s;
+  -webkit-animation: bounce 3s ease infinite;
+          animation: bounce 3s ease infinite;
+}
+#button.publishing .fa-circle-o-notch {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.5s;
+}
+#button.published {
+  background: #35B197;
+  color: rgba(255, 255, 255, 0);
+  width: 44px;
+  border-radius: 44px;
+  transition: background 0.25s ease;
+}
+#button.published .fa-check {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.25s ease 0.25s;
+}
+#button.published .fa-circle-o-notch {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

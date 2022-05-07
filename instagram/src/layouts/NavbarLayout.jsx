@@ -4,9 +4,21 @@ import { Link, Outlet } from 'react-router-dom';
 
 import { InstagramLogo } from '../components/InstagramLogo/InstagramLogo';
 import useAuth from '../hooks/useAuth';
+import { useQuery } from '@apollo/client';
+import { GET__USER } from '../gql/user';
+
+import avatarNotFound from '../assets/avatarnotfound.jpg';
 
 export default function NavbarLayout() {
   const { auth } = useAuth();
+
+  const { data, loading, error } = useQuery(GET__USER, {
+    variables: { username: auth.username },
+  });
+
+  if (loading || error) return null;
+
+  const { getUser } = data;
 
   return (
     <header>
@@ -34,7 +46,7 @@ export default function NavbarLayout() {
                   aria-expanded="false"
                 >
                   <img
-                    src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+                    src={getUser.avatar ? getUser.avatar : avatarNotFound}
                     className="w-8 h-8 rounded-full"
                     alt=""
                     loading="lazy"
