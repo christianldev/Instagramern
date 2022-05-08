@@ -3,7 +3,7 @@ import AvatarForm from '../components/AvatarForm/AvatarForm';
 import SettingsModal from '../components/SettingsModal';
 import useAuth from './useAuth';
 
-export default function useAvatarForm() {
+export default function useModalForm() {
   const [showModal, setShowModal] = React.useState(false);
   const [titleModal, setTitleModal] = React.useState('');
   const [childreModal, setChildreModal] = React.useState(null);

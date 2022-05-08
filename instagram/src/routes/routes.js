@@ -31,6 +31,12 @@ const routes = [
     exact: true,
   },
   {
+    path: 'account/password',
+    layout: <NavbarLayout />,
+    element: <EditProfile />,
+    exact: true,
+  },
+  {
     path: '*',
     element: <Error404 />,
   },

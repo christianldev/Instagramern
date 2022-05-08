@@ -7,11 +7,11 @@ import avatarNotFound from '../../assets/avatarnotfound.jpg';
 import FeaturedStories from '../FeaturedStories';
 import { FaEllipsisV } from 'react-icons/fa';
 
-import useAvatarForm from '../../hooks/useAvatarForm';
+import useModalForm from '../../hooks/useModalForm';
 
 export default function Profile({ getUser, auth, username }) {
   const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
-    useAvatarForm(auth);
+    useModalForm(auth);
 
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3    min-w-min   border-r border-indigo-900/20 hidden md:block sm:block ">

@@ -25,6 +25,7 @@ function App() {
 
   const logout = () => {
     removeToken();
+
     setAuth(null);
   };
 
