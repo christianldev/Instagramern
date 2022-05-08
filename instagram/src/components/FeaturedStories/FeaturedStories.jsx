@@ -3,7 +3,7 @@ import React from 'react';
 export default function FeaturedStories() {
   return (
     <div className="mt-0 flex flex-col  space-y-7 text-gray-500 font-medium">
-      <div className=" flex items-center  lg:p-8" href="#">
+      <div className=" flex items-center justify-center lg:p-8" href="#">
         <div className=" p-2">
           <h3 className="text-gray-600 text-sm font-semibold mb-4">
             Following
