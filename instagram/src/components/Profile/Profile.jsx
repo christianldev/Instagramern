@@ -34,8 +34,8 @@ export default function Profile({ getUser, auth, username }) {
   };
 
   return (
-    <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3 py-10 pl-4  min-w-min   border-r border-indigo-900/20 hidden md:block ">
-      <div className="shadow rounded-lg">
+    <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3    min-w-min   border-r border-indigo-900/20 hidden md:block sm:block ">
+      <div>
         <div className="flex items-center justify-end p-2">
           <FaEllipsisV
             className="cursor-pointer  text-gray-500 hover:text-gray-400"
@@ -47,7 +47,7 @@ export default function Profile({ getUser, auth, username }) {
         <div className="flex flex-col gap-1 text-center items-center">
           <span className=" rounded-full bg-gradient-to-r from-purple-800  to-blue-800">
             <img
-              className="h-32 w-32 p-2 rounded-full shadow cursor-pointer object-cover"
+              className="h-32 w-32 p-2 rounded-full  cursor-pointer object-cover"
               src={getUser.avatar ? getUser.avatar : avatarNotFound}
               onClick={() =>
                 username === auth.username && handlerModal('avatar')
@@ -84,7 +84,7 @@ export default function Profile({ getUser, auth, username }) {
         </div>
       </div>
 
-      <article className="flex flex-col p-4 text-gray-500 justify-center items-center rounded-lg shadow-lg ">
+      <article className="flex flex-col p-4 text-gray-500 justify-center items-center ">
         <p className="font-semibold text-center">{getUser.name}</p>
         {getUser.description && (
           <>

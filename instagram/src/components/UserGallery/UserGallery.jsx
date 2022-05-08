@@ -6,10 +6,10 @@ export default function UserGallery({ getUser, auth }) {
       <div className="rounded-xl pt-2  ">
         <main className=" py-2 px-4 mx-auto max-w-7xl">
           <div className="flex gap-x-8 items-center pt-4">
-            <a href="#" className="text-lg text-gray-200  font-medium">
+            <a href="#" className="text-lg text-gray-400  font-medium">
               Popular
             </a>
-            <a href="#" className="text-lg text-gray-200">
+            <a href="#" className="text-lg text-gray-400">
               Recent
             </a>
           </div>
