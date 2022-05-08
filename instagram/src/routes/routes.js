@@ -9,6 +9,7 @@ import NavbarLayout from '../layouts/NavbarLayout';
 import Home from '../pages/Home';
 import User from '../pages/User';
 import Error404 from '../pages/Error404';
+import EditProfile from '../pages/EditProfile';
 
 const routes = [
   {
@@ -21,6 +22,12 @@ const routes = [
     path: ':username',
     layout: <NavbarLayout />,
     element: <User />,
+    exact: true,
+  },
+  {
+    path: 'account/edit',
+    layout: <NavbarLayout />,
+    element: <EditProfile />,
     exact: true,
   },
   {
