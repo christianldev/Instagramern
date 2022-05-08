@@ -1,37 +1,17 @@
 import React from 'react';
-import AvatarForm from '../AvatarForm/AvatarForm';
+
 import ModalStructure from '../ModalStructure/ModalStructure';
 
 import './Profile.css';
 import avatarNotFound from '../../assets/avatarnotfound.jpg';
 import FeaturedStories from '../FeaturedStories';
 import { FaEllipsisV } from 'react-icons/fa';
-import SettingsModal from '../SettingsModal';
+
+import useAvatarForm from '../../hooks/useAvatarForm';
 
 export default function Profile({ getUser, auth, username }) {
-  const [showModal, setShowModal] = React.useState(false);
-  const [titleModal, setTitleModal] = React.useState('');
-  const [childreModal, setChildreModal] = React.useState(null);
-
-  const handlerModal = (type) => {
-    switch (type) {
-      case 'avatar':
-        setTitleModal('Editar foto de perfil');
-        setChildreModal(<AvatarForm setShowModal={setShowModal} auth={auth} />);
-        setShowModal(true);
-        break;
-      case 'editProfile':
-        setTitleModal('Editar perfil');
-        setChildreModal(
-          <SettingsModal setShowModal={setShowModal} auth={auth} />,
-        );
-        setShowModal(true);
-        break;
-
-      default:
-        break;
-    }
-  };
+  const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
+    useAvatarForm(auth);
 
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3    min-w-min   border-r border-indigo-900/20 hidden md:block sm:block ">

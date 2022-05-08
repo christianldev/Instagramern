@@ -8,6 +8,7 @@ import AuthContext from './context/AuthContext';
 import { authentication } from './firebase.config.js';
 import Navigation from './routes/Navigation';
 import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [auth, setAuth] = useState(undefined);
@@ -62,6 +63,7 @@ function App() {
     <ApolloProvider client={client}>
       <AuthContext.Provider value={authData}>
         {!auth ? <Auth /> : <Navigation />}
+        <Toaster />
       </AuthContext.Provider>
     </ApolloProvider>
   );

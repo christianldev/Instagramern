@@ -37,8 +37,8 @@ export default function NavbarLayout() {
   return (
     <>
       <nav className="border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-darktheme-navbar">
-        <div class="max-w-7xl  mx-auto px-2 sm:px-6 lg:px-8">
-          <div class="relative flex items-center justify-between h-16">
+        <div className="max-w-7xl  mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="relative flex items-center justify-between h-16">
             <Link to="/" className="flex items-center">
               <InstagramLogo />
               <span className="logo__font self-center text-3xl ml-3 font-light whitespace-nowrap text-gray-700 dark:text-white">
@@ -78,15 +78,24 @@ export default function NavbarLayout() {
                               ? `/${auth.name}`
                               : `/${auth.username}`
                           }
-                          className="flex p-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                          className="flex p-2 font-medium text-sm text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
                         >
                           Perfil
                         </Link>
                       </li>
                       <li>
+                        <Link
+                          onClick={() => setDropDown(false)}
+                          to="/account/edit"
+                          className="flex p-2 font-medium text-sm text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                        >
+                          Configuracion
+                        </Link>
+                      </li>
+                      <li>
                         <a
                           onClick={onLogout}
-                          className="flex p-2 cursor-pointer font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                          className="flex p-2 cursor-pointer text-sm font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
                         >
                           Cerrar sesión
                         </a>
