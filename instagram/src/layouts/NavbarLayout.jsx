@@ -47,7 +47,7 @@ export default function NavbarLayout() {
             </Link>
             <div className="flex items-center md:order-2">
               <div className="flex items-center relative">
-                <div className="dropdown relative">
+                <div className="hidden lg:flex sm:flex relative">
                   <button
                     onClick={onDropDown}
                     className="dropdown-toggle flex items-center hidden-arrow mr-4"
@@ -62,14 +62,9 @@ export default function NavbarLayout() {
                 </div>
 
                 {/* <!-- Dropdown menu --> */}
-                <li className="flex relative">
-                  {/* <!-- dropdown menu --> */}
-                  <div
-                    className={`right-4 p-2 mt-6 z-10 bg-white dark:bg-darktheme-navbar rounded-md shadow-xl lg:absolute ${
-                      dropDown ? 'flex flex-col' : 'hidden'
-                    }`}
-                  >
-                    <ul className="space-y-2 lg:w-48">
+                {dropDown && (
+                  <div class="bg-white dark:bg-darktheme-navbar rounded shadow-md mt-24 lg:mt-12 md:mt-12 sm:mt-12 fixed lg:absolute md:absolute sm:absolute top-0 right-14 lg:right-0 md:right-0 sm:right-0 w-3/4  lg:min-w-full md:min-w-full sm:min-w-full  overflow-auto z-30">
+                    <ul>
                       <li>
                         <Link
                           onClick={() => setDropDown(false)}
@@ -78,35 +73,35 @@ export default function NavbarLayout() {
                               ? `/${auth.name}`
                               : `/${auth.username}`
                           }
-                          className="flex p-2 font-medium text-sm text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
                         >
-                          Perfil
+                          Mi perfil
                         </Link>
                       </li>
                       <li>
                         <Link
                           onClick={() => setDropDown(false)}
                           to="/account/edit"
-                          className="flex p-2 font-medium text-sm text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
+                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
                         >
                           Configuracion
                         </Link>
                       </li>
                       <li>
-                        <a
-                          onClick={onLogout}
-                          className="flex p-2 cursor-pointer text-sm font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black"
-                        >
-                          Cerrar sesión
-                        </a>
+                        <hr class="border-t mx-2 border-gray-400" />
                       </li>
                       <li>
-                        <Toggle />
+                        <a
+                          onClick={onLogout}
+                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline cursor-pointer hover:no-underline"
+                        >
+                          Cerrar sesion
+                        </a>
                       </li>
                     </ul>
                   </div>
-                  {/* <!-- dropdown menu --> */}
-                </li>
+                )}
+
                 {/* <!-- dropdown --> */}
 
                 <div className="dropdown relative">
@@ -120,6 +115,7 @@ export default function NavbarLayout() {
               </div>
 
               <button
+                onClick={onDropDown}
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
                 className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
