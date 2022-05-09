@@ -5,7 +5,14 @@ import { validationSchemaChangePassword } from '../../helpers/validationSchema';
 import avatarNotFound from '../../assets/avatarnotfound.jpg';
 import { TextInput } from '../TextInput/TextInput';
 
-export default function ChangePasswordForm({ getUser, auth }) {
+import { UPDATE_USER } from '../../gql/user';
+
+import toast from 'react-hot-toast';
+import { useMutation } from '@apollo/client';
+
+export default function ChangePasswordForm({ getUser, auth, logout }) {
+  const [updateUser] = useMutation(UPDATE_USER);
+
   return (
     <main className="w-full  dark:bg-darktheme-body py-4 px-6">
       <div
@@ -80,8 +87,31 @@ export default function ChangePasswordForm({ getUser, auth }) {
             repeatNewPassword: '',
           }}
           validationSchema={validationSchemaChangePassword}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={async (values) => {
+            try {
+              const { data } = await updateUser({
+                variables: {
+                  input: {
+                    currentPassword: values.currentPassword,
+                    newPassword: values.newPassword,
+                  },
+                },
+              });
+              if (!data.updateUser) {
+                toast.error('La contraseña no es valida', {
+                  position: 'top-right',
+                });
+              } else {
+                logout();
+                toast.success('Contraseña cambiada correctamente', {
+                  position: 'top-right',
+                });
+              }
+            } catch (error) {
+              toast.error(error.message, {
+                position: 'top-right',
+              });
+            }
           }}
         >
           {({ handleSubmit, handleChange, values }) => (
@@ -183,7 +213,6 @@ export default function ChangePasswordForm({ getUser, auth }) {
                 <hr className="border-gray-100 my-6 -mx-6 dark:border-gray-800 border-t" />
                 <div className="flex items-center justify-start flex-wrap -mb-3">
                   <button
-                    disabled
                     className="inline-flex cursor-pointer justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border rounded ring-blue-700 p-2 bg-blue-600 text-white border-blue-700 hover:bg-blue-700 mr-3 last:mr-0 mb-3"
                     type="submit"
                   >
