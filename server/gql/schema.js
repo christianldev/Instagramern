@@ -35,6 +35,15 @@ const typeDefs = gql`
     password: String!
   }
 
+  input UserUdateInput {
+    name: String
+    email: String
+    currentPassword: String
+    newPassword: String
+    siteWeb: String
+    description: String
+  }
+
   type Query {
     #USER
     getUser(id: ID, username: String): User
@@ -46,6 +55,7 @@ const typeDefs = gql`
     login(input: LoginInput): Token
     updateAvatar(file: Upload): UpdateAvatar
     deleteAvatar: Boolean
+    updateUser(input: UserUdateInput): Boolean
   }
 `;
 
