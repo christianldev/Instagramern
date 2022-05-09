@@ -48,3 +48,9 @@ export const DELETE_AVATAR = gql`
     deleteAvatar
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation UpdateAvatar($input: UserUdateInput) {
+    updateUser(input: $input)
+  }
+`;

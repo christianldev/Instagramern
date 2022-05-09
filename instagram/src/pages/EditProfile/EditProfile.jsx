@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import EditProfileSidebar from '../../components/EditProfileSidebar';
 import useAuth from '../../hooks/useAuth';
-import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useApolloClient, useQuery } from '@apollo/client';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GET__USER } from '../../gql/user';
 import Error404 from '../Error404';
 import EditProfileForm from '../../components/EditProfileForm';
@@ -10,7 +10,16 @@ import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswo
 
 export default function EditProfile() {
   const [editProfile, setEditProfile] = useState(false);
+  const { auth, logout } = useAuth();
 
+  const navigate = useNavigate();
+  const client = useApolloClient();
+
+  const onLogout = () => {
+    client.clearStore();
+    logout();
+    navigate('/');
+  };
   const handlerChangeProfile = (type) => {
     switch (type) {
       case 'editProfile':
@@ -25,7 +34,6 @@ export default function EditProfile() {
         break;
     }
   };
-  const { auth } = useAuth();
 
   const { data, loading, error } = useQuery(GET__USER, {
     variables: auth,
@@ -41,7 +49,7 @@ export default function EditProfile() {
       {editProfile ? (
         <EditProfileForm getUser={getUser} auth={auth} />
       ) : (
-        <ChangePasswordForm getUser={getUser} auth={auth} />
+        <ChangePasswordForm getUser={getUser} auth={auth} logout={onLogout} />
       )}
     </div>
   );
