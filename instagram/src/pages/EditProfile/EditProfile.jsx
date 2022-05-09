@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditProfileSidebar from '../../components/EditProfileSidebar';
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@apollo/client';
@@ -12,10 +12,17 @@ export default function EditProfile() {
   const [editProfile, setEditProfile] = useState(false);
 
   const handlerChangeProfile = (type) => {
-    if (type === 'editProfile') {
-      setEditProfile(true);
-    } else if (type === 'changePassword') {
-      setEditProfile(false);
+    switch (type) {
+      case 'editProfile':
+        setEditProfile(true);
+
+        break;
+      case 'changePassword':
+        setEditProfile(false);
+        break;
+
+      default:
+        break;
     }
   };
   const { auth } = useAuth();

@@ -17,7 +17,7 @@ export function TextInput({ useField, label, ...rest }) {
 
       <div className="mt-1 relative">
         <Field
-          className="block w-full rounded-xl p-2 text-sm bg-black"
+          className="block w-full rounded-xl p-2 text-sm bg-slate-200 dark:bg-black dark:text-gray-400"
           {...field}
           {...rest}
         />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, useField, Formik } from 'formik';
 
-import { validationSchemaLogin } from '../../helpers/validationSchema';
+import { validationSchemaChangePassword } from '../../helpers/validationSchema';
 import avatarNotFound from '../../assets/avatarnotfound.jpg';
 import { TextInput } from '../TextInput/TextInput';
 
@@ -76,15 +76,19 @@ export default function ChangePasswordForm({ getUser, auth }) {
         <Formik
           initialValues={{
             currentPassword: '',
-            password: '',
+            newPassword: '',
+            repeatNewPassword: '',
           }}
-          validationSchema={validationSchemaLogin}
+          validationSchema={validationSchemaChangePassword}
           onSubmit={(values) => {
             console.log(values);
           }}
         >
-          {(formik) => (
-            <Form className="md:rounded border-gray-100 dark:bg-darktheme-navbar shadow-lg  w-11/12 md:w-3/4 ">
+          {({ handleSubmit, handleChange, values }) => (
+            <Form
+              onSubmit={handleSubmit}
+              className="md:rounded border-gray-100 dark:bg-darktheme-navbar shadow-lg  w-11/12 md:w-3/4 "
+            >
               <header className="border-gray-100 flex items-stretch border-b dark:border-gray-800">
                 <p className="flex items-center py-3 grow font-bold px-4 text-gray-500">
                   <span className="inline-flex justify-center items-center w-6 h-6 mr-3">
@@ -123,39 +127,25 @@ export default function ChangePasswordForm({ getUser, auth }) {
                 </a>
               </header>
               <div className="p-6">
-                <div className="mb-6 last:mb-0">
+                <div className="mb-4 last:mb-0">
                   <label className="block font-bold mb-2 text-gray-500">
                     Contraseña actual
                   </label>
                   <div className="">
                     <div className="relative">
-                      <input
-                        name="passwordCurrent"
-                        required=""
+                      <TextInput
+                        useField={useField}
+                        name="currentPassword"
                         type="password"
-                        className="px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:text-gray-200 h-12 border bg-white dark:bg-gray-600 pl-10"
+                        value={values.currentPassword}
+                        onChange={handleChange}
+                        autoComplete="off"
                       />
-                      <span className="inline-flex justify-center items-center w-10 h-12 absolute top-0 left-0 z-10 pointer-events-none text-gray-500 dark:text-gray-400">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="16"
-                          height="16"
-                          className="inline-block"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M21 13H14.4L19.1 17.7L17.7 19.1L13 14.4V21H11V14.3L6.3 19L4.9 17.6L9.4 13H3V11H9.6L4.9 6.3L6.3 4.9L11 9.6V3H13V9.4L17.6 4.8L19 6.3L14.3 11H21V13Z"
-                          ></path>
-                        </svg>
-                      </span>
                     </div>
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Required. Your current password
                   </div>
                 </div>
                 <hr className="border-gray-100 my-6 -mx-6 dark:border-gray-800 border-t" />
-                <div className="mb-6 last:mb-0">
+                <div className="mb-4 last:mb-0">
                   <label className="block font-bold mb-2 text-gray-500">
                     Nueva contraseña
                   </label>
@@ -164,59 +154,30 @@ export default function ChangePasswordForm({ getUser, auth }) {
                       <TextInput
                         useField={useField}
                         name="newPassword"
-                        required=""
                         type="password"
-                        className="px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:text-gray-200 h-12 border bg-white dark:bg-gray-600 pl-10"
+                        value={values.newPassword}
+                        onChange={handleChange}
+                        autoComplete="off"
                       />
-                      <span className="inline-flex justify-center items-center w-10 h-12 absolute top-0 left-0 z-10 pointer-events-none text-gray-500 dark:text-gray-400">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="16"
-                          height="16"
-                          className="inline-block"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M17,7H22V17H17V19A1,1 0 0,0 18,20H20V22H17.5C16.95,22 16,21.55 16,21C16,21.55 15.05,22 14.5,22H12V20H14A1,1 0 0,0 15,19V5A1,1 0 0,0 14,4H12V2H14.5C15.05,2 16,2.45 16,3C16,2.45 16.95,2 17.5,2H20V4H18A1,1 0 0,0 17,5V7M2,7H13V9H4V15H13V17H2V7M20,15V9H17V15H20M8.5,12A1.5,1.5 0 0,0 7,10.5A1.5,1.5 0 0,0 5.5,12A1.5,1.5 0 0,0 7,13.5A1.5,1.5 0 0,0 8.5,12M13,10.89C12.39,10.33 11.44,10.38 10.88,11C10.32,11.6 10.37,12.55 11,13.11C11.55,13.63 12.43,13.63 13,13.11V10.89Z"
-                          ></path>
-                        </svg>
-                      </span>
                     </div>
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Required. New password
-                  </div>
                 </div>
-                <div className="mb-6 last:mb-0">
+                <hr className="border-gray-100 my-6 -mx-6 dark:border-gray-800 border-t" />
+                <div className="mb-4 last:mb-0">
                   <label className="block font-bold mb-2 text-gray-500">
                     Confirmar contraseña
                   </label>
                   <div className="">
                     <div className="relative">
-                      <input
+                      <TextInput
+                        useField={useField}
                         name="repeatNewPassword"
                         autoComplete="off"
-                        required=""
+                        value={values.repeatNewPassword}
+                        onChange={handleChange}
                         type="password"
-                        className="px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:text-gray-200 h-12 border bg-white dark:bg-gray-600 pl-10"
                       />
-                      <span className="inline-flex justify-center items-center w-10 h-12 absolute top-0 left-0 z-10 pointer-events-none text-gray-500 dark:text-gray-400">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="16"
-                          height="16"
-                          className="inline-block"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M17,7H22V17H17V19A1,1 0 0,0 18,20H20V22H17.5C16.95,22 16,21.55 16,21C16,21.55 15.05,22 14.5,22H12V20H14A1,1 0 0,0 15,19V5A1,1 0 0,0 14,4H12V2H14.5C15.05,2 16,2.45 16,3C16,2.45 16.95,2 17.5,2H20V4H18A1,1 0 0,0 17,5V7M2,7H13V9H4V15H13V17H2V7M20,15V9H17V15H20M8.5,12A1.5,1.5 0 0,0 7,10.5A1.5,1.5 0 0,0 5.5,12A1.5,1.5 0 0,0 7,13.5A1.5,1.5 0 0,0 8.5,12M13,10.89C12.39,10.33 11.44,10.38 10.88,11C10.32,11.6 10.37,12.55 11,13.11C11.55,13.63 12.43,13.63 13,13.11V10.89Z"
-                          ></path>
-                        </svg>
-                      </span>
                     </div>
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Required. New password one more time
                   </div>
                 </div>
                 <hr className="border-gray-100 my-6 -mx-6 dark:border-gray-800 border-t" />

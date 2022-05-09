@@ -37,3 +37,23 @@ export const validationSchemaLogin = Yup.object({
     .email('Ingresa un correo valido'),
   password: Yup.string().required('La contraseña es requerida'),
 });
+
+export const validationSchemaChangePassword = Yup.object({
+  currentPassword: Yup.string().required('La contraseña es requerida'),
+  newPassword: Yup.string()
+    .required('La contraseña es requerida')
+    .oneOf([Yup.ref('repeatNewPassword')], 'Las contraseñas no coinciden')
+    .matches(
+      /(?=.*?[A-Z])/,
+      'La contraseña debe tener al menos una letra mayuscula',
+    )
+    .matches(
+      /(?=.*?[a-z])/,
+      'La contraseña debe tener al menos una letra minuscula',
+    )
+    .matches(/(?=.*?[0-9])/, 'La contraseña debe tener al menos un numero')
+    .min(8, 'La contraseña debe tener minimo 8 caracteres'),
+  repeatNewPassword: Yup.string()
+    .required('La contraseña es requerida')
+    .oneOf([Yup.ref('newPassword'), null], 'Las contraseñas no coinciden'),
+});

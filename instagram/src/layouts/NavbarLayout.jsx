@@ -63,7 +63,7 @@ export default function NavbarLayout() {
 
                 {/* <!-- Dropdown menu --> */}
                 {dropDown && (
-                  <div class="bg-white dark:bg-darktheme-navbar rounded shadow-md mt-24 lg:mt-12 md:mt-12 sm:mt-12 fixed lg:absolute md:absolute sm:absolute top-0 right-14 lg:right-0 md:right-0 sm:right-0 w-3/4  lg:min-w-full md:min-w-full sm:min-w-full  overflow-auto z-30">
+                  <div className="bg-white dark:bg-darktheme-navbar rounded shadow-md mt-24 lg:mt-12 md:mt-12 sm:mt-12 fixed lg:absolute md:absolute sm:absolute top-0 right-14 lg:right-0 md:right-0 sm:right-0 w-3/4  lg:min-w-full md:min-w-full sm:min-w-full  overflow-auto z-30">
                     <ul>
                       <li>
                         <Link
@@ -73,7 +73,7 @@ export default function NavbarLayout() {
                               ? `/${auth.name}`
                               : `/${auth.username}`
                           }
-                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
                         >
                           Mi perfil
                         </Link>
@@ -82,22 +82,23 @@ export default function NavbarLayout() {
                         <Link
                           onClick={() => setDropDown(false)}
                           to="/account/edit"
-                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
                         >
                           Configuracion
                         </Link>
                       </li>
                       <li>
-                        <hr class="border-t mx-2 border-gray-400" />
+                        <hr className="border-t mx-2 border-gray-400" />
                       </li>
                       <li>
                         <a
                           onClick={onLogout}
-                          class="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline cursor-pointer hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline cursor-pointer hover:no-underline"
                         >
                           Cerrar sesion
                         </a>
                       </li>
+                      <Toggle />
                     </ul>
                   </div>
                 )}
