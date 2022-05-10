@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react';
 import EditProfileSidebar from '../../components/EditProfileSidebar';
 import useAuth from '../../hooks/useAuth';
 import { useApolloClient, useQuery } from '@apollo/client';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GET__USER } from '../../gql/user';
 import Error404 from '../Error404';
 import EditProfileForm from '../../components/EditProfileForm';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 
 export default function EditProfile() {
-  const [editProfile, setEditProfile] = useState(false);
-  const { auth, logout } = useAuth();
+  const [editProfile, setEditProfile] = useState(true);
 
+  const { auth, logout } = useAuth();
   const navigate = useNavigate();
   const client = useApolloClient();
+
+  useEffect(() => {
+    if (editProfile) {
+      navigate('/account/edit');
+    }
+  }, [editProfile]);
 
   const onLogout = () => {
     client.clearStore();
@@ -35,7 +41,7 @@ export default function EditProfile() {
     }
   };
 
-  const { data, loading, error } = useQuery(GET__USER, {
+  const { data, loading, error, refetch } = useQuery(GET__USER, {
     variables: auth,
   });
 
@@ -45,9 +51,17 @@ export default function EditProfile() {
 
   return (
     <div className=" flex min-h-screen 2xl:max-w-7xl 2xl:mx-auto 2xl:border-x-2 2xl:border-indigo-50 ">
-      <EditProfileSidebar handlerChangeProfile={handlerChangeProfile} />
+      <EditProfileSidebar
+        handlerChangeProfile={handlerChangeProfile}
+        editProfile={editProfile}
+      />
       {editProfile ? (
-        <EditProfileForm getUser={getUser} auth={auth} />
+        <EditProfileForm
+          getUser={getUser}
+          auth={auth}
+          refetch={refetch}
+          logout={onLogout}
+        />
       ) : (
         <ChangePasswordForm getUser={getUser} auth={auth} logout={onLogout} />
       )}

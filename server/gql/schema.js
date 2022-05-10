@@ -37,6 +37,7 @@ const typeDefs = gql`
 
   input UserUdateInput {
     name: String
+    username: String
     email: String
     currentPassword: String
     newPassword: String

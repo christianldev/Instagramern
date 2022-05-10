@@ -10,6 +10,7 @@ import Error404 from '../Error404';
 export default function User() {
   const { username } = useParams();
   const { auth } = useAuth();
+
   const { data, loading, error } = useQuery(GET__USER, {
     variables: { username },
   });

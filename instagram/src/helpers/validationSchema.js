@@ -57,3 +57,18 @@ export const validationSchemaChangePassword = Yup.object({
     .required('La contraseña es requerida')
     .oneOf([Yup.ref('newPassword'), null], 'Las contraseñas no coinciden'),
 });
+
+export const validationSchemaUpdateProfile = Yup.object({
+  name: Yup.string().required('Tu nombre es requerido'),
+  username: Yup.string()
+    .required('Tu nombre de usuario es requerido')
+    .matches(
+      /^[a-zA-Z0-9-_.]*$/,
+      'El nombre de usuario no puede tener espacios',
+    ),
+  email: Yup.string()
+    .required('Tu correo es requerido')
+    .email('Ingresa un correo valido'),
+  description: Yup.string().required('Tu descripcion es requerida'),
+  siteWeb: Yup.string().required('Tu sitio web es requerido'),
+});

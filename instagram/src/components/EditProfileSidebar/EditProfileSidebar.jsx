@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function EditProfileSidebar({ handlerChangeProfile }) {
-  useEffect(() => {
-    handlerChangeProfile('editProfile');
-  }, []);
-
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-navbar w-1/4 border-r border-indigo-900/20 hidden md:block">
       <div className="flex-1 px-3 bg-white dark:bg-darktheme-navbar divide-y space-y-1">

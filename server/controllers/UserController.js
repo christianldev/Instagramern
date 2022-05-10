@@ -133,6 +133,7 @@ async function updateUser(input, ctx) {
     } else {
       await User.findByIdAndUpdate(id, input);
     }
+
     return true;
   } catch (error) {
     console.log(error);

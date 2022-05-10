@@ -15,8 +15,6 @@ import {
 import './Home.css';
 
 export default function Home() {
-  const { auth } = useAuth();
-
   const [like, setlike] = useState(100);
   const [dislike, setdislike] = useState(4);
 
