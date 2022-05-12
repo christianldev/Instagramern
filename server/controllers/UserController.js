@@ -142,6 +142,17 @@ async function updateUser(input, ctx) {
   }
 }
 
+async function searchUsers(search) {
+  // search by name or username
+  const users = await User.find({
+    $or: [
+      { name: { $regex: search, $options: 'i' } },
+      { username: { $regex: search, $options: 'i' } },
+    ],
+  }).limit(10);
+  return users;
+}
+
 module.exports = {
   register,
   login,
@@ -149,4 +160,5 @@ module.exports = {
   updateAvatar,
   deleteAvatar,
   updateUser,
+  searchUsers,
 };

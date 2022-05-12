@@ -6,6 +6,7 @@ const resolvers = {
   Query: {
     //User
     getUser: (_, { id, username }) => UserController.getUser(id, username),
+    searchUsers: (_, { search }) => UserController.searchUsers(search),
   },
   Mutation: {
     //User
