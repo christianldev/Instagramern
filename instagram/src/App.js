@@ -13,6 +13,8 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   const [auth, setAuth] = useState(undefined);
 
+  console.log('auth', auth);
+
   useEffect(() => {
     const token = getToken();
 
@@ -24,8 +26,18 @@ function App() {
   }, []);
 
   const logout = () => {
+    // remove token when expired
+    if (auth) {
+      const token = getToken();
+      if (token) {
+        const decoded = decodeToken(token);
+        if (decoded.exp < Date.now() / 1000) {
+          removeToken();
+          setAuth(null);
+        }
+      }
+    }
     removeToken();
-
     setAuth(null);
   };
 

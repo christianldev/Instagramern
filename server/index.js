@@ -21,6 +21,7 @@ mongoose.connect(
     if (err) {
       console.log('Error de conexion');
     } else {
+      console.log('Conectado a la base de datos');
       startServer();
     }
   },
@@ -38,14 +39,28 @@ async function startServer() {
           const user = jwt.verify(
             token.replace('Bearer ', ''),
             process.env.SECRET_KEY,
+            // if token is not valid, it will throw an error
+
+            (err, decoded) => {
+              if (err) {
+                // refresh token
+                const refreshToken = req.headers.refreshtoken;
+                if (refreshToken) {
+                  jwt.verify(
+                    refreshToken.replace('Bearer ', ''),
+                    process.env.SECRET_REFRESH_TOKEN,
+                    { expiresIn: '10m' },
+                  );
+                }
+              } else {
+                return { user: decoded };
+              }
+            },
           );
-          return {
-            user,
-          };
+
+          return { user };
         } catch (error) {
-          console.log('#### ERROR ####');
           console.log(error);
-          throw new Error('Token invalido');
         }
       }
     },

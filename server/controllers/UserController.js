@@ -12,6 +12,7 @@ function generateToken(user, SECRET_KEY, expiresIn) {
     username,
     email,
   };
+
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 // Regster user
