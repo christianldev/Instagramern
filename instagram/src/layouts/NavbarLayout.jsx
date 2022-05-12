@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegHeart, FaRegBell, FaSearch, FaRegCompass } from 'react-icons/fa';
-import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { InstagramLogo } from '../components/InstagramLogo/InstagramLogo';
 import useAuth from '../hooks/useAuth';
@@ -9,9 +9,11 @@ import { GET__USER } from '../gql/user';
 
 import avatarNotFound from '../assets/avatarnotfound.jpg';
 import Toggle from '../components/Toggle/Toggle';
+import Search from '../components/Search';
 
 export default function NavbarLayout() {
   const [dropDown, setDropDown] = React.useState(false);
+  const [searchUsers, setSearchUsers] = useState(false);
   const { auth, logout } = useAuth();
 
   const navigate = useNavigate();
@@ -32,6 +34,15 @@ export default function NavbarLayout() {
     client.clearStore();
     logout();
     navigate('/');
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchUsers) {
+      setSearchUsers(false);
+    } else {
+      setSearchUsers(true);
+    }
   };
 
   return (
@@ -155,45 +166,41 @@ export default function NavbarLayout() {
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                <li>
-                  <a
-                    href="#"
-                    className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                    aria-current="page"
-                  >
-                    <FaSearch />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                  >
-                    <FaRegCompass />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                  >
-                    <FaRegBell />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                  >
-                    <FaRegHeart />
-                  </a>
-                </li>
+                <Search handleSearch={handleSearch} searchUsers={searchUsers} />
+                {!searchUsers ? (
+                  <>
+                    <li>
+                      <a
+                        href="#"
+                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
+                      >
+                        <FaRegCompass />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
+                      >
+                        <FaRegBell />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
+                      >
+                        <FaRegHeart />
+                      </a>
+                    </li>
+                  </>
+                ) : null}
               </ul>
             </div>
           </div>
         </div>
       </nav>
-      <section onClick={() => setDropDown(false)}>
+      <section onClick={() => setDropDown(false) || setSearchUsers(false)}>
         <Outlet />
       </section>
     </>
