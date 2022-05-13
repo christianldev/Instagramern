@@ -13,8 +13,6 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   const [auth, setAuth] = useState(undefined);
 
-  console.log('auth', auth);
-
   useEffect(() => {
     const token = getToken();
 

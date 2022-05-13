@@ -41,21 +41,21 @@ async function startServer() {
             process.env.SECRET_KEY,
             // if token is not valid, it will throw an error
 
-            (err, decoded) => {
-              if (err) {
-                // refresh token
-                const refreshToken = req.headers.refreshtoken;
-                if (refreshToken) {
-                  jwt.verify(
-                    refreshToken.replace('Bearer ', ''),
-                    process.env.SECRET_REFRESH_TOKEN,
-                    { expiresIn: '10m' },
-                  );
-                }
-              } else {
-                return { user: decoded };
-              }
-            },
+            // (err, decoded) => {
+            //   if (err) {
+            //     // refresh token
+            //     const refreshToken = req.headers.refreshtoken;
+            //     if (refreshToken) {
+            //       jwt.verify(
+            //         refreshToken.replace('Bearer ', ''),
+            //         process.env.SECRET_REFRESH_TOKEN,
+            //         { expiresIn: '10m' },
+            //       );
+            //     }
+            //   } else {
+            //     return { user: decoded };
+            //   }
+            // },
           );
 
           return { user };

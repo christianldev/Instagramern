@@ -66,7 +66,7 @@ export default function Home() {
                   className="h-14 w-14 rounded-full  p-[1.5px] border-blue-600 bg-gradient-to-t bg-purple-500 border-2 cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
                 />
                 <div className="ml-2 text-gray-600 dark:text-gray-200 leading-loose">
-                  Abílio Barros
+                  Jhon Doe
                   <span className="text-xs flex justify-start font-extralight   dark:text-gray-400">
                     23 Hours Ago
                   </span>
@@ -110,9 +110,7 @@ export default function Home() {
             </div>
 
             <p className="text-sm ml-2 mt-2 font-extralight dark:text-white">
-              <span className=" text-sm mt-4 dark:text-white">
-                Abílio Barros:
-              </span>{' '}
+              <span className=" text-sm mt-4 dark:text-white">Jhon doe:</span>{' '}
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
               quis.
             </p>
