@@ -13,7 +13,7 @@ import Search from '../components/Search';
 
 export default function NavbarLayout() {
   const [dropDown, setDropDown] = React.useState(false);
-  const [searchUsers, setSearchUsers] = useState(false);
+  const [inputSearch, setInputSearch] = useState(false);
   const { auth, logout } = useAuth();
 
   const navigate = useNavigate();
@@ -38,10 +38,10 @@ export default function NavbarLayout() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchUsers) {
-      setSearchUsers(false);
+    if (inputSearch) {
+      setInputSearch(false);
     } else {
-      setSearchUsers(true);
+      setInputSearch(true);
     }
   };
 
@@ -134,7 +134,6 @@ export default function NavbarLayout() {
                 aria-controls="mobile-menu-2"
                 aria-expanded="false"
               >
-                <span className="sr-only">Open main menu</span>
                 <svg
                   className="w-6 h-6"
                   fill="currentColor"
@@ -166,8 +165,8 @@ export default function NavbarLayout() {
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                <Search handleSearch={handleSearch} searchUsers={searchUsers} />
-                {!searchUsers ? (
+                <Search handleSearch={handleSearch} inputSearch={inputSearch} />
+                {!inputSearch ? (
                   <>
                     <li>
                       <a
@@ -200,7 +199,7 @@ export default function NavbarLayout() {
           </div>
         </div>
       </nav>
-      <section onClick={() => setDropDown(false) || setSearchUsers(false)}>
+      <section onClick={() => setDropDown(false) || setInputSearch(false)}>
         <Outlet />
       </section>
     </>
