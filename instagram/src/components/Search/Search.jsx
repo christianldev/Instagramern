@@ -68,7 +68,7 @@ export default function Search({ handleSearch, inputSearch }) {
             {searchUsers && (
               <div className="absolute shadow bg-white dark:bg-darktheme-navbar border-gray-400 top-14 z-20 left-0 w-full rounded  max-h-select dropdown">
                 <div className="flex flex-col dropdown-menu">
-                  <div className="cursor-pointer rounded-t">
+                  <div className="cursor-pointer rounded-t overflow-y-scroll overflow-auto">
                     {!results.length && (
                       <div className="flex w-full justify-center items-center p-2  border-transparent border-l-2 relative ">
                         <p className=" justify-center text-center items-center">
