@@ -36,7 +36,21 @@ async function isFollow(username, ctx) {
   return false;
 }
 
+async function unFollow(username, ctx) {
+  const userFound = await User.findOne({ username });
+  const follow = await Follow.deleteOne({
+    idUser: ctx.user.id,
+  })
+    .where('follow')
+    .equals(userFound._id);
+  if (follow.deletedCount > 0) {
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   follow,
   isFollow,
+  unFollow,
 };

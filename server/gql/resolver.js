@@ -24,6 +24,8 @@ const resolvers = {
 
     //follow
     follow: (_, { username }, ctx) => FollowController.follow(username, ctx),
+    unFollow: (_, { username }, ctx) =>
+      FollowController.unFollow(username, ctx),
   },
 };
 
