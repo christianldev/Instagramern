@@ -2,8 +2,7 @@ const Follow = require('../models/follow');
 const User = require('../models/user');
 
 async function follow(username, ctx) {
-  const { id } = ctx.user;
-  const userFound = await User.findOne({ username: username });
+  const userFound = await User.findOne({ username });
 
   if (!userFound) {
     throw new Error('Usuario no encontrado');
@@ -21,6 +20,23 @@ async function follow(username, ctx) {
   }
 }
 
+async function isFollow(username, ctx) {
+  const userFound = await User.findOne({ username });
+  if (!userFound) {
+    throw new Error('Usuario no encontrado');
+  }
+  const follow = await Follow.find({
+    idUser: ctx.user.id,
+  })
+    .where('follow')
+    .equals(userFound._id);
+  if (follow.length > 0) {
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   follow,
+  isFollow,
 };
