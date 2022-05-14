@@ -2,9 +2,35 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const awsUploadImage = require('../utils/aws-upload-image');
+require('dotenv').config({ path: '../.env' });
+
+async function refreshToken(req) {
+  try {
+    const token = req.headers.authorization;
+    console.log(token);
+    if (token) {
+      const decoded = jwt.verify(token, process.env.APP_REFRESH_TOKEN);
+      console.log(decoded);
+      let user = await User.findById(decoded.id);
+      if (!user) {
+        throw new Error('Usuario no encontrado');
+      }
+      let tokens = await issueToken(user);
+      return { ...tokens, user };
+    }
+  } catch (err) {
+    throw new Error('No se pudo renovar el token');
+  }
+}
+
+async function issueToken(user) {
+  let token = 'Bearer ' + (await generateToken(user));
+  let refreshToken = await generateToken(user, '24h');
+  return { token, refreshToken };
+}
 
 //generate token
-function generateToken(user, SECRET_KEY, expiresIn) {
+async function generateToken(user, expiresIn = '24h') {
   const { id, name, username, email } = user;
   const payload = {
     id,
@@ -13,7 +39,12 @@ function generateToken(user, SECRET_KEY, expiresIn) {
     email,
   };
 
-  return jwt.sign(payload, SECRET_KEY, { expiresIn });
+  const token =
+    expiresIn === '24h'
+      ? process.env.SECRET_KEY
+      : process.env.SECRET_REFRESH_TOKEN;
+
+  return await jwt.sign(payload, token, { expiresIn });
 }
 // Regster user
 async function register(input) {
@@ -63,7 +94,9 @@ async function login(input) {
     throw new Error('Email o contraseña incorrectos');
   }
 
-  return { token: generateToken(userFound, process.env.SECRET_KEY, '24h') };
+  const tokens = await issueToken(userFound);
+
+  return { ...tokens, user: userFound };
 }
 
 async function getUser(id, username) {
@@ -78,6 +111,7 @@ async function getUser(id, username) {
   if (!user) {
     throw new Error('Usuario no encontrado');
   }
+
   return user;
 }
 
@@ -150,12 +184,14 @@ async function searchUsers(search) {
       { username: { $regex: search, $options: 'i' } },
     ],
   }).limit(10);
+
   return users;
 }
 
 module.exports = {
   register,
   login,
+  refreshToken,
   getUser,
   updateAvatar,
   deleteAvatar,

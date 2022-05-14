@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const express = require('express');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, graphqlExpress } = require('apollo-server-express');
 
 const typeDefs = require('./gql/schema');
 const resolvers = require('./gql/resolver');
 const { graphqlUploadExpress } = require('graphql-upload');
 const cors = require('cors');
+
 //import dotenv
 require('dotenv').config({ path: '.env' });
 
@@ -59,14 +60,14 @@ async function startServer() {
       crossOriginEmbedderPolicy: !isDevelopment,
       contentSecurityPolicy: !isDevelopment,
     }),
+    cors(),
   );
-  app.use(cors()); // include before other routes
 
-  // This middleware should be added before calling `applyMiddleware`.
   app.use(graphqlUploadExpress());
 
   server.applyMiddleware({
     app,
+    path: '/graphql',
   });
 
   await new Promise((r) => app.listen({ port: 4000 }, r));

@@ -14,6 +14,7 @@ const typeDefs = gql`
   }
   type Token {
     token: String
+    refreshToken: String
   }
 
   type UpdateAvatar {
@@ -49,12 +50,13 @@ const typeDefs = gql`
     #USER
     getUser(id: ID, username: String): User
     searchUsers(search: String): [User]
+    refreshToken: Token
   }
 
   type Mutation {
     #Create a new User
-    register(input: UserInput): User
-    login(input: LoginInput): Token
+    register(input: UserInput): User!
+    login(input: LoginInput): Token!
     updateAvatar(file: Upload): UpdateAvatar
     deleteAvatar: Boolean
     updateUser(input: UserUdateInput): Boolean
