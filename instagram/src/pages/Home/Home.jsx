@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import useAuth from '../../hooks/useAuth';
 
+import useAuth from '../../hooks/useAuth';
 import InstagramStories from '../../components/InstagramStories';
 import Suggested from '../../components/Suggested';
+import { useQuery } from '@apollo/client';
+import { GET__USER } from '../../gql/user';
 
 import {
   FaRegLaughBeam,
@@ -15,6 +17,14 @@ import {
 import './Home.css';
 
 export default function Home() {
+  const { auth } = useAuth();
+
+  const { data, loading } = useQuery(GET__USER, {
+    variables: { username: auth.username },
+  });
+
+  const { getUser } = data;
+
   const [like, setlike] = useState(100);
   const [dislike, setdislike] = useState(4);
 
@@ -138,7 +148,7 @@ export default function Home() {
             </form>
           </div>
         </section>
-        <Suggested />
+        <Suggested getUser={getUser} auth={auth} />
       </div>
     </main>
   );
