@@ -1,0 +1,96 @@
+
+.love {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    
+  }
+  
+  .heart {
+    fill: #aabbc2;
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .active .heart {
+    fill: #ff4d70;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-animation: heart 0.75s cubic-bezier(0.5, 0.1, 0.7, 0.8) 0.25s forwards;
+    animation: heart 0.75s cubic-bezier(0.5, 0.1, 0.7, 0.8) 0.25s forwards;
+  }
+  
+  .circle__like {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    border: 5px solid #e2264d;
+    transform: translate(-50%, -50%);
+  }
+  
+  .active .circle__like {
+    -webkit-animation: circle 0.25s forwards;
+    animation: circle 0.25s forwards;
+  }
+  
+  /* ANIMATIONS */
+  
+  @keyframes heart {
+    0% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+    15% {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+    20% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    30% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    40% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    70% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes circle {
+    0% {
+      border: 10px solid #e2264d;
+      width: 10px;
+      height: 10px;
+    }
+    80% {
+      border: 20px solid #cc8ef5;
+      width: 30px;
+      height: 30px;
+    }
+    100% {
+      border-width: 0px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  

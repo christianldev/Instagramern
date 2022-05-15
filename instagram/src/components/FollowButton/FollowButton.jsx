@@ -91,16 +91,6 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
       );
     } else {
       return (
-        // <button
-        //   onClick={() => onFollow()}
-        //   className="rounded px-3 py-2 m-1 border-b-4 border-l-2 shadow-lg bg-blue-500 border-blue-600 text-white"
-        // >
-        //   {loading ? (
-        //     <FaSpinner className="w-6 h-6 flex justify-center items-center" />
-        //   ) : (
-        //     'Seguir'
-        //   )}
-        // </button>
         <button
           onClick={() => onFollow()}
           class={loading ? 'heart-button active ' : 'heart-button'}

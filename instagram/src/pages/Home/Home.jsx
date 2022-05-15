@@ -10,11 +10,11 @@ import {
   FaRegLaughBeam,
   FaShareAlt,
   FaRegComment,
-  FaHeart,
   FaRegBookmark,
   FaEllipsisH,
 } from 'react-icons/fa';
 import './Home.css';
+import LikeButton from '../../components/LikeButton';
 
 export default function Home() {
   const { auth } = useAuth();
@@ -24,42 +24,6 @@ export default function Home() {
   });
 
   const { getUser } = data;
-
-  const [like, setlike] = useState(100);
-  const [dislike, setdislike] = useState(4);
-
-  const [likeactive, setlikeactive] = useState(false);
-  const [dislikeactive, setdislikeactive] = useState(false);
-
-  function likef() {
-    if (likeactive) {
-      setlikeactive(false);
-      setlike(like - 1);
-    } else {
-      setlikeactive(true);
-      setlike(like + 1);
-      if (dislikeactive) {
-        setdislikeactive(false);
-        setlike(like + 1);
-        setdislike(dislike - 1);
-      }
-    }
-  }
-
-  function dislikef() {
-    if (dislikeactive) {
-      setdislikeactive(false);
-      setdislike(dislike - 1);
-    } else {
-      setdislikeactive(true);
-      setdislike(dislike + 1);
-      if (likeactive) {
-        setlikeactive(false);
-        setdislike(dislike + 1);
-        setlike(like - 1);
-      }
-    }
-  }
 
   return (
     <main className="mx-auto bg-white dark:bg-darktheme-body lg:m-auto flex flex-1 flex-col items-center w-full ">
@@ -90,25 +54,8 @@ export default function Home() {
             />
             <div className="flex justify-between mx-1 mt-2">
               <div className="flex">
-                <div className="button">
-                  <input
-                    onClick={likef}
-                    className="input__like"
-                    defaultChecked={likeactive ? 'checked' : ''}
-                    type="checkbox"
-                    id="liked"
-                  />
-                  <label className="label__like" htmlFor="liked">
-                    <FaHeart
-                      name="heart"
-                      className={'m-1 cursor-pointer dark:text-white'}
-                    />
-                  </label>
-                </div>
+                <LikeButton />
 
-                <p className="mt-0.5 ml-1 mr-2 font-light text-sm dark:text-white">
-                  700k
-                </p>
                 <FaRegComment className="m-1 cursor-pointer transform hover:scale-105 dark:text-white" />
 
                 <p className="mt-0.5 ml-1 mr-2 font-light text-sm dark:text-white">
