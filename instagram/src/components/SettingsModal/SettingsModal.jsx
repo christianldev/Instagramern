@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { useApolloClient } from '@apollo/client';
+import { decodeToken } from '../../utils/token';
 
 export default function SettingsModal({ setShowModal }) {
   const { logout } = useAuth();
@@ -11,6 +12,18 @@ export default function SettingsModal({ setShowModal }) {
 
   const onLogout = () => {
     client.clearStore();
+    // remove token when expired
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = decodeToken(token);
+        if (decoded.exp * 1000 < Date.now()) {
+          logout();
+          navigate('/');
+        }
+      }
+    }
+
     logout();
     navigate('/');
   };

@@ -32,7 +32,9 @@ const typeDefs = gql`
   }
 
   input LoginInput {
+    # login with email or username
     email: String!
+    username: String
     password: String!
   }
 
@@ -54,6 +56,7 @@ const typeDefs = gql`
 
     #FOLLOW
     isFollow(username: String!): Boolean
+    getFollowers(username: String!): [User]
   }
 
   type Mutation {

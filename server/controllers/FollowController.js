@@ -49,8 +49,27 @@ async function unFollow(username, ctx) {
   return false;
 }
 
+async function getFollowers(username) {
+  const userFound = await User.findOne({ username });
+  if (!userFound) {
+    throw new Error('Usuario no encontrado');
+  }
+  const followers = await Follow.find({
+    follow: userFound._id,
+  }).populate('idUser');
+
+  const followersArray = [];
+
+  for await (const follower of followers) {
+    followersArray.push(follower.idUser);
+  }
+
+  return followersArray;
+}
+
 module.exports = {
   follow,
   isFollow,
   unFollow,
+  getFollowers,
 };

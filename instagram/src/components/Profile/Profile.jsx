@@ -10,6 +10,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 import useModalForm from '../../hooks/useModalForm';
 
 import FollowButton from '../FollowButton';
+import Followers from '../Followers';
 
 export default function Profile({ getUser, auth, username }) {
   const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
@@ -39,20 +40,7 @@ export default function Profile({ getUser, auth, username }) {
           </span>
           <p className="font-semibold text-gray-500">@{getUser.username}</p>
         </div>
-        <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
-          <div className="font-semibold text-center mx-4">
-            <p className="text-gray-200">102</p>
-            <span className="text-gray-400">Posts</span>
-          </div>
-          <div className="font-semibold text-center mx-4">
-            <p className="text-gray-200">102</p>
-            <span className="text-gray-400">Followers</span>
-          </div>
-          <div className="font-semibold text-center mx-4">
-            <p className="text-gray-200">102</p>
-            <span className="text-gray-400">Folowing</span>
-          </div>
-        </div>
+        <Followers username={username} />
         <FollowButton
           handlerModal={handlerModal}
           getUser={getUser}

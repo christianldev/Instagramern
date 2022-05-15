@@ -83,15 +83,22 @@ async function register(input) {
 // Login user
 
 async function login(input) {
-  const { email, password } = input;
-  const userFound = await User.findOne({ email: email.toLowerCase() });
+  const { email, username, password } = input;
+  // login with email or username
+  let userFound = null;
+  if (email || username) {
+    userFound = await User.findOne({
+      $or: [{ email: email.toLowerCase() }, { username }],
+    });
+  }
+
   if (!userFound) {
-    throw new Error('Email o contraseña incorrectos');
+    throw new Error('Credenciales incorrectas');
   }
 
   const passwordSuccess = await bcrypt.compare(password, userFound.password);
   if (!passwordSuccess) {
-    throw new Error('Email o contraseña incorrectos');
+    throw new Error('Credenciales incorrectas');
   }
 
   const tokens = await issueToken(userFound);

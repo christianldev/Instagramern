@@ -31,17 +31,6 @@ function App() {
   }, []);
 
   const logout = () => {
-    // remove token when expired
-    if (auth) {
-      const token = getToken();
-      if (token) {
-        const decoded = decodeToken(token);
-        if (decoded.exp * 1000 < Date.now()) {
-          removeToken();
-          setAuth(null);
-        }
-      }
-    }
     removeToken();
     setAuth(null);
   };
