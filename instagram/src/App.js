@@ -18,7 +18,14 @@ function App() {
 
     if (!token) {
       setAuth(null);
-    } else if (token) {
+    }
+    // if token is expired in 24h
+    if (token && decodeToken(token).exp < Date.now() / 1000) {
+      removeToken();
+      setAuth(null);
+    }
+    // if token is valid
+    if (token && decodeToken(token).exp > Date.now() / 1000) {
       setAuth(decodeToken(token));
     }
   }, []);
@@ -29,7 +36,7 @@ function App() {
       const token = getToken();
       if (token) {
         const decoded = decodeToken(token);
-        if (decoded.exp < Date.now() / 1000) {
+        if (decoded.exp * 1000 < Date.now()) {
           removeToken();
           setAuth(null);
         }

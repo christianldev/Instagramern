@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
-const { ApolloServer, graphqlExpress } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 
 const typeDefs = require('./gql/schema');
 const resolvers = require('./gql/resolver');
 const { graphqlUploadExpress } = require('graphql-upload');
 const cors = require('cors');
+const { issueToken } = require('./controllers/UserController');
+const User = require('./models/user');
 
 //import dotenv
 require('dotenv').config({ path: '.env' });
@@ -33,16 +35,24 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => {
+    context: async ({ req }) => {
       const token = req.headers.authorization;
 
       if (token) {
         try {
-          const user = jwt.verify(
+          let user = jwt.verify(
             token.replace('Bearer ', ''),
             process.env.SECRET_KEY,
           );
+          if (user.exp < Date.now() / 1000) {
+            user = User.findById(user.id);
+            if (!user) {
+              throw new Error('Usuario no encontrado');
+            }
+            let tokens = await issueToken(user);
 
+            return { ...tokens, user };
+          }
           return { user };
         } catch (error) {
           console.log(error);

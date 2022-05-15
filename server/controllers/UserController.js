@@ -24,13 +24,13 @@ async function refreshToken(req) {
 }
 
 async function issueToken(user) {
-  let token = 'Bearer ' + (await generateToken(user));
-  let refreshToken = await generateToken(user, '24h');
+  let token = await generateToken(user);
+  let refreshToken = await generateToken(user, '1h');
   return { token, refreshToken };
 }
 
 //generate token
-async function generateToken(user, expiresIn = '24h') {
+async function generateToken(user, expiresIn = '1h') {
   const { id, name, username, email } = user;
   const payload = {
     id,
@@ -40,7 +40,7 @@ async function generateToken(user, expiresIn = '24h') {
   };
 
   const token =
-    expiresIn === '24h'
+    expiresIn === '1h'
       ? process.env.SECRET_KEY
       : process.env.SECRET_REFRESH_TOKEN;
 
@@ -191,7 +191,7 @@ async function searchUsers(search) {
 module.exports = {
   register,
   login,
-  refreshToken,
+  issueToken,
   getUser,
   updateAvatar,
   deleteAvatar,
