@@ -17,23 +17,21 @@ export function TextInput({ useField, label, ...rest }) {
 
       <div className="mt-1 relative">
         <Field
-          className="block w-full rounded-xl p-2 text-sm bg-slate-200 dark:bg-black dark:text-gray-400"
+          className="block w-full rounded-xl p-2 text-sm bg-slate-200 dark:bg-black text-gray-400"
           {...field}
           {...rest}
         />
-        {meta.touched && meta.error ? (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <FaExclamationCircle
-              className="h-5 w-5 text-red-500"
-              aria-hidden="true"
-            />
-          </div>
-        ) : null}
       </div>
       {meta.touched && meta.error ? (
-        <p className="mt-2 text-sm text-red-600" id="email-error">
-          {meta.error}
-        </p>
+        <div className="relative inset-y-0 right-0 pr-3 flex items- justify-center pointer-events-none">
+          <FaExclamationCircle
+            className="h-5 w-5 mt-2 text-red-500"
+            aria-hidden="true"
+          />
+          <p className="mt-2 text-sm pl-2 text-red-600" id="email-error">
+            {meta.error}
+          </p>
+        </div>
       ) : null}
     </>
   );

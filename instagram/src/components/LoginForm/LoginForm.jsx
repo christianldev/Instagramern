@@ -59,7 +59,7 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
               onChange={formik.handleChange}
             />
           </div>
-          <div className="relative pb-2 pt-4">
+          <div className="relative pb-4 pt-4">
             <TextInput
               useField={useField}
               type={showPassword ? 'text' : 'password'}
@@ -72,12 +72,18 @@ export const LoginForm = ({ loginForm, setLoginForm }) => {
 
             <div
               onClick={handleShowPassword}
-              className="absolute inset-y-0 right-0 pr-3 pt-7 flex items-center text-sm leading-5 cursor-pointer"
+              className={
+                'absolute inset-y-0 right-0 pr-3 p-12 block text-sm leading-5 cursor-pointer'
+              }
             >
               {showPassword ? (
-                <FaRegEye className={!formik.isValid ? 'hidden' : ''} />
+                <FaRegEye
+                  className={'text-gray-500  flex justify-center items-center'}
+                />
               ) : (
-                <FaRegEyeSlash className={!formik.isValid ? 'hidden' : ''} />
+                <FaRegEyeSlash
+                  className={'text-gray-500  flex justify-center items-center'}
+                />
               )}
             </div>
           </div>
