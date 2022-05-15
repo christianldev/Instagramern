@@ -8,29 +8,12 @@ import FeaturedStories from '../FeaturedStories';
 import { FaEllipsisV } from 'react-icons/fa';
 
 import useModalForm from '../../hooks/useModalForm';
-import { useMutation } from '@apollo/client';
-import { FOLLOW_USER } from '../../gql/follow';
+
+import FollowButton from '../FollowButton';
 
 export default function Profile({ getUser, auth, username }) {
   const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
     useModalForm(auth);
-
-  const [followUserState, setFollowUserState] = useState(false);
-
-  const [followUser] = useMutation(FOLLOW_USER, {
-    variables: {
-      username,
-    },
-    onCompleted: () => {
-      setFollowUserState(true);
-    },
-  });
-
-  const handleFollowUser = () => {
-    followUser();
-
-    setFollowUserState(true);
-  };
 
   return (
     <aside className="relative bg-no-repeat bg-fixed bg-center bg-cover dark:bg-darktheme-body w-1/3    min-w-min   border-r border-indigo-900/20 hidden md:block sm:block ">
@@ -70,20 +53,12 @@ export default function Profile({ getUser, auth, username }) {
             <span className="text-gray-400">Folowing</span>
           </div>
         </div>
-        <div className="font-semibold text-center mx-4">
-          {getUser.username === auth.username ? (
-            <button className="px-8 py-1 border-2 border-blue-500 bg-blue-500 rounded-full text-gray-50 font-semibold">
-              Ajustes
-            </button>
-          ) : (
-            <button
-              onClick={handleFollowUser}
-              className="px-8 py-1 border-2 border-blue-500 bg-blue-500 rounded-full text-gray-50 font-semibold"
-            >
-              {followUserState ? 'Siguiendo' : 'Seguir'}
-            </button>
-          )}
-        </div>
+        <FollowButton
+          handlerModal={handlerModal}
+          getUser={getUser}
+          auth={auth}
+          username={username}
+        />
       </div>
 
       <article className="flex flex-col p-4 text-gray-500 justify-center items-center ">
