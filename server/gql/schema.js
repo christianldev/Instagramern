@@ -73,7 +73,7 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    newFollow: User!
+    newFollow: [User!]
     newUnFollow: User!
   }
 `;

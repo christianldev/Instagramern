@@ -1,7 +1,7 @@
 const Follow = require('../models/follow');
 const User = require('../models/user');
 
-async function follow(username, ctx, pubsub) {
+async function follow(username, ctx) {
   const userFound = await User.findOne({ username });
 
   if (!userFound) {
@@ -26,7 +26,7 @@ async function follow(username, ctx, pubsub) {
       throw new Error('Ya sigues a este usuario');
     }
     await follow.save();
-    pubsub.publish('NEW_FOLLOW', { newFollow: follow });
+
     return true;
   } catch (error) {
     console.log(error);
@@ -63,7 +63,7 @@ async function unFollow(username, ctx) {
   return false;
 }
 
-async function getFollowers(username) {
+async function getFollowers(username, pubsub) {
   const userFound = await User.findOne({ username });
   if (!userFound) {
     throw new Error('Usuario no encontrado');
@@ -78,6 +78,7 @@ async function getFollowers(username) {
     followersArray.push(follower.idUser);
   }
 
+  pubsub.publish('NEW_FOLLOW', { newFollow: followers });
   return followersArray;
 }
 
