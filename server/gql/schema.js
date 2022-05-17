@@ -71,6 +71,11 @@ const typeDefs = gql`
     follow(username: String!): Boolean
     unFollow(username: String!): Boolean
   }
+
+  type Subscription {
+    newFollow: User!
+    newUnFollow: User!
+  }
 `;
 
 module.exports = typeDefs;

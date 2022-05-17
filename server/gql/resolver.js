@@ -1,3 +1,5 @@
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
 const UserController = require('../controllers/UserController');
 const FollowController = require('../controllers/FollowController');
 const { GraphQLUpload } = require('graphql-upload');
@@ -24,9 +26,15 @@ const resolvers = {
     updateUser: (_, { input }, ctx) => UserController.updateUser(input, ctx),
 
     //follow
-    follow: (_, { username }, ctx) => FollowController.follow(username, ctx),
+    follow: (_, { username }, ctx) =>
+      FollowController.follow(username, ctx, pubsub),
     unFollow: (_, { username }, ctx) =>
       FollowController.unFollow(username, ctx),
+  },
+  Subscription: {
+    newFollow: {
+      subscribe: () => pubsub.asyncIterator('NEW_FOLLOW'),
+    },
   },
 };
 
