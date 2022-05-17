@@ -17,16 +17,22 @@
   },
   "homepage": "https://github.com/DevLop-EC/Instagram#readme",
   "dependencies": {
+    "@graphql-tools/schema": "^8.3.11",
     "apollo-server": "^3.6.7",
+    "apollo-server-core": "^3.7.0",
     "apollo-server-express": "^3.7.0",
     "aws-sdk": "^2.1127.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
+    "graphql": "^16.5.0",
+    "graphql-subscriptions": "^2.0.0",
     "graphql-upload": "^13.0.0",
+    "graphql-ws": "^5.8.2",
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.1"
+    "mongoose": "^6.3.1",
+    "ws": "^8.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
