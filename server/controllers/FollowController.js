@@ -1,7 +1,7 @@
 const Follow = require('../models/follow');
 const User = require('../models/user');
 
-async function follow(username, ctx) {
+async function follow(username, ctx, pubsub) {
   const userFound = await User.findOne({ username });
 
   if (!userFound) {
@@ -12,7 +12,21 @@ async function follow(username, ctx) {
       idUser: ctx.user.id,
       follow: userFound._id,
     });
-    follow.save();
+
+    if (ctx.user.id === userFound._id) {
+      throw new Error('No puedes seguirte a ti mismo');
+    }
+    // if follow is already exist
+    const followExist = await Follow.find({
+      idUser: ctx.user.id,
+    })
+      .where('follow')
+      .equals(userFound._id);
+    if (followExist.length > 0) {
+      throw new Error('Ya sigues a este usuario');
+    }
+    await follow.save();
+    pubsub.publish('NEW_FOLLOW', { newFollow: follow });
     return true;
   } catch (error) {
     console.log(error);
