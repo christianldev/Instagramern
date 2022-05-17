@@ -24,7 +24,9 @@ export default function Followers({ username }) {
             (getFollowers.length >= 1000000 && 'm')}
         </p>
         <span className="text-gray-400">
-          {getFollowers.length > 1 ? 'Seguidores' : 'Seguidor'}
+          {getFollowers.length > 1 || getFollowers.length == 0
+            ? 'Seguidores'
+            : 'Seguidor'}
         </span>
       </div>
       <div className="font-semibold text-center mx-4">
