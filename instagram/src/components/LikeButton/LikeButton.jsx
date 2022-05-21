@@ -19,10 +19,10 @@ export default function LikeButton() {
 
   return (
     <>
-      <button onClick={onLike} class={like ? 'love active' : 'love'}>
-        <div class="circle__like"></div>
+      <button onClick={onLike} className={like ? 'love active' : 'love'}>
+        <div className="circle__like"></div>
         <svg
-          class="heart"
+          className="heart"
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           x="0"
