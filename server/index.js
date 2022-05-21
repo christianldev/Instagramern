@@ -62,7 +62,7 @@ async function startServer() {
 
   const server = new ApolloServer({
     schema,
-    csrfPrevention: true,
+    csrfPrevention: false,
 
     plugins: [
       // Proper shutdown for the HTTP server.
@@ -79,21 +79,23 @@ async function startServer() {
         },
       },
     ],
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null;
+    context: ({ req }) => {
+      const token = req.headers.authorization;
 
-      if (auth) {
+      if (token) {
         try {
-          const decodeToken = jwt.verify(
-            auth.replace('Bearer ', ''),
+          const user = jwt.verify(
+            token.replace('Bearer ', ''),
             process.env.SECRET_KEY,
           );
 
-          const user = await User.findById(decodeToken.id);
-
-          return { user };
-        } catch (err) {
-          console.log(err);
+          return {
+            user,
+          };
+        } catch (error) {
+          console.log('#### ERROR ####');
+          console.log(error);
+          throw new Error('Token invalido');
         }
       }
     },
@@ -108,7 +110,6 @@ async function startServer() {
       crossOriginEmbedderPolicy: !isDevelopment,
       contentSecurityPolicy: !isDevelopment,
     }),
-    cors(),
   );
 
   app.use(graphqlUploadExpress());
@@ -119,6 +120,8 @@ async function startServer() {
   });
 
   httpServer.listen(process.env.PORT, () => {
-    console.log(`Server running on http://localhost:${process.env.PORT}`);
+    console.log(
+      `Server running on http://localhost:${process.env.PORT}/graphql`,
+    );
   });
 }
