@@ -1,9 +1,7 @@
-import React from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useQuery, useMutation, useSubscription } from '@apollo/client';
 import { IS_FOLLOW, FOLLOW_USER, UNFOLLOW_USER } from '../../gql/follow';
 import toast from 'react-hot-toast';
-
-import { FaSpinner } from 'react-icons/fa';
 
 import './FollowButton.css';
 
@@ -15,6 +13,10 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
       username: getUser.username,
     },
   });
+
+  if (loading) {
+    return <div className="flex justify-center items-center">Cargando...</div>;
+  }
 
   const onFollow = async () => {
     try {
@@ -83,9 +85,9 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
       return (
         <button
           onClick={() => onUnfollow()}
-          class={!loading ? 'heart-button active ' : 'heart-button'}
+          className={!loading ? 'heart-button active ' : 'heart-button'}
         >
-          <div class="heart-flip"></div>
+          <div className="heart-flip"></div>
           <span>Dejar de seguir</span>
         </button>
       );
@@ -93,9 +95,9 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
       return (
         <button
           onClick={() => onFollow()}
-          class={loading ? 'heart-button active ' : 'heart-button'}
+          className={loading ? 'heart-button active ' : 'heart-button'}
         >
-          <div class="heart-flip"></div>
+          <div className="heart-flip"></div>
           <span>Seguir</span>
         </button>
       );

@@ -45,6 +45,7 @@ export default function Profile({ getUser, auth, username }) {
           handlerModal={handlerModal}
           getUser={getUser}
           auth={auth}
+          username={username}
         />
       </div>
 

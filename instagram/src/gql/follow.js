@@ -27,3 +27,27 @@ export const GET_FOLLOWERS = gql`
     }
   }
 `;
+
+export const FOLLOW_ADDED = gql`
+  subscription FollowAdded {
+    followAdded {
+      id
+      name
+      username
+      email
+      avatar
+    }
+  }
+`;
+
+export const UNFOLLOW_ADDED = gql`
+  subscription UnFollowAdded {
+    unFollowAdded {
+      id
+      name
+      username
+      email
+      avatar
+    }
+  }
+`;

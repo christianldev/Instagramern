@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_AVATAR, DELETE_AVATAR, GET__USER } from '../../gql/user';
 
 import './AvatarForm.css';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function AvatarForm({ setShowModal, auth }) {
   const [loading, setLoading] = useState(false);
@@ -49,16 +49,18 @@ export default function AvatarForm({ setShowModal, auth }) {
     try {
       setLoading(true);
       const result = await updateAvatar({ variables: { file } });
+
       const { data } = result;
 
       if (!data.updateAvatar.status) {
+        toast.warning('Error al actualizar el avatar');
         setLoading(false);
       } else {
         setLoading(false);
         setShowModal(false);
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
     }
   }, []);
 
@@ -135,7 +137,6 @@ export default function AvatarForm({ setShowModal, auth }) {
       </button>
 
       <input {...getInputProps()} />
-      <Toaster />
     </div>
   );
 }
