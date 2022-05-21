@@ -1,79 +1,42 @@
 const User = require('../models/user');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const awsUploadImage = require('../utils/aws-upload-image');
 require('dotenv').config({ path: '../.env' });
 
-async function refreshToken(req) {
-  try {
-    const token = req.headers.authorization;
-    console.log(token);
-    if (token) {
-      const decoded = jwt.verify(token, process.env.APP_REFRESH_TOKEN);
-      console.log(decoded);
-      let user = await User.findById(decoded.id);
-      if (!user) {
-        throw new Error('Usuario no encontrado');
-      }
-      let tokens = await issueToken(user);
-      return { ...tokens, user };
-    }
-  } catch (err) {
-    throw new Error('No se pudo renovar el token');
-  }
-}
-
-async function issueToken(user) {
-  let token = await generateToken(user);
-  let refreshToken = await generateToken(user, '1h');
-  return { token, refreshToken };
-}
-
-//generate token
-async function generateToken(user, expiresIn = '1h') {
-  const { id, name, username, email } = user;
+function createToken(user, SECRET_KEY, expiresIn) {
+  const { id, name, email, username } = user;
   const payload = {
     id,
     name,
-    username,
     email,
+    username,
   };
-
-  const token =
-    expiresIn === '1h'
-      ? process.env.SECRET_KEY
-      : process.env.SECRET_REFRESH_TOKEN;
-
-  return await jwt.sign(payload, token, { expiresIn });
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 // Regster user
 async function register(input) {
   const newUser = input;
-
   newUser.email = newUser.email.toLowerCase();
   newUser.username = newUser.username.toLowerCase();
 
   const { email, username, password } = newUser;
 
-  // Revisar si el email ya existe
+  // Revisamos si el email esta en uso
   const foundEmail = await User.findOne({ email });
-  // Revisar si el username ya existe
+  if (foundEmail) throw new Error('El email ya esta en uso');
+
+  // Revisamos si el username esta en uso
   const foundUsername = await User.findOne({ username });
-  if (foundEmail) {
-    throw new Error('El email ya existe');
-  }
+  if (foundUsername) throw new Error('El nombre de usuario ya esta en uso');
 
-  if (foundUsername) {
-    throw new Error('El usuario ya existe');
-  }
-
-  //Encriptar password
-  const salt = await bcrypt.genSaltSync(10);
-  newUser.password = await bcrypt.hashSync(password, salt);
+  // Encriptar
+  const salt = await bcryptjs.genSaltSync(10);
+  newUser.password = await bcryptjs.hash(password, salt);
 
   try {
     const user = new User(newUser);
-    await user.save();
+    user.save();
     return user;
   } catch (error) {
     console.log(error);
@@ -83,27 +46,17 @@ async function register(input) {
 // Login user
 
 async function login(input) {
-  const { email, username, password } = input;
-  // login with email or username
-  let userFound = null;
-  if (email || username) {
-    userFound = await User.findOne({
-      $or: [{ email: email.toLowerCase() }, { username }],
-    });
-  }
+  const { email, password } = input;
 
-  if (!userFound) {
-    throw new Error('Credenciales incorrectas');
-  }
+  const userFound = await User.findOne({ email: email.toLowerCase() });
+  if (!userFound) throw new Error('Error en el email o contraseña');
 
-  const passwordSuccess = await bcrypt.compare(password, userFound.password);
-  if (!passwordSuccess) {
-    throw new Error('Credenciales incorrectas');
-  }
+  const passwordSucess = await bcryptjs.compare(password, userFound.password);
+  if (!passwordSucess) throw new Error('Error en el email o contraseña');
 
-  const tokens = await issueToken(userFound);
-
-  return { ...tokens, user: userFound };
+  return {
+    token: createToken(userFound, process.env.SECRET_KEY, '24h'),
+  };
 }
 
 async function getUser(id, username) {
@@ -198,7 +151,6 @@ async function searchUsers(search) {
 module.exports = {
   register,
   login,
-  issueToken,
   getUser,
   updateAvatar,
   deleteAvatar,
