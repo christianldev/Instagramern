@@ -9,7 +9,6 @@ const resolvers = {
   Query: {
     //User
     getUser: (_, { id, username }) => UserController.getUser(id, username),
-    refreshToken: (_, { req }) => UserController.refreshToken(req),
     searchUsers: (_, { search }) => UserController.searchUsers(search),
 
     //Follow
@@ -30,11 +29,14 @@ const resolvers = {
     follow: (_, { username }, ctx) =>
       FollowController.follow(username, ctx, pubsub),
     unFollow: (_, { username }, ctx) =>
-      FollowController.unFollow(username, ctx),
+      FollowController.unFollow(username, ctx, pubsub),
   },
   Subscription: {
-    newFollow: {
-      subscribe: () => pubsub.asyncIterator('NEW_FOLLOW'),
+    followAdded: {
+      subscribe: () => pubsub.asyncIterator('FOLLOW_ADDED'),
+    },
+    unFollowAdded: {
+      subscribe: () => pubsub.asyncIterator('NEW_UNFOLLOW'),
     },
   },
 };

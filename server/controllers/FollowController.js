@@ -1,7 +1,7 @@
 const Follow = require('../models/follow');
 const User = require('../models/user');
 
-async function follow(username, ctx) {
+async function follow(username, ctx, pubsub) {
   const userFound = await User.findOne({ username });
 
   if (!userFound) {
@@ -22,10 +22,13 @@ async function follow(username, ctx) {
     })
       .where('follow')
       .equals(userFound._id);
+
     if (followExist.length > 0) {
       throw new Error('Ya sigues a este usuario');
     }
     await follow.save();
+
+    pubsub.publish('FOLLOW_ADDED', { followAdded: follow });
 
     return true;
   } catch (error) {
@@ -50,7 +53,7 @@ async function isFollow(username, ctx) {
   return false;
 }
 
-async function unFollow(username, ctx) {
+async function unFollow(username, ctx, pubsub) {
   const userFound = await User.findOne({ username });
   const follow = await Follow.deleteOne({
     idUser: ctx.user.id,
@@ -58,8 +61,10 @@ async function unFollow(username, ctx) {
     .where('follow')
     .equals(userFound._id);
   if (follow.deletedCount > 0) {
+    pubsub.publish('NEW_UNFOLLOW', { unFollowAdded: follow });
     return true;
   }
+
   return false;
 }
 
@@ -78,7 +83,8 @@ async function getFollowers(username, pubsub) {
     followersArray.push(follower.idUser);
   }
 
-  pubsub.publish('NEW_FOLLOW', { newFollow: followers });
+  // pubsub.publish('FOLLOW_ADDED', { followAdded: followers });
+
   return followersArray;
 }
 

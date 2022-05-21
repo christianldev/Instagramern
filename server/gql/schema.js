@@ -14,7 +14,6 @@ const typeDefs = gql`
   }
   type Token {
     token: String
-    refreshToken: String
   }
 
   type UpdateAvatar {
@@ -52,7 +51,6 @@ const typeDefs = gql`
     #USER
     getUser(id: ID, username: String): User
     searchUsers(search: String): [User]
-    refreshToken: Token
 
     #FOLLOW
     isFollow(username: String!): Boolean
@@ -73,8 +71,8 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    newFollow: [User!]
-    newUnFollow: User!
+    followAdded: User!
+    unFollowAdded: User!
   }
 `;
 
