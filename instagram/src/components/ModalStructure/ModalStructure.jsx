@@ -18,11 +18,13 @@ export default function ModalStructure({
       <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body ">
         <div className="">
           <div className="text-center p-5 flex-auto justify-center">
-            <h2 className="text-xl font-bold py-4  dark:text-white ">
+            <h2 className="text-xl font-bold py-2  dark:text-white ">
               {titleModal}
             </h2>
             <p className="text-sm text-gray-500 px-8">
-              ¿Qué accion vas a realizar?
+              {titleModal === 'getFollowers' || 'Following'
+                ? ''
+                : '¿Qué accion vas a realizar?'}
             </p>
           </div>
           {children}

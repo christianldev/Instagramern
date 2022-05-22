@@ -1,6 +1,11 @@
-import React, { useEffect } from 'react';
-import { useQuery, useMutation, useSubscription } from '@apollo/client';
-import { IS_FOLLOW, FOLLOW_USER, UNFOLLOW_USER } from '../../gql/follow';
+import React from 'react';
+import { useQuery, useMutation, useApolloClient } from '@apollo/client';
+import {
+  IS_FOLLOW,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
+  GET_FOLLOWERS,
+} from '../../gql/follow';
 import toast from 'react-hot-toast';
 
 import './FollowButton.css';
@@ -8,6 +13,7 @@ import './FollowButton.css';
 export default function FollowButton({ handlerModal, getUser, auth }) {
   const [follow] = useMutation(FOLLOW_USER);
   const [unfollow] = useMutation(UNFOLLOW_USER);
+
   const { data, loading } = useQuery(IS_FOLLOW, {
     variables: {
       username: getUser.username,

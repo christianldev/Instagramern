@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  scalar Upload
+
   type User {
     id: ID
     name: String
@@ -20,8 +22,6 @@ const typeDefs = gql`
     status: Boolean
     urlAvatar: String
   }
-
-  scalar Upload
 
   input UserInput {
     name: String!

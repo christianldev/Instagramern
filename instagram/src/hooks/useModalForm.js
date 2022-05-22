@@ -1,5 +1,6 @@
 import React from 'react';
 import AvatarForm from '../components/AvatarForm/AvatarForm';
+import FollowersModal from '../components/FollowersModal';
 import SettingsModal from '../components/SettingsModal';
 import useAuth from './useAuth';
 
@@ -20,6 +21,14 @@ export default function useModalForm() {
         setTitleModal('Editar perfil');
         setChildreModal(
           <SettingsModal setShowModal={setShowModal} auth={auth} />,
+        );
+        setShowModal(true);
+        break;
+
+      case 'getFollowers':
+        setTitleModal('Seguidores');
+        setChildreModal(
+          <FollowersModal setShowModal={setShowModal} auth={auth} />,
         );
         setShowModal(true);
         break;

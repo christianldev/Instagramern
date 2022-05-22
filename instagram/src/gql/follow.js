@@ -21,6 +21,7 @@ export const UNFOLLOW_USER = gql`
 export const GET_FOLLOWERS = gql`
   query GetFollowers($username: String!) {
     getFollowers(username: $username) {
+      id
       username
       name
       avatar

@@ -40,7 +40,7 @@ export default function Profile({ getUser, auth, username }) {
           </span>
           <p className="font-semibold text-gray-500">@{getUser.username}</p>
         </div>
-        <Followers username={username} />
+        <Followers username={username} handlerModal={handlerModal} />
         <FollowButton
           handlerModal={handlerModal}
           getUser={getUser}

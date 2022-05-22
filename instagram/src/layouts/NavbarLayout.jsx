@@ -84,7 +84,7 @@ export default function NavbarLayout() {
                               ? `/${auth.name}`
                               : `/${auth.username}`
                           }
-                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-700 no-underline hover:no-underline"
                         >
                           Mi perfil
                         </Link>
@@ -93,7 +93,9 @@ export default function NavbarLayout() {
                         <Link
                           onClick={() => setDropDown(false)}
                           to="/account/edit"
-                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 
+                          hover:bg-blue-100
+                          dark:hover:bg-gray-700 no-underline hover:no-underline"
                         >
                           Configuracion
                         </Link>
@@ -104,7 +106,7 @@ export default function NavbarLayout() {
                       <li>
                         <a
                           onClick={onLogout}
-                          className="px-4 py-2 block text-gray-400 hover:bg-gray-700 no-underline cursor-pointer hover:no-underline"
+                          className="px-4 py-2 block text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-700 no-underline cursor-pointer hover:no-underline"
                         >
                           Cerrar sesion
                         </a>

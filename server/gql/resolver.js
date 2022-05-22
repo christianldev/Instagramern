@@ -38,6 +38,9 @@ const resolvers = {
     unFollowAdded: {
       subscribe: () => pubsub.asyncIterator('NEW_UNFOLLOW'),
     },
+    // getFollowersAdded: {
+    //   subscribe: () => pubsub.asyncIterator('GET_FOLLOWERS'),
+    // },
   },
 };
 

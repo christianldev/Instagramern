@@ -8,27 +8,29 @@ async function follow(username, ctx, pubsub) {
     throw new Error('Usuario no encontrado');
   }
   try {
-    const follow = new Follow({
+    const newFollow = new Follow({
       idUser: ctx.user.id,
       follow: userFound._id,
     });
 
-    if (ctx.user.id === userFound._id) {
-      throw new Error('No puedes seguirte a ti mismo');
-    }
-    // if follow is already exist
-    const followExist = await Follow.find({
+    // if follow is already added
+    const follow = await Follow.find({
       idUser: ctx.user.id,
     })
       .where('follow')
       .equals(userFound._id);
 
-    if (followExist.length > 0) {
+    if (follow.length > 0) {
       throw new Error('Ya sigues a este usuario');
     }
-    await follow.save();
 
-    pubsub.publish('FOLLOW_ADDED', { followAdded: follow });
+    await newFollow.save();
+
+    // find the user that is being followed
+    const userFollowed = await User.findById(userFound._id);
+
+    // publish the new follow
+    pubsub.publish('FOLLOW_ADDED', { followAdded: userFollowed });
 
     return true;
   } catch (error) {
@@ -55,17 +57,30 @@ async function isFollow(username, ctx) {
 
 async function unFollow(username, ctx, pubsub) {
   const userFound = await User.findOne({ username });
-  const follow = await Follow.deleteOne({
-    idUser: ctx.user.id,
-  })
-    .where('follow')
-    .equals(userFound._id);
-  if (follow.deletedCount > 0) {
-    pubsub.publish('NEW_UNFOLLOW', { unFollowAdded: follow });
-    return true;
+  if (!userFound) {
+    throw new Error('Usuario no encontrado');
   }
 
-  return false;
+  try {
+    const followDelete = await Follow.findOneAndDelete({
+      idUser: ctx.user.id,
+    })
+      .where('follow')
+      .equals(userFound._id)
+      .populate('idUser');
+
+    if (followDelete) {
+      pubsub.publish('NEW_UNFOLLOW', {
+        unFollowAdded: followDelete.idUser,
+      });
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
 
 async function getFollowers(username, pubsub) {
@@ -83,7 +98,7 @@ async function getFollowers(username, pubsub) {
     followersArray.push(follower.idUser);
   }
 
-  // pubsub.publish('FOLLOW_ADDED', { followAdded: followers });
+  // pubsub.publish('GET_FOLLOWERS', { getFollowersAdded: followersArray });
 
   return followersArray;
 }
