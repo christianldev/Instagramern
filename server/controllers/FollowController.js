@@ -13,6 +13,11 @@ async function follow(username, ctx, pubsub) {
       follow: userFound._id,
     });
 
+    //no follow a si mismo
+    if (ctx.user.id.toString() === userFound._id.toString()) {
+      throw new Error('No puedes seguirte a ti mismo');
+    }
+
     // if follow is already added
     const follow = await Follow.find({
       idUser: ctx.user.id,
@@ -101,9 +106,30 @@ async function getFollowers(username) {
   return followersArray;
 }
 
+async function getFollowing(username) {
+  const userFound = await User.findOne({ username });
+  if (!userFound) {
+    throw new Error('Usuario no encontrado');
+  }
+  const user = await User.findOne({ username });
+  const following = await Follow.find({
+    idUser: user._id,
+  }).populate('follow');
+
+  const followingArray = [];
+
+  for await (const followingUser of following) {
+    followingArray.push(followingUser.follow);
+  }
+
+  console.log(followingArray);
+  return followingArray;
+}
+
 module.exports = {
   follow,
   isFollow,
   unFollow,
   getFollowers,
+  getFollowing,
 };

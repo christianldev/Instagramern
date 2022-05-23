@@ -29,6 +29,17 @@ export const GET_FOLLOWERS = gql`
   }
 `;
 
+export const GET_FOLLOWING = gql`
+  query GetFollowing($username: String!) {
+    getFollowing(username: $username) {
+      id
+      name
+      username
+      avatar
+    }
+  }
+`;
+
 export const FOLLOW_ADDED = gql`
   subscription FollowAdded {
     followAdded {
