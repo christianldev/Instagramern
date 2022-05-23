@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { GET_FOLLOWERS, FOLLOW_ADDED, UNFOLLOW_ADDED } from '../../gql/follow';
 
 export default function Followers({ username, handlerModal }) {
@@ -7,7 +7,7 @@ export default function Followers({ username, handlerModal }) {
     variables: { username },
   });
 
-  useEffect(() => {
+  const iniFetch = useCallback(() => {
     subscribeToMore({
       document: FOLLOW_ADDED,
       updateQuery: (prev, { subscriptionData }) => {
@@ -15,7 +15,7 @@ export default function Followers({ username, handlerModal }) {
         const newFollow = subscriptionData.data.followAdded;
 
         const newFollowers = Object.assign({}, prev.followers, {
-          [newFollow.username]: newFollow,
+          [newFollow?.username]: newFollow,
         });
 
         return Object.assign({}, prev, {
@@ -38,7 +38,11 @@ export default function Followers({ username, handlerModal }) {
         return updatedFollowers;
       },
     });
-  }, [subscribeToMore, data]);
+  }, []);
+
+  useEffect(() => {
+    iniFetch();
+  }, [iniFetch]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

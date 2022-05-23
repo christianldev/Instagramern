@@ -83,7 +83,7 @@ async function unFollow(username, ctx, pubsub) {
   }
 }
 
-async function getFollowers(username, pubsub) {
+async function getFollowers(username) {
   const userFound = await User.findOne({ username });
   if (!userFound) {
     throw new Error('Usuario no encontrado');
@@ -97,8 +97,6 @@ async function getFollowers(username, pubsub) {
   for await (const follower of followers) {
     followersArray.push(follower.idUser);
   }
-
-  // pubsub.publish('GET_FOLLOWERS', { getFollowersAdded: followersArray });
 
   return followersArray;
 }
