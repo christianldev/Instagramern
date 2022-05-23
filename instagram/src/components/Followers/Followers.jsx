@@ -1,26 +1,23 @@
 import { useQuery } from '@apollo/client';
-import React, { useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { GET_FOLLOWERS, FOLLOW_ADDED, UNFOLLOW_ADDED } from '../../gql/follow';
+import FollowingUsers from '../FollowingUsers/FollowingUsers';
 
 export default function Followers({ username, handlerModal }) {
+  const [followers, setFollowers] = useState([]);
   const { data, loading, error, subscribeToMore } = useQuery(GET_FOLLOWERS, {
     variables: { username },
   });
 
-  const iniFetch = useCallback(() => {
+  useEffect(() => {
     subscribeToMore({
       document: FOLLOW_ADDED,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const newFollow = subscriptionData.data.followAdded;
+        setFollowers((prevFollowers) => [...prevFollowers, newFollow]);
 
-        const newFollowers = Object.assign({}, prev.followers, {
-          [newFollow?.username]: newFollow,
-        });
-
-        return Object.assign({}, prev, {
-          getFollowers: newFollowers,
-        });
+        return prev;
       },
     });
     subscribeToMore({
@@ -29,25 +26,21 @@ export default function Followers({ username, handlerModal }) {
         if (!subscriptionData.data) return prev;
         const unfollow = subscriptionData.data.unFollowAdded;
 
-        const updatedFollowers = Object.assign({}, prev, {
-          getFollowers: prev.getFollowers.filter(
+        setFollowers(
+          {
+            ...prev,
+          }.getFollowers.filter(
             (follower) => follower.username !== unfollow.username,
           ),
-        });
+        );
 
-        return updatedFollowers;
+        return prev;
       },
     });
-  }, []);
-
-  useEffect(() => {
-    iniFetch();
-  }, [iniFetch]);
+  }, [subscribeToMore]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
-  const { getFollowers } = data;
 
   return (
     <>
@@ -58,23 +51,20 @@ export default function Followers({ username, handlerModal }) {
         </div>
         <div className="font-semibold text-center mx-4">
           <p className="text-gray-400">
-            {getFollowers.length}{' '}
-            {(getFollowers.length >= 10000 && 'k') ||
-              (getFollowers.length >= 1000000 && 'm')}
+            {followers.length}{' '}
+            {(followers.length >= 10000 && 'k') ||
+              (followers.length >= 1000000 && 'm')}
           </p>
           <span
             onClick={() => handlerModal('getFollowers')}
             className="text-gray-400 cursor-pointer"
           >
-            {getFollowers.length > 1 || getFollowers.length == 0
+            {followers.length > 1 || followers.length == 0
               ? 'Seguidores'
               : 'Seguidor'}
           </span>
         </div>
-        <div className="font-semibold text-center mx-4">
-          <p className="text-gray-400">102</p>
-          <span className="text-gray-400">Siguiendo</span>
-        </div>
+        <FollowingUsers username={username} />
       </div>
     </>
   );

@@ -20,10 +20,6 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
     },
   });
 
-  if (loading) {
-    return <div className="flex justify-center items-center">Cargando...</div>;
-  }
-
   const onFollow = async () => {
     try {
       await follow({

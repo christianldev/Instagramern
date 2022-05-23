@@ -4,7 +4,9 @@ import { Link, useParams } from 'react-router-dom';
 import { GET_FOLLOWERS } from '../../gql/follow';
 import FollowButton from '../FollowButton';
 
-export default function FollowersModal({ auth }) {
+import avatarNotFound from '../../assets/avatarnotfound.jpg';
+
+export default function FollowersModal({ auth, setShowModal }) {
   const { username } = useParams();
   const { data, loading, error } = useQuery(GET_FOLLOWERS, {
     variables: { username },
@@ -14,6 +16,8 @@ export default function FollowersModal({ auth }) {
   if (error) return <p>Error :(</p>;
 
   const { getFollowers } = data;
+
+  console.log(getFollowers);
 
   return (
     <div className="relative p-2 w-full max-w-md h-full md:h-auto">
@@ -32,23 +36,24 @@ export default function FollowersModal({ auth }) {
                 <div className="avatar-content mb-2.5 sm:mb-0 sm:mr-2.5">
                   <img
                     className="avatar w-10 h-10 rounded-full"
-                    src={follower.avatar}
+                    src={follower.avatar || avatarNotFound}
                   />
                 </div>
-                <div className="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4">
-                  <a
-                    href="#"
-                    className="title font-medium no-underline text-gray-400"
-                  >
+                <Link
+                  to={`/${follower.username}`}
+                  onClick={() => setShowModal(false)}
+                  className="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4"
+                >
+                  <span className="title font-medium no-underline text-gray-400">
                     @{follower.username}
-                  </a>
+                  </span>
                   <div className="skills flex flex-col">
                     <span className="subtitle text-slate-500">
                       {follower.name}
                     </span>
                     {/* <span className="subtitle text-slate-500">Coordinator 💪</span> */}
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className="user-option mx-auto sm:ml-auto sm:mr-0">
