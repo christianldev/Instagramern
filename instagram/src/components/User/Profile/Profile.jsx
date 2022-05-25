@@ -1,16 +1,17 @@
 import React from 'react';
 
-import ModalStructure from '../ModalStructure/ModalStructure';
+import ModalStructure from '../../ModalStructure/ModalStructure';
 
 import './Profile.css';
-import avatarNotFound from '../../assets/avatarnotfound.jpg';
-import FeaturedStories from '../FeaturedStories';
+import avatarNotFound from '../../../assets/avatarnotfound.jpg';
+
 import { FaEllipsisV } from 'react-icons/fa';
 
-import useModalForm from '../../hooks/useModalForm';
+import useModalForm from '../../../hooks/useModalForm';
 
-import FollowButton from '../FollowButton';
+import FollowButton from '../../FollowButton';
 import Followers from '../Followers';
+import FeaturedStories from '../FeaturedStories/FeaturedStories';
 
 export default function Profile({ getUser, auth, username }) {
   const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
@@ -31,7 +32,7 @@ export default function Profile({ getUser, auth, username }) {
           <span className=" rounded-full bg-gradient-to-r from-purple-800  to-blue-800">
             <img
               className="h-32 w-32 p-2 rounded-full  cursor-pointer object-cover"
-              src={getUser.avatar ? getUser.avatar : avatarNotFound}
+              src={getUser.avatar || avatarNotFound}
               onClick={() =>
                 username === auth.username && handlerModal('avatar')
               }
@@ -62,7 +63,7 @@ export default function Profile({ getUser, auth, username }) {
         {getUser.siteWeb && (
           <>
             <h4 className="font-bold">Informacion</h4>
-            <a href={getUser.siteWeb} target="_blank">
+            <a href={getUser.siteWeb} target="_blank" rel="noreferrer">
               {getUser.siteWeb}
             </a>
           </>

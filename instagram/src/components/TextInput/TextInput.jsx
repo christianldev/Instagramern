@@ -10,7 +10,7 @@ export function TextInput({ useField, label, ...rest }) {
     <>
       <label
         htmlFor={rest.id || rest.name}
-        className="flex text-sm font-light text-gray-200"
+        className="flex text-sm font-light text-gray-400"
       >
         {label}
       </label>

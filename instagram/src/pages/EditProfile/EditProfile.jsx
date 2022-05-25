@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import EditProfileSidebar from '../../components/EditProfileSidebar';
+
 import useAuth from '../../hooks/useAuth';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { GET__USER } from '../../gql/user';
 import Error404 from '../Error404';
-import EditProfileForm from '../../components/EditProfileForm';
+
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
+import EditProfileSidebar from '../../components/User/EditProfileSidebar';
+import EditProfileForm from '../../components/User/EditProfileForm';
 
 export default function EditProfile() {
   const [editProfile, setEditProfile] = useState(true);

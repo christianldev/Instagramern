@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
-import { UPDATE_AVATAR, DELETE_AVATAR, GET__USER } from '../../gql/user';
+import { UPDATE_AVATAR, DELETE_AVATAR, GET__USER } from '../../../gql/user';
 
 import './AvatarForm.css';
 import toast from 'react-hot-toast';

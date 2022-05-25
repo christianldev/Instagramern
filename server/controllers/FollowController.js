@@ -122,7 +122,6 @@ async function getFollowing(username) {
     followingArray.push(followingUser.follow);
   }
 
-  console.log(followingArray);
   return followingArray;
 }
 

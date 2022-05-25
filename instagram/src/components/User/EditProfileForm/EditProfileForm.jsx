@@ -3,15 +3,15 @@ import { Form, useField, Formik } from 'formik';
 
 import toast from 'react-hot-toast';
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '../../gql/user';
+import { UPDATE_USER } from '../../../gql/user';
 
-import useModalForm from '../../hooks/useModalForm';
+import useModalForm from '../../../hooks/useModalForm';
 
-import ModalStructure from '../ModalStructure/ModalStructure';
+import ModalStructure from '../../ModalStructure/ModalStructure';
 
-import avatarNotFound from '../../assets/avatarnotfound.jpg';
-import { validationSchemaUpdateProfile } from '../../helpers/validationSchema';
-import { TextInput } from '../TextInput/TextInput';
+import avatarNotFound from '../../../assets/avatarnotfound.jpg';
+import { validationSchemaUpdateProfile } from '../../../helpers/validationSchema';
+import { TextInput } from '../../TextInput/TextInput';
 
 export default function EditProfileForm({ auth, getUser, refetch, logout }) {
   const { setShowModal, showModal, handlerModal, titleModal, childreModal } =

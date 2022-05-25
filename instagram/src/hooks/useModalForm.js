@@ -1,8 +1,10 @@
 import React from 'react';
-import AvatarForm from '../components/AvatarForm/AvatarForm';
-import FollowersModal from '../components/FollowersModal';
+
+import FollowersModal from '../components/User/FollowersModal';
 import SettingsModal from '../components/SettingsModal';
+import AvatarForm from '../components/User/AvatarForm';
 import useAuth from './useAuth';
+import FollowingModal from '../components/User/FollowingModal';
 
 export default function useModalForm() {
   const [showModal, setShowModal] = React.useState(false);
@@ -29,6 +31,14 @@ export default function useModalForm() {
         setTitleModal('Seguidores');
         setChildreModal(
           <FollowersModal setShowModal={setShowModal} auth={auth} />,
+        );
+        setShowModal(true);
+        break;
+
+      case 'getFollowing':
+        setTitleModal('Seguidos');
+        setChildreModal(
+          <FollowingModal setShowModal={setShowModal} auth={auth} />,
         );
         setShowModal(true);
         break;

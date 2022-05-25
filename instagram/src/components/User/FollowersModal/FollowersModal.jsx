@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { GET_FOLLOWERS } from '../../gql/follow';
-import FollowButton from '../FollowButton';
+import { GET_FOLLOWERS } from '../../../gql/follow';
+import FollowButton from '../../FollowButton';
 
-import avatarNotFound from '../../assets/avatarnotfound.jpg';
+import avatarNotFound from '../../../assets/avatarnotfound.jpg';
 
 export default function FollowersModal({ auth, setShowModal }) {
   const { username } = useParams();

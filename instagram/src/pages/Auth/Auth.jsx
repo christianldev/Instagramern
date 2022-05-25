@@ -31,7 +31,7 @@ export default function Auth() {
   return (
     <section className="min-h-screen flex items-stretch text-white ">
       <div className="bg__auth lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
-        <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
+        <div className="absolute  dark:bg-black opacity-60 inset-0 z-0"></div>
         <div className="w-full px-24 z-10">
           <h1 className="logo__font text-5xl font-bold text-left tracking-wide">
             Instagram
@@ -69,10 +69,7 @@ export default function Auth() {
           </a>
         </div>
       </div>
-      <div
-        className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
-        style={{ backgroundColor: '#161616' }}
-      >
+      <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 bg-white dark:bg-darktheme-body">
         <div className="bg__auth absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
           <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
         </div>
@@ -93,7 +90,7 @@ export default function Auth() {
               </button>
             </div>
           )}
-          {loginForm && <p className="text-gray-100">o usa tu cuenta</p>}
+          {loginForm && <p className="text-gray-400">o usa tu cuenta</p>}
           {loginForm ? (
             <LoginForm loginForm={loginForm} setLoginForm={setLoginForm} />
           ) : (

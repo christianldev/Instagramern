@@ -3,7 +3,7 @@
   position: relative;
   width: 35px;
   height: 35px;
-  
+  box-shadow: inset 2px 0px 15px 5px rgba(0,0,0, .1);
   border-radius: 10px;
   background: #FCFCFC;
   animation: fade 1s ease-in-out;

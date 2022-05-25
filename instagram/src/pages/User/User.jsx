@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Profile from '../../components/Profile';
-import UserGallery from '../../components/UserGallery';
+
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@apollo/client';
 import { GET__USER } from '../../gql/user';
 import Error404 from '../Error404';
+import Profile from '../../components/User/Profile/Profile';
+import UserGallery from '../../components/User/UserGallery/UserGallery';
 
 export default function User() {
   const { username } = useParams();
