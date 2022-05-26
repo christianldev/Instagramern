@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FaRegHeart, FaRegBell, FaSearch, FaRegCompass } from 'react-icons/fa';
+import { FaRegHeart, FaRegCompass, FaFacebookMessenger } from 'react-icons/fa';
+
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { InstagramLogo } from '../components/InstagramLogo/InstagramLogo';
@@ -10,10 +11,16 @@ import { GET__USER } from '../gql/user';
 import avatarNotFound from '../assets/avatarnotfound.jpg';
 import Toggle from '../components/Toggle/Toggle';
 import Search from '../components/Search';
+import useModalForm from '../hooks/useModalForm';
+import ModalStructure from '../components/ModalStructure/ModalStructure';
 
 export default function NavbarLayout() {
   const [dropDown, setDropDown] = React.useState(false);
   const [inputSearch, setInputSearch] = useState(false);
+
+  const { handlerModal, setShowModal, showModal, childreModal, titleModal } =
+    useModalForm();
+
   const { auth, logout } = useAuth();
 
   const navigate = useNavigate();
@@ -120,10 +127,14 @@ export default function NavbarLayout() {
 
                 <div className="dropdown relative">
                   <button
+                    onClick={() =>
+                      getUser.username === auth.username &&
+                      handlerModal('uploadPost')
+                    }
                     type="button"
                     className="flex items-center text-white bg-darktheme-button hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-8 py-2 text-center mr-3 md:mr-0  dark:hover:bg-blue-600 dark:focus:ring-blue-700 rounded-full"
                   >
-                    New post
+                    Publicar
                   </button>
                 </div>
               </div>
@@ -171,26 +182,17 @@ export default function NavbarLayout() {
                 {!inputSearch ? (
                   <>
                     <li>
-                      <a
-                        href="#"
-                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                      >
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
                         <FaRegCompass />
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                      >
-                        <FaRegBell />
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0 cursor-pointer">
+                        <FaFacebookMessenger />
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0"
-                      >
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
                         <FaRegHeart />
                       </a>
                     </li>
@@ -203,6 +205,15 @@ export default function NavbarLayout() {
       </nav>
       <section onClick={() => setDropDown(false) || setInputSearch(false)}>
         <Outlet />
+        {showModal ? (
+          <ModalStructure
+            showModal={showModal}
+            setShowModal={setShowModal}
+            titleModal={titleModal}
+          >
+            {childreModal}
+          </ModalStructure>
+        ) : null}
       </section>
     </>
   );

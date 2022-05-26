@@ -5,6 +5,7 @@ import SettingsModal from '../components/SettingsModal';
 import AvatarForm from '../components/User/AvatarForm';
 import useAuth from './useAuth';
 import FollowingModal from '../components/User/FollowingModal';
+import UploadPostModal from '../components/Posts/UploadPostModal';
 
 export default function useModalForm() {
   const [showModal, setShowModal] = React.useState(false);
@@ -39,6 +40,14 @@ export default function useModalForm() {
         setTitleModal('Seguidos');
         setChildreModal(
           <FollowingModal setShowModal={setShowModal} auth={auth} />,
+        );
+        setShowModal(true);
+        break;
+
+      case 'uploadPost':
+        setTitleModal('Publicar');
+        setChildreModal(
+          <UploadPostModal setShowModal={setShowModal} auth={auth} />,
         );
         setShowModal(true);
         break;

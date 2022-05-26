@@ -1,11 +1,6 @@
 import React from 'react';
 import { useQuery, useMutation, useApolloClient } from '@apollo/client';
-import {
-  IS_FOLLOW,
-  FOLLOW_USER,
-  UNFOLLOW_USER,
-  GET_FOLLOWERS,
-} from '../../gql/follow';
+import { IS_FOLLOW, FOLLOW_USER, UNFOLLOW_USER } from '../../gql/follow';
 import toast from 'react-hot-toast';
 
 import './FollowButton.css';
