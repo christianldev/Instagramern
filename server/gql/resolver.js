@@ -2,6 +2,7 @@ const { PubSub } = require('graphql-subscriptions');
 const pubsub = new PubSub();
 const UserController = require('../controllers/UserController');
 const FollowController = require('../controllers/FollowController');
+const PostController = require('../controllers/PostController');
 const { GraphQLUpload } = require('graphql-upload');
 
 const resolvers = {
@@ -30,6 +31,9 @@ const resolvers = {
       FollowController.follow(username, ctx, pubsub),
     unFollow: (_, { username }, ctx) =>
       FollowController.unFollow(username, ctx, pubsub),
+
+    //Publication
+    publish: (_, { file }, ctx) => PostController.publish(file, ctx),
   },
   Subscription: {
     followAdded: {
