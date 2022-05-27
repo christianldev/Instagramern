@@ -71,7 +71,7 @@ export default function Search({ handleSearch, inputSearch }) {
                   <div className="cursor-pointer rounded-t overflow-y-scroll overflow-auto">
                     {!results.length && (
                       <div className="flex w-full justify-center items-center p-2  border-transparent border-l-2 relative ">
-                        <p className=" justify-center text-center items-center">
+                        <p className=" justify-center text-center text-gray-500 items-center">
                           No hay resultados
                         </p>
                       </div>

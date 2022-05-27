@@ -5,7 +5,7 @@ import SettingsModal from '../components/SettingsModal';
 import AvatarForm from '../components/User/AvatarForm';
 import useAuth from './useAuth';
 import FollowingModal from '../components/User/FollowingModal';
-import UploadPostModal from '../components/Posts/UploadPostModal';
+import UploadPostModal from '../components/Posts/UploadPostModal/UploadPostModal';
 
 export default function useModalForm() {
   const [showModal, setShowModal] = React.useState(false);

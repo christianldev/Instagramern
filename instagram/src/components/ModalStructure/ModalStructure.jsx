@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function ModalStructure({ setShowModal, children, titleModal }) {
-  console.log(titleModal);
   return (
     <div
       className={
