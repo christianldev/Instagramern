@@ -1,10 +1,6 @@
 import React from 'react';
 
-export default function UploadImageStep({
-  setShowModal,
-  fileUpload,
-  getRootProps,
-}) {
+export default function UploadImageStep({ getRootProps }) {
   return (
     <div className="relative w-full flex items-center justify-center">
       <div className=" w-full p-8 bg-white rounded-xl z-10">

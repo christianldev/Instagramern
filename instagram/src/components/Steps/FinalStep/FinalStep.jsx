@@ -11,10 +11,10 @@ export default function FinalStep({ setShowModal }) {
         </div>
 
         <div className="mt-3 text-xl font-semibold uppercase text-green-500">
-          NUevo post publicado
+          Nuevo post
         </div>
         <div className="text-lg font-semibold text-gray-500">
-          Revisa la publicación en tu perfil
+          Tu publicacion ha sido creada con exito
         </div>
 
         <div onClick={() => setShowModal(false)} className="mt-10">

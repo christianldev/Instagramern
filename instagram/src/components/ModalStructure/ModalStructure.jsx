@@ -4,12 +4,12 @@ export default function ModalStructure({ setShowModal, children, titleModal }) {
   return (
     <div
       className={
-        'w-full h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover'
+        'w-full h-screen animated fadeIn faster absolute  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover'
       }
       id="modal-id"
     >
       <div
-        className="absolute bg-black opacity-80 inset-0 z-0"
+        className="fixed bg-black opacity-80 inset-0 z-0"
         onClick={() => setShowModal(false)}
       ></div>
       <div

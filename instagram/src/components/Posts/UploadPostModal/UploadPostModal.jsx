@@ -12,7 +12,7 @@ import UploadImageStep from '../../Steps/StepsUploadForm/UploadImageStep';
 export default function UploadPostModal({ setShowModal, auth }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [fileUpload, setFileUpload] = useState(null);
-  const [loadingNewPost, setLoadingNewPost] = useState(false);
+
   const [error, setError] = useState('');
 
   const onDrop = useCallback(

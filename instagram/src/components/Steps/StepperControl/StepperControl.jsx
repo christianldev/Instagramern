@@ -1,4 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { PUBLISH_POST } from '../../../gql/post';
+
+import toast from 'react-hot-toast';
 
 export default function StepperControl({
   handleClick,
@@ -10,13 +14,35 @@ export default function StepperControl({
   fileUpload,
   setShowModal,
 }) {
-  // automatic step whem the user uploads an image
+  const [loadingUploadPost, setLoadingUploadPost] = useState(false);
+  const [publish] = useMutation(PUBLISH_POST);
 
+  // automatic step whem the user uploads an image
   useEffect(() => {
     if (fileUpload?.type === 'image') {
       handleClick('next');
     }
   }, [fileUpload]);
+
+  const onPublishPost = async () => {
+    setLoadingUploadPost(true);
+    try {
+      const result = await publish({
+        variables: {
+          file: fileUpload.file,
+        },
+      });
+
+      if (result.data.publish.status) {
+        setLoadingUploadPost(false);
+        handleClick('next');
+      } else {
+        toast.error('No se pudo publicar el post');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -39,15 +65,30 @@ export default function StepperControl({
         >
           Cancelar
         </button>
-        <button
-          {...getRootProps()}
-          onClick={() => handleClick('next')}
-          className="cursor-pointer rounded-lg bg-blue-500 py-2 px-2 font-semibold  text-white transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white"
-        >
-          {currentStep === steps.length - 1 && fileUpload
-            ? 'Publicar'
-            : 'Siguiente'}
-        </button>
+
+        {loadingUploadPost ? (
+          <button className="cursor-pointer rounded-lg bg-blue-500 py-2 px-2 font-semibold  text-white transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white">
+            {currentStep === steps.length - 1 &&
+              fileUpload &&
+              loadingUploadPost &&
+              'Publicando...'}
+          </button>
+        ) : (
+          <button
+            {...getRootProps()}
+            onClick={() =>
+              currentStep === steps.length - 1 && fileUpload
+                ? onPublishPost()
+                : handleClick('next')
+            }
+            className="cursor-pointer rounded-lg bg-blue-500 py-2 px-2 font-semibold  text-white transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white"
+          >
+            {currentStep === steps.length - 1 && fileUpload
+              ? 'Publicar'
+              : 'Siguiente'}
+          </button>
+        )}
+
         <input {...getInputProps()} />
       </div>
     </>

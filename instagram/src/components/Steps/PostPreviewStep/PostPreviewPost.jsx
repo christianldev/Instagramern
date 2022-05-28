@@ -20,7 +20,7 @@ export default function PostPreviewPost({ fileUpload }) {
         <img
           src={fileUpload.preview}
           alt="preview"
-          className="w-full h-4/5 object-cover "
+          className="w-full h-4/5 object-fit "
         />
       ) : (
         <div className="flex flex-col justify-center items-center p-8">
