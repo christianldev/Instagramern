@@ -17,6 +17,10 @@ const resolvers = {
       FollowController.isFollow(username, ctx),
     getFollowers: (_, { username }) => FollowController.getFollowers(username),
     getFollowing: (_, { username }) => FollowController.getFollowing(username),
+
+    //Publication
+    getPublications: (_, { username }) =>
+      PostController.getPublications(username),
   },
   Mutation: {
     //User

@@ -110,6 +110,7 @@ export default function UploadPostModal({ setShowModal, auth }) {
           getRootProps={getRootProps}
           getInputProps={getInputProps}
           fileUpload={fileUpload}
+          setFileUpload={setFileUpload}
           error={error}
           setShowModal={setShowModal}
         />

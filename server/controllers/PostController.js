@@ -1,7 +1,7 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 const awsUploadImage = require('../utils/aws-upload-image');
 const { v4: uuidv4 } = require('uuid');
-const { now } = require('mongoose');
 
 async function publish(file, ctx) {
   const { id } = ctx.user;
@@ -17,7 +17,7 @@ async function publish(file, ctx) {
     const publication = new Post({
       idUser: id,
       file: result,
-      fileName: mimetype.split('/')[0],
+      typeFile: mimetype.split('/')[0],
       createAt: Date.now(),
     });
 
@@ -35,6 +35,20 @@ async function publish(file, ctx) {
   }
 }
 
+async function getPublications(username) {
+  const user = await User.findOne({ username });
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+  const publications = await Post.find()
+    .where({
+      idUser: user._id,
+    })
+    .sort({ createAt: -1 });
+  return publications;
+}
+
 module.exports = {
   publish,
+  getPublications,
 };
