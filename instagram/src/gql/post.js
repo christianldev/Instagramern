@@ -8,3 +8,15 @@ export const PUBLISH_POST = gql`
     }
   }
 `;
+
+export const GET_PUBLICATIONS = gql`
+  query GetPublications($username: String!) {
+    getPublications(username: $username) {
+      id
+      idUser
+      file
+      typeFile
+      createAt
+    }
+  }
+`;

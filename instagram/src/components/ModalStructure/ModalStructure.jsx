@@ -3,9 +3,7 @@ import React from 'react';
 export default function ModalStructure({ setShowModal, children, titleModal }) {
   return (
     <div
-      className={
-        'w-full h-screen animated fadeIn faster absolute  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover'
-      }
+      className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
       id="modal-id"
     >
       <div
@@ -15,8 +13,8 @@ export default function ModalStructure({ setShowModal, children, titleModal }) {
       <div
         className={
           titleModal === 'Publicar'
-            ? 'w-full max-w-2xl p-2 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body '
-            : 'w-full max-w-lg p-2 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body '
+            ? 'w-full max-w-2xl p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body '
+            : 'w-full max-w-lg p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body '
         }
       >
         {titleModal !== 'Publicar' && (

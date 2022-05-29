@@ -8,7 +8,12 @@ import {
 } from '../../../gql/follow';
 import FollowingUsers from '../FollowingUsers/FollowingUsers';
 
-export default function Followers({ username, handlerModal }) {
+export default function Followers({
+  username,
+  handlerModal,
+  dataPublications,
+  loadingPublications,
+}) {
   const { data, loading, subscribeToMore } = useQuery(GET_FOLLOWERS, {
     variables: { username },
   });
@@ -50,15 +55,16 @@ export default function Followers({ username, handlerModal }) {
     });
   }, [subscribeToMore]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || loadingPublications) return <p>Cargando...</p>;
 
   const { getFollowers } = data;
+  const { getPublications } = dataPublications;
 
   return (
     <>
       <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
         <div className="font-semibold text-center mx-4">
-          <p className="text-gray-400">102k</p>
+          <p className="text-gray-400">{getPublications.length}</p>
           <span className="text-gray-400">Posts</span>
         </div>
         <div className="font-semibold text-center mx-4">

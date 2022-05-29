@@ -22,7 +22,9 @@ export default function FollowingModal({ setShowModal, auth }) {
       <div className="relative bg-white  dark:bg-darktheme-body">
         {getFollowing.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
-            <p className="text-center text-gray-400">No sigues a nadie</p>
+            <p className="text-center  text-gray-400">
+              No esta siguiendo a nadie
+            </p>
           </div>
         ) : (
           getFollowing.map((follower) => (

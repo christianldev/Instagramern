@@ -13,7 +13,14 @@ import FollowButton from '../../FollowButton';
 import Followers from '../Followers';
 import FeaturedStories from '../FeaturedStories/FeaturedStories';
 
-export default function Profile({ getUser, auth, username }) {
+export default function Profile({
+  getUser,
+  auth,
+  username,
+  dataPublications,
+  loadingPublications,
+  errorPublications,
+}) {
   const { showModal, titleModal, childreModal, handlerModal, setShowModal } =
     useModalForm(auth);
 
@@ -41,7 +48,13 @@ export default function Profile({ getUser, auth, username }) {
           </span>
           <p className="font-semibold text-gray-500">@{getUser.username}</p>
         </div>
-        <Followers username={username} handlerModal={handlerModal} />
+        <Followers
+          username={username}
+          handlerModal={handlerModal}
+          dataPublications={dataPublications}
+          loadingPublications={loadingPublications}
+          errorPublications={errorPublications}
+        />
         <FollowButton
           handlerModal={handlerModal}
           getUser={getUser}

@@ -113,6 +113,7 @@ export default function UploadPostModal({ setShowModal, auth }) {
           setFileUpload={setFileUpload}
           error={error}
           setShowModal={setShowModal}
+          auth={auth}
         />
       )}
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { PUBLISH_POST } from '../../../gql/post';
+import { GET_PUBLICATIONS, PUBLISH_POST } from '../../../gql/post';
 
 import toast from 'react-hot-toast';
 
@@ -14,9 +14,18 @@ export default function StepperControl({
   fileUpload,
   setFileUpload,
   setShowModal,
+  auth,
 }) {
+  const { username } = auth;
   const [loadingUploadPost, setLoadingUploadPost] = useState(false);
-  const [publish] = useMutation(PUBLISH_POST);
+  const [publish] = useMutation(PUBLISH_POST, {
+    refetchQueries: [
+      {
+        query: GET_PUBLICATIONS,
+        variables: { username },
+      },
+    ],
+  });
 
   // automatic step whem the user uploads an image
   useEffect(() => {
@@ -72,7 +81,7 @@ export default function StepperControl({
           <button className="cursor-pointer rounded-lg bg-blue-500 py-2 px-2 font-semibold  text-white transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white">
             <svg
               role="status"
-              class="inline w-4 h-4 mr-2 text-white animate-spin"
+              className="inline w-4 h-4 mr-2 text-white animate-spin"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
