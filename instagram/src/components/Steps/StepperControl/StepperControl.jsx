@@ -15,9 +15,12 @@ export default function StepperControl({
   setFileUpload,
   setShowModal,
   auth,
+  title,
+  description,
 }) {
   const { username } = auth;
   const [loadingUploadPost, setLoadingUploadPost] = useState(false);
+
   const [publish] = useMutation(PUBLISH_POST, {
     refetchQueries: [
       {
@@ -40,8 +43,14 @@ export default function StepperControl({
       const result = await publish({
         variables: {
           file: fileUpload.file,
+          input: {
+            title: title,
+            description: description,
+          },
         },
       });
+
+      console.log(result);
 
       if (result.data.publish.status) {
         setLoadingUploadPost(false);
@@ -49,9 +58,11 @@ export default function StepperControl({
         setFileUpload(null);
       } else {
         toast.error('No se pudo publicar el post');
+        setLoadingUploadPost(false);
       }
     } catch (error) {
       console.log(error);
+      setLoadingUploadPost(false);
     }
   };
 

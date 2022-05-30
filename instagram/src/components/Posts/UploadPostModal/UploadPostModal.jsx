@@ -8,12 +8,24 @@ import StepperControl from '../../Steps/StepperControl';
 
 import PostPreviewPost from '../../Steps/PostPreviewStep/PostPreviewPost';
 import UploadImageStep from '../../Steps/StepsUploadForm/UploadImageStep';
+import DescriptionPostStep from '../../Steps/DescriptionPostStep/DescriptionPostStep';
+import toast from 'react-hot-toast';
 
 export default function UploadPostModal({ setShowModal, auth }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [fileUpload, setFileUpload] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const [error, setError] = useState('');
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeDescription = (e) => {
+    setDescription(e.target.value);
+  };
 
   const onDrop = useCallback(
     async (acceptedFile) => {
@@ -56,7 +68,15 @@ export default function UploadPostModal({ setShowModal, auth }) {
 
       case 3:
         if (fileUpload?.type === 'image') {
-          return <h3>Formulario descripcion</h3>;
+          return (
+            <DescriptionPostStep
+              fileUpload={fileUpload}
+              title={title}
+              description={description}
+              onChangeDescription={onChangeDescription}
+              onChangeTitle={onChangeTitle}
+            />
+          );
         }
 
       case 4:
@@ -114,6 +134,8 @@ export default function UploadPostModal({ setShowModal, auth }) {
           error={error}
           setShowModal={setShowModal}
           auth={auth}
+          title={title}
+          description={description}
         />
       )}
     </div>

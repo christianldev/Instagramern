@@ -6,6 +6,7 @@ import {
   FOLLOW_ADDED,
   UNFOLLOW_ADDED,
 } from '../../../gql/follow';
+import LoadingData from '../../LoadingData';
 import FollowingUsers from '../FollowingUsers/FollowingUsers';
 
 export default function Followers({
@@ -55,7 +56,7 @@ export default function Followers({
     });
   }, [subscribeToMore]);
 
-  if (loading || loadingPublications) return <p>Cargando...</p>;
+  if (loading || loadingPublications) return <LoadingData />;
 
   const { getFollowers } = data;
   const { getPublications } = dataPublications;
@@ -65,7 +66,7 @@ export default function Followers({
       <div className="flex flex-nowrap __profile justify-center items-center gap-2 my-3">
         <div className="font-semibold text-center mx-4">
           <p className="text-gray-400">{getPublications.length}</p>
-          <span className="text-gray-400">Posts</span>
+          <span className="text-gray-400">Publicaciones</span>
         </div>
         <div className="font-semibold text-center mx-4">
           <p className="text-gray-400">{getFollowers.length} </p>

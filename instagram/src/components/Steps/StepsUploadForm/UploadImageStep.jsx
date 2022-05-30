@@ -40,23 +40,6 @@ export default function UploadImageStep({ getRootProps }) {
               </p>
             </div>
           </div>
-
-          {/* <button
-            type="submit"
-            className="my-2 w-full flex justify-center bg-blue-500 text-gray-100 p-2  rounded-full tracking-wide
-                                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300"
-          >
-            Publicar
-          </button>
-          <button
-            onClick={() => setShowModal(false)}
-            type="submit"
-            className="my-2 w-full flex justify-center bg-red-500 text-gray-100 p-2  rounded-full tracking-wide
-                                  font-semibold  focus:outline-none focus:shadow-outline hover:bg-red-600 shadow-lg cursor-pointer transition ease-in duration-300"
-          >
-            Cancelar
-          </button>
-        <input {...getInputProps()} /> */}
         </form>
       </div>
     </div>

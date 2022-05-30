@@ -60,6 +60,11 @@ const typeDefs = gql`
     description: String
   }
 
+  input PublicationInput {
+    title: String
+    description: String
+  }
+
   type Query {
     #USER
     getUser(id: ID, username: String): User
@@ -87,7 +92,7 @@ const typeDefs = gql`
     unFollow(username: String!): Boolean
 
     #Publiccations
-    publish(file: Upload): Publish
+    publish(file: Upload, input: PublicationInput): Publish
   }
 
   type Subscription {

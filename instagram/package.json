@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apollo-link-context": "^1.0.20",
     "apollo-upload-client": "^17.0.0",
+    "emoji-picker-react": "^3.5.1",
     "firebase": "^9.7.0",
     "formik": "^2.2.9",
     "graphql": "^16.3.0",

@@ -37,7 +37,8 @@ const resolvers = {
       FollowController.unFollow(username, ctx, pubsub),
 
     //Publication
-    publish: (_, { file }, ctx) => PostController.publish(file, ctx),
+    publish: (_, { file, input }, ctx) =>
+      PostController.publish(file, input, ctx),
   },
   Subscription: {
     followAdded: {

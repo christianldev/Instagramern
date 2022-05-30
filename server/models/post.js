@@ -18,6 +18,16 @@ const PostSchema = Schema({
     trim: true,
   },
 
+  title: {
+    type: String,
+    trim: true,
+  },
+
+  description: {
+    type: String,
+    trim: true,
+  },
+
   createAt: {
     type: Date,
     default: Date.now(),

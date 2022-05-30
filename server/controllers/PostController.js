@@ -3,8 +3,9 @@ const User = require('../models/user');
 const awsUploadImage = require('../utils/aws-upload-image');
 const { v4: uuidv4 } = require('uuid');
 
-async function publish(file, ctx) {
+async function publish(file, input, ctx) {
   const { id } = ctx.user;
+  console.log(input);
 
   const { createReadStream, mimetype } = await file;
 
@@ -18,16 +19,21 @@ async function publish(file, ctx) {
       idUser: id,
       file: result,
       typeFile: mimetype.split('/')[0],
+      title: input.title,
+      description: input.description,
       createAt: Date.now(),
     });
 
     await publication.save();
+    console.log(result);
+    console.log(publication);
 
     return {
       status: true,
       urlFile: result,
     };
   } catch (error) {
+    console.log(error);
     return {
       status: false,
       urlFile: '',
