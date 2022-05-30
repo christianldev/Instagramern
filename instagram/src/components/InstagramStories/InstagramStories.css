@@ -6,8 +6,8 @@
 
 .circle {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
   .circle svg {
     fill: none;
@@ -23,7 +23,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 70px;
+    width: 65px;
     border-radius: 50%;
   }
   @keyframes stroke-draw {

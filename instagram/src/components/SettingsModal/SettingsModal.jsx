@@ -29,7 +29,7 @@ export default function SettingsModal({ setShowModal }) {
   };
 
   return (
-    <div className="relative p-2 w-full max-w-md h-full md:h-auto">
+    <div className="relative p-2 w-full max-w-lg h-full md:h-auto">
       <div className="relative bg-white  dark:bg-darktheme-body">
         <div className="p-2">
           <ul className=" space-y-3">

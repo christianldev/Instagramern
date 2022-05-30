@@ -30,9 +30,7 @@ export default function UploadImageStep({ getRootProps }) {
                 />
               </svg>
 
-              <p className="text-xl text-gray-700">
-                Arrastra una imagen o selecciona
-              </p>
+              <p className="text-xl text-gray-700">Selecciona una imagen</p>
 
               <p className="text-xs text-gray-600 mt-4">Tamaño maximo: 6MB</p>
               <p className="text-sm text-gray-400">

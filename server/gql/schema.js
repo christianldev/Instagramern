@@ -33,6 +33,8 @@ const typeDefs = gql`
     idUser: ID
     file: String
     typeFile: String
+    title: String
+    description: String
     createAt: String
   }
 

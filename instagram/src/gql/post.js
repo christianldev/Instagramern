@@ -17,6 +17,8 @@ export const GET_PUBLICATIONS = gql`
       file
       typeFile
       createAt
+      title
+      description
     }
   }
 `;

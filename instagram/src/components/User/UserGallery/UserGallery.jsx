@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import useModalForm from '../../../hooks/useModalForm';
 import LoadingData from '../../LoadingData';
+
+import PreviewPost from '../../Posts/PreviewPost';
 
 import './UserGallery.css';
 
@@ -8,7 +11,7 @@ export default function UserGallery({
   loadingPublications,
   errorPublications,
 }) {
-  const [changeGridImage, setChangeGridImage] = React.useState(false);
+  const [changeGridImage, setChangeGridImage] = useState(false);
 
   useEffect(() => {
     setChangeGridImage(true);
@@ -88,13 +91,7 @@ export default function UserGallery({
             }
           >
             {getPublications.map((post) => (
-              <figure key={post.id} className="py-4 [break-inside:avoid]">
-                <img
-                  className="rounded-md  h-80 object-cover w-full cursor-pointer hover:opacity-90 "
-                  src={post.file}
-                  alt={post.description}
-                />
-              </figure>
+              <PreviewPost key={post.id} post={post} />
             ))}
           </div>
         </main>
