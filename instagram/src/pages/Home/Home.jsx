@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto bg-white dark:bg-darktheme-body lg:m-auto flex flex-1 flex-col items-center w-full ">
-      <InstagramStories />
+      <InstagramStories getUser={getUser} />
 
       <div id="wrapper" className="lg:flex px-2">
         <section className="px-5 self-start xl:w-4/6 ">
