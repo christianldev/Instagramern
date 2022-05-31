@@ -5,7 +5,7 @@ import './InstagramStories.css';
 
 export default function InstagramStories({ getUser }) {
   return (
-    <div className="max-w-2xl mx-auto shadow-lg min-w-0  dark:highlight-white/5 p-4">
+    <div className="max-w-2xl mx-auto  min-w-0  dark:highlight-white/5 p-4">
       <div className="overflow-x-auto flex">
         <div className="flex-none py-2 px-3 first:pl-6 last:pr-6">
           <div className="flex flex-col items-center justify-center gap-3 ">
@@ -18,8 +18,8 @@ export default function InstagramStories({ getUser }) {
                 {getUser.username}
               </font>
             </strong>
-            <button class="relative bg-blue-500 text-white text-sm font-light w-5 h-5 rounded-full bottom-14 left-6 border-2 border-white flex justify-center items-center font-mono hover:bg-blue-700 focus:outline-none">
-              <div class="transform -translate-y-px text-sm">+</div>
+            <button className="relative bg-blue-500 text-white text-sm font-light w-5 h-5 rounded-full bottom-14 left-6 border-2 border-white flex justify-center items-center font-mono hover:bg-blue-700 focus:outline-none">
+              <div className="transform -translate-y-px text-sm">+</div>
             </button>
           </div>
         </div>

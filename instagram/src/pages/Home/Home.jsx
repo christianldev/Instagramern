@@ -31,68 +31,138 @@ export default function Home() {
 
       <div id="wrapper" className="lg:flex px-2">
         <section className="px-5 self-start xl:w-4/6 ">
-          <div className="lg:m-4 mb-10 lg:mb-20">
-            <div className="flex items-center mb-2 justify-between">
-              <div className="flex items-center">
-                <img
-                  src="https://source.unsplash.com/user/goodfacesclub/107x107"
-                  alt=""
-                  className="h-14 w-14 rounded-full  p-[1.5px] border-blue-600 bg-gradient-to-t bg-purple-500 border-2 cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
-                />
-                <div className="ml-2 text-gray-600 dark:text-gray-200 leading-loose">
-                  Jhon Doe
-                  <span className="text-xs flex justify-start font-extralight   dark:text-gray-400">
-                    23 Hours Ago
-                  </span>
+          <div class="flex max-w-xl my-10 bg-white shadow-md rounded-lg overflow-hidden mx-auto">
+            <div class="flex items-center w-full">
+              <div class="w-full">
+                <div class="flex flex-row mt-2 px-2 py-3 mx-3">
+                  <div class="w-auto h-auto rounded-full border-2 border-pink-500">
+                    <img
+                      class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
+                      alt="User avatar"
+                      src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+                    />
+                  </div>
+                  <div class="flex flex-col mb-2 ml-4 mt-1">
+                    <div class="text-gray-600 text-sm font-semibold">
+                      Sara Lauren
+                    </div>
+                    <div class="flex w-full mt-1">
+                      <div class="text-blue-700 font-base text-xs mr-1 cursor-pointer">
+                        UX Design
+                      </div>
+                      <div class="text-gray-400 font-thin text-xs">
+                        • 30 seconds ago
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <img
-              src="https://source.unsplash.com/random/607x607"
-              className="w-full post__img object-cover"
-              alt=""
-            />
-            <div className="flex justify-between mx-1 mt-2">
-              <div className="flex">
-                <LikeButton />
-
-                <FaRegComment className="m-1 cursor-pointer transform hover:scale-105 dark:text-white" />
-
-                <p className="mt-0.5 ml-1 mr-2 font-light text-sm dark:text-white">
-                  485
-                </p>
-                <FaShareAlt className="m-1 cursor-pointer transform hover:scale-105 dark:text-white" />
-              </div>
-              <FaRegBookmark className="m-1 mr-2 cursor-pointer transform hover:scale-105 dark:text-white" />
-            </div>
-
-            <p className="text-sm ml-2 mt-2 font-extralight dark:text-white">
-              <span className=" text-sm mt-4 dark:text-white">Jhon doe:</span>{' '}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
-              quis.
-            </p>
-
-            <form className="mt-3 ">
-              <div className="flex justify-between border-t border-gray-600 items-center w-full">
-                <div className="w-full ">
+                <div class="border-b border-gray-100"></div>
+                <div class="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
+                  <img class="rounded" src="https://picsum.photos/536/354" />
+                </div>
+                <div class="text-gray-600 font-semibold text-lg mb-2 mx-3 px-2">
+                  Dummy text of the printing and typesetting industry
+                </div>
+                <div class="text-gray-500 font-thin text-sm mb-6 mx-3 px-2">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500
+                </div>
+                <div class="flex justify-start mb-4 border-t border-gray-100">
+                  <div class="flex w-full mt-1 pt-2 pl-5">
+                    <span class="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
+                      <FaRegBookmark />
+                    </span>
+                    <img
+                      class="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                    <img
+                      class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                    <img
+                      class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                      alt=""
+                    />
+                    <img
+                      class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                      alt=""
+                    />
+                  </div>
+                  <div class="flex justify-end w-full mt-1 pt-2 pr-5">
+                    <span class="flex justify-center items-center transition ease-out duration-300 hover:bg-blue-50 bg-blue-100 h-8 px-2 py-2 text-center rounded-full text-blue-400 cursor-pointer mr-2">
+                      <FaShareAlt />
+                    </span>
+                    <span class=" flex justify-center items-center transition ease-out duration-300 hover:bg-blue-500 bg-blue-600 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer">
+                      <FaRegComment />
+                    </span>
+                  </div>
+                </div>
+                <div class="flex w-full border-t border-gray-100">
+                  <div class="mt-3 mx-5 flex flex-row">
+                    <div class="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center">
+                      Comments:
+                      <div class="ml-1 text-gray-400 font-thin text-ms">
+                        {' '}
+                        30
+                      </div>
+                    </div>
+                    <div class="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center">
+                      Views:{' '}
+                      <div class="ml-1 text-gray-400 font-thin text-ms">
+                        {' '}
+                        60k
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3 mx-5 w-full flex justify-end">
+                    <div class="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-2 items-center">
+                      <LikeButton />
+                    </div>
+                  </div>
+                </div>
+                <div class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
+                  <img
+                    class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
+                    alt="User avatar"
+                    src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+                  />
+                  <span class="absolute inset-y-0 right-0 flex items-center pr-6">
+                    <button
+                      type="submit"
+                      class="p-1 focus:outline-none focus:shadow-none hover:text-blue-500"
+                    >
+                      <svg
+                        class="w-6 h-6 transition ease-out duration-300 hover:text-blue-500 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                  </span>
                   <input
-                    type="text"
-                    name="comment"
-                    id="comment"
-                    placeholder="Add A Comment..."
-                    className="w-full text-sm py-4 px-3 rounded-none dark:bg-darktheme-body dark:text-white focus:outline-none"
+                    type="search"
+                    class="w-full py-3 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
+                    style={{ borderRadius: '25px' }}
+                    placeholder="Post a comment..."
+                    autocomplete="off"
                   />
                 </div>
-                <div className="w-30">
-                  <button className="border-none flex text-lg px-2  py-2 dark:text-gray-200 focus:outline-none">
-                    <FaRegLaughBeam />
-                    <div className="pl-3">
-                      <FaEllipsisH className="transform hover:scale-105 cursor-pointer " />
-                    </div>
-                  </button>
-                </div>
               </div>
-            </form>
+            </div>
           </div>
         </section>
         <Suggested getUser={getUser} auth={auth} />

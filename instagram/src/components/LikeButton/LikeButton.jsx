@@ -37,7 +37,7 @@ export default function LikeButton() {
       </button>
 
       <p className="mt-0.5 ml-3 mr-2 font-light text-sm dark:text-white">
-        {count}k
+        {count} likes
       </p>
     </>
   );

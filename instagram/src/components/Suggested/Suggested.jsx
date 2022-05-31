@@ -49,7 +49,7 @@ export default function Suggested({ getUser, auth }) {
           </ul>
         </div>
         <p className="mt-5 text-gray-400 text-xs sm:m-2">
-          © 2021 Instagram from Facebook
+          © 2022 Instagram from Facebook
         </p>
       </footer>
     </div>

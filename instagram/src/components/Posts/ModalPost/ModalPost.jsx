@@ -17,7 +17,7 @@ export default function ModalPost({ publication }) {
   const datePost = `${day}/${month}`;
 
   return (
-    <div className="bg-white overflow-hidden shadow-none">
+    <div className="bg-white dark:bg-darktheme-body overflow-hidden shadow-none">
       <div className="grid grid-cols-3 min-w-full">
         <div className="col-span-2 w-full">
           <img
@@ -56,7 +56,7 @@ export default function ModalPost({ publication }) {
                 </div>
                 <p className="font-bold ml-2">
                   <a className="cursor-pointer">Joshua:</a>
-                  <span className="text-gray-700 font-medium ml-1">
+                  <span className="text-gray-500 font-medium ml-1">
                     Good post
                   </span>
                 </p>
@@ -77,7 +77,7 @@ export default function ModalPost({ publication }) {
               </div>
               <p className="font-bold ml-2">
                 <a className="cursor-pointer">Kesha:</a>
-                <span className="text-gray-700 font-medium ml-1">
+                <span className="text-gray-500 font-medium ml-1">
                   This is amazing
                 </span>
               </p>
@@ -104,7 +104,7 @@ export default function ModalPost({ publication }) {
             <div className="pt-4 pb-1 pr-3">
               <div className="flex items-start">
                 <textarea
-                  className="w-full resize-none outline-none appearance-none"
+                  className="w-full resize-none outline-none appearance-none bg-darktheme-navbar rounded-lg p-2"
                   aria-label="Agrega un comentario..."
                   placeholder="Agrega un comentario..."
                   autoComplete="off"
