@@ -1,7 +1,8 @@
 import React from 'react';
-import { useQuery, useMutation, useApolloClient } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { IS_FOLLOW, FOLLOW_USER, UNFOLLOW_USER } from '../../gql/follow';
 import toast from 'react-hot-toast';
+import { FaHeartBroken, FaUserPlus } from 'react-icons/fa';
 
 import './FollowButton.css';
 
@@ -84,8 +85,8 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
           onClick={() => onUnfollow()}
           className={!loading ? 'heart-button active ' : 'heart-button'}
         >
-          <div className="heart-flip"></div>
-          <span>Dejar de seguir</span>
+          <FaHeartBroken className="inline-flex relative bottom-0.5" />
+          <span className="pl-2">Dejar de seguir</span>
         </button>
       );
     } else {
@@ -94,7 +95,7 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
           onClick={() => onFollow()}
           className={loading ? 'heart-button active ' : 'heart-button'}
         >
-          <div className="heart-flip"></div>
+          <FaUserPlus className=" inline-flex relative bottom-0.5" />
           <span>Seguir</span>
         </button>
       );

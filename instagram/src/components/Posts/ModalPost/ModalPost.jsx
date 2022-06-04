@@ -1,6 +1,7 @@
 import React from 'react';
 import LikeButton from '../../../components/LikeButton';
 import LoadingData from '../../../components/LoadingData';
+import { Link } from 'react-router-dom';
 
 import { FaRegComment } from 'react-icons/fa';
 import { useQuery } from '@apollo/client';
@@ -71,56 +72,64 @@ export default function ModalPost({ publication }) {
                 </div>
               </div>
 
-              <div className="hidden lg:block md:block sm:block w-full font-bold text-base text-gray-900 px-6">
+              <div className="hidden lg:block md:block sm:block w-full font-semibold text-sm text-gray-900 px-6">
                 {publication.title}
               </div>
-              <p className="hidden lg:block md:block sm:block text-gray-800  text-sm px-6 mb-5">
+              <p className="hidden lg:block md:block sm:block text-gray-800  text-sm px-6">
                 {publication.description}
                 <br />
                 <br />
               </p>
               <hr className="w-full hidden lg:flex md:flex sm:flex" />
-              {getComments.map((comment) => (
-                <div
-                  key={comment._id}
-                  className="hidden lg:flex md:flex  items-center space-x-2 p-2"
-                >
-                  <div className="flex flex-shrink-0 self-start cursor-pointer overflow-y-auto">
-                    <img
-                      src={comment.idUser.avatar || avatarNotFound}
-                      alt=""
-                      className="h-8 w-8 object-fill rounded-full"
-                    />
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 ">
-                    <div className="block">
-                      <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                        <div className="font-medium">
-                          <a href="#" className="hover:underline text-sm">
-                            <small>{comment.idUser.name}</small>
-                          </a>
+              <section className="overflow-y-scroll max-h-60">
+                {getComments.map((comment) => (
+                  <div
+                    key={comment._id}
+                    className="hidden lg:flex md:flex  items-center space-x-2 p-2 "
+                  >
+                    <Link
+                      to={`/${comment.idUser.username}`}
+                      className="flex flex-shrink-0 self-start cursor-pointer"
+                    >
+                      <img
+                        src={comment.idUser.avatar || avatarNotFound}
+                        alt=""
+                        className="h-8 w-8 object-fill rounded-full"
+                      />
+                    </Link>
+                    <div className="flex items-center justify-center space-x-2 ">
+                      <div className="block">
+                        <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
+                          <div className="font-medium">
+                            <Link
+                              to={`/${comment.idUser.username}`}
+                              className="hover:underline text-sm"
+                            >
+                              <small>{comment.idUser.name}</small>
+                            </Link>
+                          </div>
+                          <div className="text-xs">{comment.comment}</div>
                         </div>
-                        <div className="text-xs">{comment.comment}</div>
-                      </div>
-                      <div className="flex justify-start items-center text-xs w-full">
-                        <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                          <a href="#" className="hover:underline">
-                            <small>Like</small>
-                          </a>
-                          <small className="self-center">.</small>
-                          <a href="#" className="hover:underline">
-                            <small>Reply</small>
-                          </a>
-                          <small className="self-center">.</small>
-                          <a href="#" className="hover:underline">
-                            <small>15 hour</small>
-                          </a>
+                        <div className="flex justify-start items-center text-xs w-full">
+                          <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
+                            <a href="#" className="hover:underline">
+                              <small>Like</small>
+                            </a>
+                            <small className="self-center">.</small>
+                            <a href="#" className="hover:underline">
+                              <small>Reply</small>
+                            </a>
+                            <small className="self-center">.</small>
+                            <a href="#" className="hover:underline">
+                              <small>15 hour</small>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </section>
             </div>
             <div className="flex w-full border-t border-gray-100">
               <div className=" flex flex-row">

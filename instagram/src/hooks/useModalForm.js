@@ -40,7 +40,7 @@ export default function useModalForm() {
         break;
 
       case 'getFollowing':
-        setTitleModal('Seguidos');
+        setTitleModal('Siguiendo');
         setChildreModal(
           <FollowingModal setShowModal={setShowModal} auth={auth} />,
         );
