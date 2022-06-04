@@ -1,13 +1,19 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 
-import { TextInput } from '../../TextInput/TextInput';
 import toast from 'react-hot-toast';
 import { useMutation } from '@apollo/client';
-import { ADD_COMMENT } from '../../../gql/comment';
+import { ADD_COMMENT, GET_COMMENTS } from '../../../gql/comment';
 
 export default function CommentPost({ publication }) {
-  const [addComment] = useMutation(ADD_COMMENT);
+  const [addComment] = useMutation(ADD_COMMENT, {
+    refetchQueries: [
+      {
+        query: GET_COMMENTS,
+        variables: { idPublication: publication.id },
+      },
+    ],
+  });
 
   return (
     <Formik

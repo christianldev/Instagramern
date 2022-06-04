@@ -1,6 +1,8 @@
 import React from 'react';
 import LikeButton from '../../../components/LikeButton';
-import { FaRegComment, FaShareAlt, FaRegBookmark } from 'react-icons/fa';
+import LoadingData from '../../../components/LoadingData';
+
+import { FaRegComment } from 'react-icons/fa';
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../../gql/user';
 import useAuth from '../../../hooks/useAuth';
@@ -8,6 +10,7 @@ import useAuth from '../../../hooks/useAuth';
 import avatarNotFound from '../../../assets/avatarnotfound.jpg';
 import './ModalPost.css';
 import CommentPost from '../CommentPost';
+import { GET_COMMENTS } from '../../../gql/comment';
 
 export default function ModalPost({ publication }) {
   // convert string to int
@@ -28,12 +31,22 @@ export default function ModalPost({ publication }) {
     variables: { username: auth.username },
   });
 
+  const { data: dataComment, loading: loadingComment } = useQuery(
+    GET_COMMENTS,
+    {
+      variables: { idPublication: publication.id },
+    },
+  );
+
+  if (loading || loadingComment) return <LoadingData />;
+
   const { getUser } = data;
+  const { getComments } = dataComment;
 
   return (
-    <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
+    <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
       <div className="flex h-full bg-white rounded overflow-hidden ">
-        <a className="flex flex-wrap no-underline hover:no-underline">
+        <div className="flex flex-wrap no-underline hover:no-underline">
           <div className="w-full md:w-2/3 object-cover rounded-t">
             <img src={publication.file} className="image__post" />
           </div>
@@ -67,6 +80,47 @@ export default function ModalPost({ publication }) {
                 <br />
               </p>
               <hr className="w-full hidden lg:flex md:flex sm:flex" />
+              {getComments.map((comment) => (
+                <div
+                  key={comment._id}
+                  className="hidden lg:flex md:flex  items-center space-x-2 p-2"
+                >
+                  <div className="flex flex-shrink-0 self-start cursor-pointer overflow-y-auto">
+                    <img
+                      src={comment.idUser.avatar || avatarNotFound}
+                      alt=""
+                      className="h-8 w-8 object-fill rounded-full"
+                    />
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 ">
+                    <div className="block">
+                      <div className="bg-gray-100 w-auto rounded-xl px-2 pb-2">
+                        <div className="font-medium">
+                          <a href="#" className="hover:underline text-sm">
+                            <small>{comment.idUser.name}</small>
+                          </a>
+                        </div>
+                        <div className="text-xs">{comment.comment}</div>
+                      </div>
+                      <div className="flex justify-start items-center text-xs w-full">
+                        <div className="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
+                          <a href="#" className="hover:underline">
+                            <small>Like</small>
+                          </a>
+                          <small className="self-center">.</small>
+                          <a href="#" className="hover:underline">
+                            <small>Reply</small>
+                          </a>
+                          <small className="self-center">.</small>
+                          <a href="#" className="hover:underline">
+                            <small>15 hour</small>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="flex w-full border-t border-gray-100">
               <div className=" flex flex-row">
@@ -87,8 +141,8 @@ export default function ModalPost({ publication }) {
 
             <CommentPost publication={publication} />
           </div>
-        </a>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

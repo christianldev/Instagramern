@@ -39,8 +39,9 @@ const typeDefs = gql`
   }
 
   type Comment {
+    _id: ID
     idPublication: ID
-    idUser: ID
+    idUser: User
     comment: String
     date: String
   }
@@ -91,6 +92,9 @@ const typeDefs = gql`
 
     #PUBLICATION
     getPublications(username: String!): [Publication]
+
+    #COMMENT
+    getComments(idPublication: ID!): [Comment]
   }
 
   type Mutation {

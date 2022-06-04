@@ -22,6 +22,10 @@ const resolvers = {
     //Publication
     getPublications: (_, { username }) =>
       PostController.getPublications(username),
+
+    //Comment
+    getComments: (_, { idPublication }) =>
+      CommentController.getComments(idPublication),
   },
   Mutation: {
     //User
