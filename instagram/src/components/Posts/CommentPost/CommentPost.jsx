@@ -50,7 +50,7 @@ export default function CommentPost({ publication }) {
         >
           <button
             type="submit"
-            className="flex items-center justify-center w-20 h-10 object-cover  shadow mr-2 cursor-pointer text-base font-medium text-gray-200 bg-darktheme-button rounded-xl hover:bg-blue-600"
+            className="flex items-center justify-center w-20 h-10 object-cover  shadow mr-2 cursor-pointer text-xs font-medium text-gray-200 bg-darktheme-button rounded-xl hover:bg-blue-600"
           >
             Enviar
           </button>

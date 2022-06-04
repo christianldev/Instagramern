@@ -3,7 +3,7 @@ import LikeButton from '../../../components/LikeButton';
 import LoadingData from '../../../components/LoadingData';
 import { Link } from 'react-router-dom';
 
-import { FaRegComment } from 'react-icons/fa';
+import { FaRegComment, FaShareAlt } from 'react-icons/fa';
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../../gql/user';
 import useAuth from '../../../hooks/useAuth';
@@ -138,8 +138,13 @@ export default function ModalPost({ publication }) {
                     <LikeButton />
                   </div>
                 </div>
-                <div className="flex text-gray-700 font-normal text-sm rounded-md mb-0 mt-2 mr-2 items-center">
-                  <FaRegComment />
+                <div className="flex text-gray-700 font-normal text-sm rounded-md mb-0 mt-2  items-center">
+                  <span className="flex justify-center items-center transition ease-out duration-300 hover:bg-blue-50 bg-blue-100 h-8 px-2 py-2 text-center rounded-full text-blue-400 cursor-pointer mr-2">
+                    <FaShareAlt />
+                  </span>
+                  <span className=" flex justify-center items-center transition ease-out duration-300 hover:bg-blue-500 bg-blue-600 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer">
+                    <FaRegComment />
+                  </span>
                   <div className="ml-1 text-gray-400 font-thin text-ms">
                     {' '}
                     30

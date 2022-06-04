@@ -4,6 +4,7 @@ const UserController = require('../controllers/UserController');
 const FollowController = require('../controllers/FollowController');
 const PostController = require('../controllers/PostController');
 const CommentController = require('../controllers/CommentController');
+const LikeController = require('../controllers/LikeController');
 const { GraphQLUpload } = require('graphql-upload');
 
 const resolvers = {
@@ -47,6 +48,10 @@ const resolvers = {
 
     //Comment
     addComment: (_, { input }, ctx) => CommentController.addComment(input, ctx),
+
+    //Like
+    addLike: (_, { idPublication }, ctx) =>
+      LikeController.addLike(idPublication, ctx, pubsub),
   },
   Subscription: {
     followAdded: {
@@ -54,6 +59,9 @@ const resolvers = {
     },
     unFollowAdded: {
       subscribe: () => pubsub.asyncIterator('NEW_UNFOLLOW'),
+    },
+    likeAdded: {
+      subscribe: () => pubsub.asyncIterator('LIKE_ADDED'),
     },
   },
 };
