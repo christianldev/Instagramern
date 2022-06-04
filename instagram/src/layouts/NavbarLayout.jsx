@@ -6,7 +6,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { InstagramLogo } from '../components/InstagramLogo/InstagramLogo';
 import useAuth from '../hooks/useAuth';
 import { useApolloClient, useQuery } from '@apollo/client';
-import { GET__USER } from '../gql/user';
+import { GET_USER } from '../gql/user';
 
 import avatarNotFound from '../assets/avatarnotfound.jpg';
 import Toggle from '../components/Toggle/Toggle';
@@ -25,7 +25,7 @@ export default function NavbarLayout() {
 
   const navigate = useNavigate();
   const client = useApolloClient();
-  const { data, loading, error } = useQuery(GET__USER, {
+  const { data, loading, error } = useQuery(GET_USER, {
     variables: { username: auth.username },
   });
 

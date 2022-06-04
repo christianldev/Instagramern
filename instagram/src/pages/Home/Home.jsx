@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import InstagramStories from '../../components/InstagramStories';
 import Suggested from '../../components/Suggested';
 import { useQuery } from '@apollo/client';
-import { GET__USER } from '../../gql/user';
+import { GET_USER } from '../../gql/user';
 
 import {
   FaRegLaughBeam,
@@ -19,7 +19,7 @@ import LikeButton from '../../components/LikeButton';
 export default function Home() {
   const { auth } = useAuth();
 
-  const { data, loading } = useQuery(GET__USER, {
+  const { data, loading } = useQuery(GET_USER, {
     variables: { username: auth.username },
   });
 

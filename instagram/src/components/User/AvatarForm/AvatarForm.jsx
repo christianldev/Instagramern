@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation } from '@apollo/client';
-import { UPDATE_AVATAR, DELETE_AVATAR, GET__USER } from '../../../gql/user';
+import { UPDATE_AVATAR, DELETE_AVATAR, GET_USER } from '../../../gql/user';
 
 import './AvatarForm.css';
 import toast from 'react-hot-toast';
@@ -12,12 +12,12 @@ export default function AvatarForm({ setShowModal, auth }) {
   const [updateAvatar] = useMutation(UPDATE_AVATAR, {
     update(cache, { data: { updateAvatar } }) {
       const { getUser } = cache.readQuery({
-        query: GET__USER,
+        query: GET_USER,
         variables: { username: auth.username },
       });
 
       cache.writeQuery({
-        query: GET__USER,
+        query: GET_USER,
         variables: { username: auth.username },
         data: {
           getUser: { ...getUser, avatar: updateAvatar.urlAvatar },
@@ -29,12 +29,12 @@ export default function AvatarForm({ setShowModal, auth }) {
   const [deleteAvatar] = useMutation(DELETE_AVATAR, {
     update(cache, { data: { deleteAvatar } }) {
       const { getUser } = cache.readQuery({
-        query: GET__USER,
+        query: GET_USER,
         variables: { username: auth.username },
       });
 
       cache.writeQuery({
-        query: GET__USER,
+        query: GET_USER,
         variables: { username: auth.username },
         data: {
           getUser: { ...getUser, avatar: '' },

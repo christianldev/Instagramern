@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { GET__USER } from '../../gql/user';
+import { GET_USER } from '../../gql/user';
 import Error404 from '../Error404';
 
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
@@ -43,7 +43,7 @@ export default function EditProfile() {
     }
   };
 
-  const { data, loading, error, refetch } = useQuery(GET__USER, {
+  const { data, loading, error, refetch } = useQuery(GET_USER, {
     variables: auth,
   });
 
