@@ -85,11 +85,10 @@ export default function ModalPost({ publication }) {
             </div>
 
             <div className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
-              <img
-                className="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
-                alt="User avatar"
-                src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
-              />
+              <button className="flex items-center justify-center w-20 h-10 object-cover  shadow mr-2 cursor-pointer text-base font-medium text-gray-200 bg-darktheme-button rounded-md hover:bg-blue-600 focus:outline-none focus:bg-gray-200 focus:shadow-outline">
+                Enviar
+              </button>
+
               <span className="absolute inset-y-0 right-0 flex items-center pr-6">
                 <div className="p-1 focus:outline-none focus:shadow-none hover:text-blue-500">
                   <svg
@@ -109,10 +108,11 @@ export default function ModalPost({ publication }) {
                 </div>
               </span>
               <input
-                type="search"
+                type="text"
+                name="comment"
                 className="w-full py-3 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
                 style={{ borderRadius: '25px' }}
-                placeholder="Post a comment..."
+                placeholder="Escribe un comentario..."
                 autoComplete="off"
               />
             </div>

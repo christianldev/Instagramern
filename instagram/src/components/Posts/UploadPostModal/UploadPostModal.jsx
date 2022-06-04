@@ -26,8 +26,6 @@ export default function UploadPostModal({ setShowModal, auth }) {
     setDescription(e.target.value);
   };
 
-  useEffect(() => {}, [description]);
-
   const onDrop = useCallback(
     async (acceptedFile) => {
       const file = acceptedFile[0];
