@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { useDropzone } from 'react-dropzone';
 import { PostContextProvider } from '../../../context/StepperContext';
@@ -9,7 +9,6 @@ import StepperControl from '../../Steps/StepperControl';
 import PostPreviewPost from '../../Steps/PostPreviewStep/PostPreviewPost';
 import UploadImageStep from '../../Steps/StepsUploadForm/UploadImageStep';
 import DescriptionPostStep from '../../Steps/DescriptionPostStep/DescriptionPostStep';
-import toast from 'react-hot-toast';
 
 export default function UploadPostModal({ setShowModal, auth }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,6 +25,8 @@ export default function UploadPostModal({ setShowModal, auth }) {
   const onChangeDescription = (e) => {
     setDescription(e.target.value);
   };
+
+  useEffect(() => {}, [description]);
 
   const onDrop = useCallback(
     async (acceptedFile) => {
@@ -73,6 +74,7 @@ export default function UploadPostModal({ setShowModal, auth }) {
               fileUpload={fileUpload}
               title={title}
               description={description}
+              setDescription={setDescription}
               onChangeDescription={onChangeDescription}
               onChangeTitle={onChangeTitle}
             />
@@ -109,7 +111,7 @@ export default function UploadPostModal({ setShowModal, auth }) {
   return (
     <div className="mx-auto rounded-2xl bg-white dark:bg-darktheme-body pb-2 shadow-xl lg:w-full  ">
       {/* Stepper */}
-      <div className=" container mt-5 ">
+      <div className=" container ">
         <Stepper
           steps={steps}
           currentStep={currentStep}

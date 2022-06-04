@@ -12,12 +12,14 @@ export default function ModalStructure({ setShowModal, children, titleModal }) {
       ></div>
       <div
         className={
-          titleModal === 'Publicar' || titleModal === 'Publicacion'
-            ? 'w-full max-w-4xl p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body'
+          titleModal === 'Publicar'
+            ? 'w-full max-w-2xl p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body'
+            : titleModal === 'Publicacion'
+            ? 'w-full max-w-5xl p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body'
             : 'w-full max-w-lg p-2 absolute mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-darktheme-body'
         }
       >
-        {titleModal !== 'Publicar' && (
+        {titleModal !== 'Publicar' && titleModal !== 'Publicacion' && (
           <div className="text-center p-2 flex-auto justify-center">
             <h2 className="text-xl font-bold py-2  dark:text-white ">
               {titleModal}

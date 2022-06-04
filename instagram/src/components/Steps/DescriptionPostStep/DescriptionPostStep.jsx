@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Picker from 'emoji-picker-react';
 
 export default function DescriptionPostStep({
   fileUpload,
   title,
   description,
+  setDescription,
   onChangeDescription,
   onChangeTitle,
 }) {
@@ -13,6 +14,12 @@ export default function DescriptionPostStep({
 
   const [maxLength, setMaxLength] = useState(0);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (chosenEmoji) {
+      fileUpload.description += chosenEmoji.emoji;
+    }
+  }, [chosenEmoji]);
 
   const handleMaxLength = (e) => {
     const { value } = e.target;
@@ -23,22 +30,17 @@ export default function DescriptionPostStep({
       setError('La descripción no puede superar los 250 caracteres');
     } else {
       setError('');
-      setMaxLength(value.length);
       setChosenEmoji(e.target.value);
+      setMaxLength(value.length);
     }
   };
 
   const onEmojiClick = (event, emojiObject) => {
     event.preventDefault();
     setChosenEmoji((emoji) => emoji + emojiObject.emoji);
-    setShowPicker(false);
-  };
 
-  useEffect(() => {
-    if (chosenEmoji) {
-      fileUpload.description = fileUpload.description + chosenEmoji.emoji;
-    }
-  }, [chosenEmoji]);
+    setDescription(...description, chosenEmoji);
+  };
 
   return (
     <form className=" mx-auto w-full flex flex-col rounded-lg text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
@@ -93,6 +95,7 @@ export default function DescriptionPostStep({
               transform: 'translate(-50%, -50%)',
             }}
             disableSearchBar
+            preload={true}
           />
         )}
       </div>
@@ -106,6 +109,7 @@ export default function DescriptionPostStep({
         onChange={onChangeTitle}
       />
       <textarea
+        onClick={() => setShowPicker(false)}
         className=" bg-gray-100 sec p-3 h-40 border border-gray-300 outline-none resize-none"
         maxLength={250}
         placeholder="Descripcion"

@@ -44,13 +44,11 @@ export default function StepperControl({
         variables: {
           file: fileUpload.file,
           input: {
-            title: title,
-            description: description,
+            title,
+            description,
           },
         },
       });
-
-      console.log(result);
 
       if (result.data.publish.status) {
         setLoadingUploadPost(false);
@@ -71,7 +69,7 @@ export default function StepperControl({
       <span className="flex justify-center  items-center text-gray-500 text-xs">
         {error && <span className="text-red-600 text-sm">{error}</span>}
       </span>
-      <div className="container mt-2 mb-2 flex justify-around">
+      <div className="container  mb-2 flex justify-around">
         <button
           onClick={() => handleClick('back')}
           className={`cursor-pointer rounded-xl border-2 border-slate-300 bg-white py-2 px-2 font-semibold  text-slate-400 transition duration-200 ease-in-out hover:bg-slate-700 hover:text-white  ${

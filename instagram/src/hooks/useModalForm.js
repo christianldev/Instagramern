@@ -58,11 +58,7 @@ export default function useModalForm() {
       case 'viewPost':
         setTitleModal('Publicacion');
         setChildreModal(
-          <ModalPost
-            setShowModal={setShowModal}
-            auth={auth}
-            publication={publication}
-          />,
+          <ModalPost setShowModal={setShowModal} publication={publication} />,
         );
         setShowModal(true);
 
