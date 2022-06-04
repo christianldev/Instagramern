@@ -3,6 +3,7 @@ const pubsub = new PubSub();
 const UserController = require('../controllers/UserController');
 const FollowController = require('../controllers/FollowController');
 const PostController = require('../controllers/PostController');
+const CommentController = require('../controllers/CommentController');
 const { GraphQLUpload } = require('graphql-upload');
 
 const resolvers = {
@@ -39,6 +40,9 @@ const resolvers = {
     //Publication
     publish: (_, { file, input }, ctx) =>
       PostController.publish(file, input, ctx),
+
+    //Comment
+    addComment: (_, { input }, ctx) => CommentController.addComment(input, ctx),
   },
   Subscription: {
     followAdded: {

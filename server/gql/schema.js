@@ -38,6 +38,13 @@ const typeDefs = gql`
     createAt: String
   }
 
+  type Comment {
+    idPublication: ID
+    idUser: ID
+    comment: String
+    date: String
+  }
+
   input UserInput {
     name: String!
     username: String!
@@ -65,6 +72,11 @@ const typeDefs = gql`
   input PublicationInput {
     title: String
     description: String
+  }
+
+  input CommentInput {
+    idPublication: ID
+    comment: String
   }
 
   type Query {
@@ -95,6 +107,9 @@ const typeDefs = gql`
 
     #Publiccations
     publish(file: Upload, input: PublicationInput): Publish
+
+    #Comments
+    addComment(input: CommentInput): Comment
   }
 
   type Subscription {
