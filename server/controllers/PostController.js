@@ -50,7 +50,8 @@ async function getPublications(username) {
     .where({
       idUser: user._id,
     })
-    .sort({ createAt: -1 });
+    .sort({ createAt: -1 })
+    .populate('idUser');
   return publications;
 }
 

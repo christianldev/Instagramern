@@ -135,7 +135,7 @@ export default function ModalPost({ publication }) {
               <div className=" flex flex-row">
                 <div className="mt-2 mx-5 w-full flex justify-end">
                   <div className="flex text-gray-700 font-normal text-sm rounded-md mb-0 mr-2 items-center">
-                    <LikeButton />
+                    <LikeButton publication={publication} />
                   </div>
                 </div>
                 <div className="flex text-gray-700 font-normal text-sm rounded-md mb-0 mt-2  items-center">

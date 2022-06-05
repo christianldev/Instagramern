@@ -30,7 +30,8 @@ const typeDefs = gql`
 
   type Publication {
     id: ID
-    idUser: ID
+
+    idUser: User
     file: String
     typeFile: String
     title: String
@@ -95,6 +96,10 @@ const typeDefs = gql`
 
     #COMMENT
     getComments(idPublication: ID!): [Comment]
+
+    #GET LIKES
+    isLike(idPublication: ID!): Boolean
+    getCountLikes(idPublication: ID!): Int
   }
 
   type Mutation {
@@ -117,12 +122,14 @@ const typeDefs = gql`
 
     #Likes
     addLike(idPublication: ID!): Boolean
+    removeLike(idPublication: ID!): Boolean
   }
 
   type Subscription {
     followAdded: User!
     unFollowAdded: User!
     likeAdded: Publication!
+    likeRemoved: Publication!
   }
 `;
 

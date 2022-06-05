@@ -20,8 +20,8 @@ export const GET_COMMENTS = gql`
   query GetComments($idPublication: ID!) {
     getComments(idPublication: $idPublication) {
       _id
-      idPublication
       comment
+      idPublication
       date
       idUser {
         name

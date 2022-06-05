@@ -7,10 +7,72 @@ async function addLike(idPublication, ctx, pubsub) {
       idPublication,
       idUser: ctx.user.id,
     });
-    if (like) {
-      await like.save();
-      const publication = await Post.findById(idPublication);
-      pubsub.publish('LIKE_ADDED', { likeAdded: publication });
+    //find the user that is being liked
+    const post = await Post.findById(idPublication).populate('idUser');
+
+    // if like is already added
+    const likeFound = await Like.find({
+      idPublication,
+      idUser: ctx.user.id,
+    })
+      .where('idPublication')
+      .equals(idPublication);
+
+    if (likeFound.length > 0) {
+      throw new Error('Ya has dado like a esta publicacion');
+    }
+
+    await like.save();
+
+    // publish the new like
+    pubsub.publish('LIKE_ADDED', { likeAdded: post });
+
+    return true;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function removeLike(idPublication, ctx, pubsub) {
+  try {
+    const like = await Like.findOne({
+      idPublication,
+      idUser: ctx.user.id,
+    });
+    if (!like) {
+      throw new Error('No has dado like a esta publicacion');
+    }
+    const post = await Post.findById(idPublication).populate('idUser');
+
+    await like.remove();
+
+    // publish the new like
+    pubsub.publish('LIKE_REMOVED', { likeRemoved: post });
+
+    return true;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getCountLikes(idPublication) {
+  try {
+    const likes = await Like.find({
+      idPublication,
+    });
+    return likes.length;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function isLike(idPublication, ctx) {
+  try {
+    const like = await Like.find({
+      idPublication,
+      idUser: ctx.user.id,
+    });
+    if (like.length > 0) {
       return true;
     }
     return false;
@@ -21,4 +83,7 @@ async function addLike(idPublication, ctx, pubsub) {
 
 module.exports = {
   addLike,
+  removeLike,
+  getCountLikes,
+  isLike,
 };

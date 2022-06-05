@@ -27,6 +27,12 @@ const resolvers = {
     //Comment
     getComments: (_, { idPublication }) =>
       CommentController.getComments(idPublication),
+
+    //Like
+    isLike: (_, { idPublication }, ctx) =>
+      LikeController.isLike(idPublication, ctx),
+    getCountLikes: (_, { idPublication }) =>
+      LikeController.getCountLikes(idPublication),
   },
   Mutation: {
     //User
@@ -52,6 +58,9 @@ const resolvers = {
     //Like
     addLike: (_, { idPublication }, ctx) =>
       LikeController.addLike(idPublication, ctx, pubsub),
+
+    removeLike: (_, { idPublication }, ctx) =>
+      LikeController.removeLike(idPublication, ctx, pubsub),
   },
   Subscription: {
     followAdded: {
@@ -62,6 +71,9 @@ const resolvers = {
     },
     likeAdded: {
       subscribe: () => pubsub.asyncIterator('LIKE_ADDED'),
+    },
+    likeRemoved: {
+      subscribe: () => pubsub.asyncIterator('LIKE_REMOVED'),
     },
   },
 };
