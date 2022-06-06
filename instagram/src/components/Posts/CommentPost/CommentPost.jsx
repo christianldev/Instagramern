@@ -31,8 +31,6 @@ export default function CommentPost({ publication }) {
             },
           });
 
-          console.log(result);
-
           if (result.data.addComment.comment !== '') {
             actions.resetForm();
           }

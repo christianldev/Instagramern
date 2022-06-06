@@ -34,10 +34,15 @@ export default function Home() {
       <InstagramStories getUser={getUser} />
 
       <div id="wrapper" className="lg:flex px-2">
-        <HomePagePost
-          getFollowingPublications={getFollowingPublications}
-          getUser={getUser}
-        />
+        <section className="px-5 self-start xl:w-4/6 ">
+          {getFollowingPublications.map((publication) => (
+            <HomePagePost
+              key={publication._id}
+              publication={publication}
+              getUser={getUser}
+            />
+          ))}
+        </section>
         <Suggested getUser={getUser} auth={auth} />
       </div>
     </main>

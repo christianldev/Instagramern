@@ -28,6 +28,7 @@ export default function ModalPost({ publication }) {
   const datePost = `${day}/${month}`;
 
   const { auth } = useAuth();
+
   const { data, loading } = useQuery(GET_USER, {
     variables: { username: auth.username },
   });
@@ -47,7 +48,7 @@ export default function ModalPost({ publication }) {
   return (
     <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
       <div className="flex h-full bg-white rounded overflow-hidden ">
-        <div className="flex flex-wrap no-underline hover:no-underline">
+        <div className="flex flex-wrap no-underline hover:no-underline w-full">
           <div className="w-full md:w-2/3 object-cover rounded-t">
             <img src={publication.file} className="image__post" />
           </div>
@@ -146,8 +147,7 @@ export default function ModalPost({ publication }) {
                     <FaRegComment />
                   </span>
                   <div className="ml-1 text-gray-400 font-thin text-ms">
-                    {' '}
-                    30
+                    {getComments.length}
                   </div>
                 </div>
               </div>
