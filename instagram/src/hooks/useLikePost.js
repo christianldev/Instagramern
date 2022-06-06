@@ -1,26 +1,18 @@
-import React, { useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import {
-  ADD_LIKE,
-  ADD_LIKE_SUBSCRIPTION,
-  GET_COUNT_LIKES,
-  IS_LIKE,
-  REMOVE_LIKE,
-  REMOVE_LIKE_SUBSCRIPTION,
-} from '../gql/like';
+import { ADD_LIKE, GET_COUNT_LIKES, IS_LIKE, REMOVE_LIKE } from '../gql/like';
 
 import toast from 'react-hot-toast';
 
 export default function useLikePost(publication) {
   const { data, loading } = useQuery(GET_COUNT_LIKES, {
-    variables: { idPublication: publication.id },
+    variables: { idPublication: publication._id },
   });
 
   const [addLike] = useMutation(ADD_LIKE, {
     refetchQueries: [
       {
         query: GET_COUNT_LIKES,
-        variables: { idPublication: publication.id },
+        variables: { idPublication: publication._id },
       },
     ],
   });
@@ -28,32 +20,32 @@ export default function useLikePost(publication) {
     refetchQueries: [
       {
         query: GET_COUNT_LIKES,
-        variables: { idPublication: publication.id },
+        variables: { idPublication: publication._id },
       },
     ],
   });
 
   const { data: dataIsLike, loading: loadingIsLike } = useQuery(IS_LIKE, {
-    variables: { idPublication: publication.id },
+    variables: { idPublication: publication._id },
   });
 
   const handleAddLike = async () => {
     try {
       await addLike({
         variables: {
-          idPublication: publication.id,
+          idPublication: publication._id,
         },
         update(cache, { data: { addLike } }) {
           const { isLike } = cache.readQuery({
             query: IS_LIKE,
             variables: {
-              idPublication: publication.id,
+              idPublication: publication._id,
             },
           });
           cache.writeQuery({
             query: IS_LIKE,
             variables: {
-              idPublication: publication.id,
+              idPublication: publication._id,
             },
             data: {
               isLike: !isLike,
@@ -72,19 +64,19 @@ export default function useLikePost(publication) {
     try {
       await removeLike({
         variables: {
-          idPublication: publication.id,
+          idPublication: publication._id,
         },
         update(cache, { data: { removeLike } }) {
           const { isLike } = cache.readQuery({
             query: IS_LIKE,
             variables: {
-              idPublication: publication.id,
+              idPublication: publication._id,
             },
           });
           cache.writeQuery({
             query: IS_LIKE,
             variables: {
-              idPublication: publication.id,
+              idPublication: publication._id,
             },
             data: {
               isLike: !isLike,

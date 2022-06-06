@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function LoadingData() {
   return (
-    <main className="flex justify-center items-center container py-12">
+    <main className="flex justify-center items-center container py-12 bg-white dark:bg-darktheme-body">
       <svg
         viewBox="0 0 24 24"
         fill="none"

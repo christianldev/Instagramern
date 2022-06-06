@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useLikePost from '../../hooks/useLikePost';
 import LoadingData from '../LoadingData';
 
@@ -6,7 +6,6 @@ import './LikeButton.css';
 
 export default function LikeButton({ publication }) {
   const {
-    like,
     data,
     loading,
     dataIsLike,

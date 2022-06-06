@@ -91,7 +91,7 @@ export default function UserGallery({
             }
           >
             {getPublications.map((post) => (
-              <PreviewPost key={post.id} post={post} />
+              <PreviewPost key={post._id} post={post} />
             ))}
           </div>
         </main>

@@ -35,7 +35,7 @@ export default function ModalPost({ publication }) {
   const { data: dataComment, loading: loadingComment } = useQuery(
     GET_COMMENTS,
     {
-      variables: { idPublication: publication.id },
+      variables: { idPublication: publication._id },
     },
   );
 
@@ -43,6 +43,8 @@ export default function ModalPost({ publication }) {
 
   const { getUser } = data;
   const { getComments } = dataComment;
+
+  console.log(getComments);
 
   return (
     <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">

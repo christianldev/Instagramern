@@ -12,10 +12,9 @@ export const PUBLISH_POST = gql`
 export const GET_PUBLICATIONS = gql`
   query GetPublications($username: String!) {
     getPublications(username: $username) {
-      id
+      _id
       title
       description
-      createAt
       file
       idUser {
         name

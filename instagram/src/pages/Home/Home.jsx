@@ -6,15 +6,11 @@ import Suggested from '../../components/Suggested';
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../gql/user';
 
-import {
-  FaRegLaughBeam,
-  FaShareAlt,
-  FaRegComment,
-  FaRegBookmark,
-  FaEllipsisH,
-} from 'react-icons/fa';
+import { FaShareAlt, FaRegComment, FaRegBookmark } from 'react-icons/fa';
 import './Home.css';
 import LikeButton from '../../components/LikeButton';
+import LoadingData from '../../components/LoadingData';
+import useGetPublications from '../../hooks/useGetPublications';
 
 export default function Home() {
   const { auth } = useAuth();
@@ -22,6 +18,8 @@ export default function Home() {
   const { data, loading } = useQuery(GET_USER, {
     variables: { username: auth.username },
   });
+
+  if (loading) return <LoadingData />;
 
   const { getUser } = data;
 
@@ -125,7 +123,7 @@ export default function Home() {
                   </div>
                   <div className="mt-3 mx-5 w-full flex justify-end">
                     <div className="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-2 items-center">
-                      <LikeButton />
+                      {/* <LikeButton /> */}
                     </div>
                   </div>
                 </div>

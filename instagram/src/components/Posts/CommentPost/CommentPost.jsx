@@ -10,7 +10,7 @@ export default function CommentPost({ publication }) {
     refetchQueries: [
       {
         query: GET_COMMENTS,
-        variables: { idPublication: publication.id },
+        variables: { idPublication: publication._id },
       },
     ],
   });
@@ -26,7 +26,7 @@ export default function CommentPost({ publication }) {
             variables: {
               input: {
                 comment: values.comment,
-                idPublication: publication.id,
+                idPublication: publication._id,
               },
             },
           });

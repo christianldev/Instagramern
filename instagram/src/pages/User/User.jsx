@@ -7,7 +7,8 @@ import { GET_USER } from '../../gql/user';
 import Error404 from '../Error404';
 import Profile from '../../components/User/Profile/Profile';
 import UserGallery from '../../components/User/UserGallery/UserGallery';
-import { GET_PUBLICATIONS } from '../../gql/post';
+import LoadingData from '../../components/LoadingData';
+import useGetPublications from '../../hooks/useGetPublications';
 
 export default function User() {
   const { username } = useParams();
@@ -17,36 +18,10 @@ export default function User() {
     variables: { username },
   });
 
-  const {
-    data: dataPublications,
-    loading: loadingPublications,
-    error: errorPublications,
-  } = useQuery(GET_PUBLICATIONS, {
-    variables: {
-      username: username,
-    },
+  const { dataPublications, loadingPublications, errorPublications } =
+    useGetPublications(username);
 
-    update(cache, { data: { getPublications } }) {
-      const { publications } = cache.readQuery({
-        query: GET_PUBLICATIONS,
-        variables: {
-          username: username,
-        },
-      });
-
-      cache.writeQuery({
-        query: GET_PUBLICATIONS,
-        variables: {
-          username: username,
-        },
-        data: {
-          getPublications: getPublications.publications,
-        },
-      });
-    },
-  });
-
-  if (loading) return null;
+  if (loading) return <LoadingData />;
   if (error) return <Error404 />;
   const { getUser } = data;
 

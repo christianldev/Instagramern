@@ -29,8 +29,7 @@ const typeDefs = gql`
   }
 
   type Publication {
-    id: ID
-
+    _id: ID
     idUser: User
     file: String
     typeFile: String
