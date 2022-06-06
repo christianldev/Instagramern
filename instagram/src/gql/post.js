@@ -16,6 +16,7 @@ export const GET_PUBLICATIONS = gql`
       title
       description
       file
+      createAt
       idUser {
         name
         username

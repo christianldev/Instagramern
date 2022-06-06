@@ -38,6 +38,16 @@ const typeDefs = gql`
     createAt: String
   }
 
+  type FeedPublication {
+    _id: ID
+    idUser: User
+    file: String
+    typeFile: String
+    title: String
+    description: String
+    createAt: String
+  }
+
   type Comment {
     _id: ID
     idPublication: ID
@@ -92,6 +102,7 @@ const typeDefs = gql`
 
     #PUBLICATION
     getPublications(username: String!): [Publication]
+    getFollowingPublications: [FeedPublication]
 
     #COMMENT
     getComments(idPublication: ID!): [Comment]

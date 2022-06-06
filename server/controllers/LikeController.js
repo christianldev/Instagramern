@@ -57,10 +57,10 @@ async function removeLike(idPublication, ctx, pubsub) {
 
 async function getCountLikes(idPublication) {
   try {
-    const likes = await Like.find({
+    const likes = await Like.countDocuments({
       idPublication,
     });
-    return likes.length;
+    return likes;
   } catch (err) {
     console.log(err);
   }
@@ -68,16 +68,17 @@ async function getCountLikes(idPublication) {
 
 async function isLike(idPublication, ctx) {
   try {
-    const like = await Like.find({
+    const like = await Like.findOne({
       idPublication,
-      idUser: ctx.user.id,
-    });
-    if (like.length > 0) {
-      return true;
+    }).where({ idUser: ctx.user.id });
+    if (!like) {
+      throw new Error('No has dado like a esta publicacion');
     }
-    return false;
+
+    return true;
   } catch (err) {
     console.log(err);
+    return false;
   }
 }
 

@@ -22,7 +22,7 @@ async function addComment(input, ctx) {
 async function getComments(idPublication) {
   try {
     const comments = await Comment.find({ idPublication }).populate('idUser');
-    console.log(comments);
+
     return comments;
   } catch (error) {
     console.log(error);

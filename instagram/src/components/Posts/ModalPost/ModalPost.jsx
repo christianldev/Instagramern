@@ -44,8 +44,6 @@ export default function ModalPost({ publication }) {
   const { getUser } = data;
   const { getComments } = dataComment;
 
-  console.log(getComments);
-
   return (
     <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
       <div className="flex h-full bg-white rounded overflow-hidden ">
@@ -83,7 +81,7 @@ export default function ModalPost({ publication }) {
                 <br />
               </p>
               <hr className="w-full hidden lg:flex md:flex sm:flex" />
-              <section className="overflow-y-scroll max-h-60">
+              <section className="overflow-y-auto max-h-60">
                 {getComments.map((comment) => (
                   <div
                     key={comment._id}
