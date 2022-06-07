@@ -67,6 +67,7 @@ export const UNFOLLOW_ADDED = gql`
 export const GET_NOT_FOLLOWING = gql`
   query GetNotFollowing {
     getNotFollowing {
+      id
       name
       username
       email

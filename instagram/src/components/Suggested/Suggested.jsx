@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
 import { GET_NOT_FOLLOWING } from '../../gql/follow';
-import LoadingData from '../LoadingData/';
+import { Link } from 'react-router-dom';
 
 import FollowButton from '../FollowButton';
 import avataNotFound from '../../assets/avatarnotfound.jpg';
@@ -24,24 +24,40 @@ export default function Suggested({ getUser, auth }) {
       </div>
       <div className="flex"></div>
       <div className="flex items-center justify-between w-full lg:w-5/6">
-        {getNotFollowing.map((user) => (
-          <div className=" flex items-center">
-            <div className="w-8 h-8 m-3 bg-pink-700 rounded-full">
-              <img
-                src={user.avatar || avataNotFound}
-                alt=""
-                className="rounded-full w-8 h-8"
-              />
-            </div>
-            <div className="">
-              <p className="text-xs dark:text-gray-200 font-bold">
-                {user.name}
-              </p>
-              <p className="text-xs text-gray-500">{user.username}</p>
-            </div>
+        {getNotFollowing.length < 1 ? (
+          <div className="flex justify-center items-center w-full">
+            <p className="text-center text-lg text-gray-600">
+              No hay sugerencias
+            </p>
           </div>
-        ))}
-        <FollowButton getUser={getUser} auth={auth} />
+        ) : (
+          getNotFollowing.map((user) => (
+            <div
+              className="flex justify-center items-center w-full"
+              key={user.id}
+            >
+              <div className="flex justify-between items-center">
+                <Link
+                  to={`/${user.username}`}
+                  className="w-8 h-8 m-3 bg-pink-700 rounded-full"
+                >
+                  <img
+                    src={user.avatar || avataNotFound}
+                    alt=""
+                    className="rounded-full w-8 h-8"
+                  />
+                </Link>
+                <Link to={`/${user.username}`}>
+                  <p className="text-xs dark:text-gray-200 font-bold">
+                    {user.name}
+                  </p>
+                  <p className="text-xs text-gray-500">{user.username}</p>
+                </Link>
+                <FollowButton getNotFollowing={user} />
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       <footer className="sm:m-5">

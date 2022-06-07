@@ -35,13 +35,21 @@ export default function Home() {
 
       <div id="wrapper" className="lg:flex px-2">
         <section className="px-5 self-start xl:w-4/6 ">
-          {getFollowingPublications.map((publication) => (
-            <HomePagePost
-              key={publication._id}
-              publication={publication}
-              getUser={getUser}
-            />
-          ))}
+          {getFollowingPublications.length < 1 ? (
+            <div className="text-center flex justify-center items-center my-10">
+              <h1 className="text-2xl font-semibold text-gray-500 w-full">
+                No hay publicaciones...
+              </h1>
+            </div>
+          ) : (
+            getFollowingPublications.map((publication) => (
+              <HomePagePost
+                key={publication._id}
+                publication={publication}
+                getUser={getUser}
+              />
+            ))
+          )}
         </section>
         <Suggested getUser={getUser} auth={auth} />
       </div>

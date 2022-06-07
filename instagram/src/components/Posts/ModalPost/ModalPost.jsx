@@ -45,6 +45,8 @@ export default function ModalPost({ publication }) {
   const { getUser } = data;
   const { getComments } = dataComment;
 
+  console.log(publication);
+
   return (
     <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
       <div className="flex h-full bg-white rounded overflow-hidden ">
@@ -64,7 +66,7 @@ export default function ModalPost({ publication }) {
                 <div className="">
                   <div className="flex items-center justify-between">
                     <h2 className="text-base font-semibold text-gray-900 -mt-1">
-                      {getUser.name}
+                      {publication.idUser.name}
                     </h2>
                   </div>
                   <p className="text-gray-700 text-sm">

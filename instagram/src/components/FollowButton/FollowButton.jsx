@@ -1,18 +1,42 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { IS_FOLLOW, FOLLOW_USER, UNFOLLOW_USER } from '../../gql/follow';
+import {
+  IS_FOLLOW,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
+  GET_NOT_FOLLOWING,
+} from '../../gql/follow';
 import toast from 'react-hot-toast';
 import { FaHeartBroken, FaUserPlus } from 'react-icons/fa';
 
 import './FollowButton.css';
+import { GET_FOLLOWING_PUBLICATIONS } from '../../gql/post';
 
-export default function FollowButton({ handlerModal, getUser, auth }) {
-  const [follow] = useMutation(FOLLOW_USER);
-  const [unfollow] = useMutation(UNFOLLOW_USER);
+export default function FollowButton({ getUser, getNotFollowing }) {
+  const [follow] = useMutation(FOLLOW_USER, {
+    refetchQueries: [
+      {
+        query: GET_NOT_FOLLOWING,
+      },
+      {
+        query: GET_FOLLOWING_PUBLICATIONS,
+      },
+    ],
+  });
+  const [unfollow] = useMutation(UNFOLLOW_USER, {
+    refetchQueries: [
+      {
+        query: GET_NOT_FOLLOWING,
+      },
+      {
+        query: GET_FOLLOWING_PUBLICATIONS,
+      },
+    ],
+  });
 
   const { data, loading } = useQuery(IS_FOLLOW, {
     variables: {
-      username: getUser.username,
+      username: getUser?.username || getNotFollowing?.username,
     },
   });
 
@@ -20,19 +44,20 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
     try {
       await follow({
         variables: {
-          username: getUser.username,
+          username: getUser?.username || getNotFollowing?.username,
         },
+
         update(cache, { data: { follow } }) {
           const { isFollow } = cache.readQuery({
             query: IS_FOLLOW,
             variables: {
-              username: getUser.username,
+              username: getUser?.username || getNotFollowing?.username,
             },
           });
           cache.writeQuery({
             query: IS_FOLLOW,
             variables: {
-              username: getUser.username,
+              username: getUser?.username || getNotFollowing?.username,
             },
             data: {
               isFollow: !isFollow,
@@ -51,19 +76,19 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
     try {
       await unfollow({
         variables: {
-          username: getUser.username,
+          username: getUser?.username || getNotFollowing?.username,
         },
         update(cache, { data: { unfollow } }) {
           const { isFollow } = cache.readQuery({
             query: IS_FOLLOW,
             variables: {
-              username: getUser.username,
+              username: getUser?.username || getNotFollowing?.username,
             },
           });
           cache.writeQuery({
             query: IS_FOLLOW,
             variables: {
-              username: getUser.username,
+              username: getUser?.username || getNotFollowing?.username,
             },
             data: {
               isFollow: !isFollow,
@@ -104,18 +129,7 @@ export default function FollowButton({ handlerModal, getUser, auth }) {
 
   return (
     <div className="font-semibold text-center mx-4">
-      {getUser.username === auth.username ? (
-        <button
-          onClick={() =>
-            getUser.username === auth.username && handlerModal('editProfile')
-          }
-          className="px-8 py-1 border-2 border-blue-500 bg-blue-500 rounded-full text-gray-50 font-semibold"
-        >
-          Ajustes
-        </button>
-      ) : (
-        !loading && buttonFollow()
-      )}
+      {!loading && buttonFollow()}
     </div>
   );
 }
