@@ -45,8 +45,6 @@ export default function ModalPost({ publication }) {
   const { getUser } = data;
   const { getComments } = dataComment;
 
-  console.log(publication);
-
   return (
     <main className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
       <div className="flex h-full bg-white rounded overflow-hidden ">
