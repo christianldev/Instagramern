@@ -63,3 +63,14 @@ export const UNFOLLOW_ADDED = gql`
     }
   }
 `;
+
+export const GET_NOT_FOLLOWING = gql`
+  query GetNotFollowing {
+    getNotFollowing {
+      name
+      username
+      email
+      avatar
+    }
+  }
+`;

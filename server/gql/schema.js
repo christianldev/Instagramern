@@ -99,6 +99,7 @@ const typeDefs = gql`
     isFollow(username: String!): Boolean
     getFollowers(username: String!): [User]
     getFollowing(username: String!): [User]
+    getNotFollowing: [User]
 
     #PUBLICATION
     getPublications(username: String!): [Publication]

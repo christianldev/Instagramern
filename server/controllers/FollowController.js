@@ -125,10 +125,32 @@ async function getFollowing(username) {
   return followingArray;
 }
 
+async function getNotFollowing(ctx) {
+  const users = await User.find().limit(10);
+  const userArray = [];
+
+  for await (const userFound of users) {
+    const isFind = await Follow.findOne({
+      idUser: ctx.user.id,
+    })
+      .where('follow')
+      .equals(userFound._id);
+
+    if (!isFind) {
+      if (userFound._id.toString() !== ctx.user.id.toString()) {
+        userArray.push(userFound);
+      }
+    }
+  }
+
+  return userArray;
+}
+
 module.exports = {
   follow,
   isFollow,
   unFollow,
   getFollowers,
   getFollowing,
+  getNotFollowing,
 };
