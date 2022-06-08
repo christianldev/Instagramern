@@ -59,10 +59,34 @@ export default function NavbarLayout() {
           <div className="relative flex items-center justify-between h-16">
             <Link to="/" className="flex items-center">
               <InstagramLogo />
-              <span className="logo__font self-center text-3xl ml-3 font-light whitespace-nowrap text-gray-700 dark:text-white">
+              <span className="logo__font hidden lg:flex md:flex sm:flex self-center text-3xl ml-3 font-light whitespace-nowrap text-gray-700 dark:text-white">
                 Instagram
               </span>
             </Link>
+            <div className=" justify-center align-center items-center w-full flex md:w-auto md:order-1">
+              <ul className="flex flex-row justify-center items-center  md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                <Search handleSearch={handleSearch} inputSearch={inputSearch} />
+                {!inputSearch ? (
+                  <>
+                    <li>
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
+                        <FaRegCompass />
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0 cursor-pointer">
+                        <FaFacebookMessenger />
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
+                        <FaRegHeart />
+                      </a>
+                    </li>
+                  </>
+                ) : null}
+              </ul>
+            </div>
             <div className="flex items-center md:order-2">
               <div className="flex items-center relative">
                 <div className="hidden lg:flex sm:flex relative">
@@ -125,18 +149,16 @@ export default function NavbarLayout() {
 
                 {/* <!-- dropdown --> */}
 
-                <div className="dropdown relative">
-                  <button
-                    onClick={() =>
-                      getUser.username === auth.username &&
-                      handlerModal('uploadPost')
-                    }
-                    type="button"
-                    className="flex items-center text-white bg-darktheme-button hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-8 py-2 text-center mr-3 md:mr-0  dark:hover:bg-blue-600 dark:focus:ring-blue-700 rounded-full"
-                  >
-                    Publicar
-                  </button>
-                </div>
+                <button
+                  onClick={() =>
+                    getUser.username === auth.username &&
+                    handlerModal('uploadPost')
+                  }
+                  type="button"
+                  className="hidden lg:flex md:flex sm:flex items-center text-white relative bg-darktheme-button hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-8 py-2 text-center mr-3 md:mr-0  dark:hover:bg-blue-600 dark:focus:ring-blue-700 rounded-full"
+                >
+                  Publicar
+                </button>
               </div>
 
               <button
@@ -172,33 +194,6 @@ export default function NavbarLayout() {
                   ></path>
                 </svg>
               </button>
-            </div>
-            <div
-              className="hidden justify-center align-center items-center w-full md:flex md:w-auto md:order-1"
-              id="mobile-menu-2"
-            >
-              <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                <Search handleSearch={handleSearch} inputSearch={inputSearch} />
-                {!inputSearch ? (
-                  <>
-                    <li>
-                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
-                        <FaRegCompass />
-                      </a>
-                    </li>
-                    <li>
-                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0 cursor-pointer">
-                        <FaFacebookMessenger />
-                      </a>
-                    </li>
-                    <li>
-                      <a className="block text-lg py-2 pr-2 pl-2 text-gray-500 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 hover:text-blue-500 md:p-0">
-                        <FaRegHeart />
-                      </a>
-                    </li>
-                  </>
-                ) : null}
-              </ul>
             </div>
           </div>
         </div>
