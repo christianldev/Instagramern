@@ -119,9 +119,14 @@ async function startServer() {
     path: '/graphql',
   });
 
-  httpServer.listen(process.env.PORT, () => {
-    console.log(
-      `Server running on http://localhost:${process.env.PORT}/graphql`,
-    );
-  });
+  httpServer.listen(
+    isDevelopment ? process.env.PORT : process.env.PORT_PROD,
+    () => {
+      console.log(
+        `Server running on http://localhost:${
+          isDevelopment ? process.env.PORT : process.env.PORT_PROD
+        }/graphql`,
+      );
+    },
+  );
 }
