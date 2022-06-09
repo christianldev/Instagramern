@@ -7,7 +7,7 @@ import { setContext } from 'apollo-link-context';
 import { getToken } from '../utils/token';
 
 const httpLink = createUploadLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://insta-merng-server.herokuapp.com/graphql',
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors);
     console.log('networkError', networkError);
@@ -27,7 +27,7 @@ const authLink = setContext((_, { headers }) => {
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://localhost:4000/graphql`,
+    url: `wss://insta-merng-server.herokuapp.com/graphql`,
     options: { reconnect: true },
     connectionParams: {
       headers: {

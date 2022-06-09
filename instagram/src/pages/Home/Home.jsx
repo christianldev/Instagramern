@@ -30,7 +30,7 @@ export default function Home() {
   const { getFollowingPublications } = dataFollowingPosts;
 
   return (
-    <main className="mx-auto bg-white dark:bg-darktheme-body lg:m-auto flex flex-1 flex-col items-center w-full ">
+    <main className="mx-auto min-h-screen bg-white dark:bg-darktheme-body lg:m-auto flex flex-1 flex-col items-center w-full ">
       <InstagramStories getUser={getUser} />
 
       <div id="wrapper" className="lg:flex px-2">

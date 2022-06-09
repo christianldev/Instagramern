@@ -19,8 +19,6 @@ const typeDefs = require('./gql/schema');
 const resolvers = require('./gql/resolver');
 const { graphqlUploadExpress } = require('graphql-upload');
 const cors = require('cors');
-const { issueToken } = require('./controllers/UserController');
-const User = require('./models/user');
 
 //import dotenv
 require('dotenv').config({ path: '.env' });
@@ -43,7 +41,11 @@ mongoose.connect(
 
 async function startServer() {
   const app = express();
+
+  app.use(cors());
+
   const httpServer = createServer(app);
+
   const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
@@ -51,6 +53,10 @@ async function startServer() {
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/graphql',
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
   });
 
   const serverCleanup = useServer(
@@ -58,12 +64,15 @@ async function startServer() {
       schema,
     },
     wsServer,
+    cors({
+      origin: '*',
+      credentials: true,
+    }),
   );
 
   const server = new ApolloServer({
     schema,
     csrfPrevention: false,
-
     plugins: [
       // Proper shutdown for the HTTP server.
       ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -99,6 +108,10 @@ async function startServer() {
         }
       }
     },
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
   });
 
   await server.start();
@@ -117,16 +130,12 @@ async function startServer() {
   server.applyMiddleware({
     app,
     path: '/graphql',
+    cors: false,
   });
 
-  httpServer.listen(
-    isDevelopment ? process.env.PORT : process.env.PORT_PROD,
-    () => {
-      console.log(
-        `Server running on http://localhost:${
-          isDevelopment ? process.env.PORT : process.env.PORT_PROD
-        }/graphql`,
-      );
-    },
-  );
+  httpServer.listen({ port: process.env.PORT || 4000 }, () => {
+    console.log(
+      `Server running on http://localhost:${process.env.PORT || 4000}/graphql`,
+    );
+  });
 }

@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+<h2 align="center" ><strong>New Instagram Web</strong></br>
+ Created with stack MERN, Firebase auth with Facebook and AWS S3. 
+</h2>
+<br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3>Home Page</h3>
 
-## Available Scripts
 
-In the project directory, you can run:
+<img width="914" alt="React Boilerplate Meets CRA" src="https://awesomescreenshot.s3.amazonaws.com/image/3305293/27135219-448a85a73fb32a1639da1cce94a41f2e.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSCJQ2NM3XLFPVKA%2F20220513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220513T163638Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&X-Amz-Signature=0c9530a76c1928c5f0021f366562ec37f16383dd95c023df5f5d1ba1a73e0a7d" align="center">
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h3>Profile Page</h3>
+<img width="914" alt="React Boilerplate Meets CRA" src="https://awesomescreenshot.s3.amazonaws.com/image/3305293/27135243-7e8793dc28256690f4a838651d85daf2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSCJQ2NM3XLFPVKA%2F20220513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220513T163711Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&X-Amz-Signature=7191384e3fe6cd130d038471f509ca7539e181c0a9c55edaf2c65f6caecefd44" align="center">
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- <div align="center">
+  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Abuild">
+    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/build/badge.svg" alt="Build Status" />
+  </a>
+  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%3Atests">
+    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/test/badge.svg" alt="Tests Status" />
+  </a>
+  <a href="https://github.com/react-boilerplate/react-boilerplate-cra-template/actions?query=workflow%release">
+    <img src="https://github.com/react-boilerplate/react-boilerplate-cra-template/workflows/release/badge.svg" alt="Release Status" />
+  </a>
+</div> -->
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ `Show some ❤️ and star the repo to support the project.`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start your [Create React App](https://github.com/facebook/create-react-app) projects in seconds with the best, industry-standard tools and practices made ready for you.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**📚 Note:** `This repository is still under development and I will continue to add more features to it.`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- **🎨 Check the example app:** [Demonstrating the features](https://react-boilerplate.github.io/react-boilerplate-cra-template/) -->
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**📦 Features:** 
+- Custom photo feed based on who you follow
+- Change your profile picture
+- Make and Like posts
+- View all likes on a post
+- Comment on posts
+- View all comments on a post
+- Search based on usernames and names
+- Follow / Unfollow Users
+- Edit profile
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
+<h2>Frontend</h2>
 
-### Analyzing the Bundle Size
+## Install & Start
+``` shell 
+git clone https://github.com/DevLop-EC/Instagram
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+⚠️ Using [NPM Package Manager](https://www.npmjs.com/) 
 
-### Making a Progressive Web App
+Start and check our example app, if you want
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```shell
+cd Instagram
+npm i && npm start
+```
 
-### Advanced Configuration
+<h2>Backend</h2>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`Create a .env to store your credentials`
 
-### Deployment
+- Create a [Firebase](https://firebase.google.com/) account and use facebook authentication
+- Create a bucket in AWS S3 to store your images
+- Create a database in MongoDB Atlas to store your data and local authentication
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🖥️ Tech Stack
+**Frontend:**
+
+![reactjs](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)&nbsp;
+![react-router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)&nbsp;
+![tailwindcss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)&nbsp;
+
+
+**Backend:**
+
+![nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
+![expressjs](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)&nbsp;
+![mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)&nbsp;
+![jwt](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=purple)&nbsp;
+![graphql](https://img.shields.io/badge/GraphQL-000000?style=for-the-badge&logo=GraphQL&logoColor=red)&nbsp;
+![firebase](https://img.shields.io/badge/Firebase-000000?style=for-the-badge&logo=Firebase&logoColor=yellow)&nbsp;
+
+
+
+**Realtime Communication:**
+
+- `coming soon...`
+
+</br>
+<h2>📬 Contact</h2>
+
+If you want to contact me, you can reach me through below handles.
+
+[![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/christdevlop/)
+
+© 2022 Christian Lopez

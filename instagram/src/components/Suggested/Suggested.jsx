@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import FollowButton from '../FollowButton';
 import avataNotFound from '../../assets/avatarnotfound.jpg';
 
-export default function Suggested({ getUser, auth }) {
+export default function Suggested({ getUser }) {
   const { data, loading } = useQuery(GET_NOT_FOLLOWING);
 
   if (loading) return null;
@@ -53,7 +53,7 @@ export default function Suggested({ getUser, auth }) {
                   </p>
                   <p className="text-xs text-gray-500">{user.username}</p>
                 </Link>
-                <FollowButton getNotFollowing={user} />
+                <FollowButton getNotFollowing={user} getUser={getUser} />
               </div>
             </div>
           ))

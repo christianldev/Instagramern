@@ -12,7 +12,7 @@ import { FaHeartBroken, FaUserPlus } from 'react-icons/fa';
 import './FollowButton.css';
 import { GET_FOLLOWING_PUBLICATIONS } from '../../gql/post';
 
-export default function FollowButton({ getUser, getNotFollowing }) {
+export default function FollowButton({ getUser, getNotFollowing, auth }) {
   const [follow] = useMutation(FOLLOW_USER, {
     refetchQueries: [
       {
@@ -129,7 +129,7 @@ export default function FollowButton({ getUser, getNotFollowing }) {
 
   return (
     <div className="font-semibold text-center mx-4">
-      {!loading && buttonFollow()}
+      {!loading && getUser?.username !== auth?.username && buttonFollow()}
     </div>
   );
 }
