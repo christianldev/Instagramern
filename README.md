@@ -9,7 +9,7 @@
 
 <h3>Home Page</h3>
 
-<img width="914" alt="React Boilerplate Meets CRA" src="https://www.mediafire.com/convkey/7872/kedax46wrhwvehd7g.jpg" align="center">
+<img width="914" alt="React Boilerplate Meets CRA" src="https://www.mediafire.com/convkey/93bc/550mh25nn198w1f7g.jpg" align="center">
 
 
 <br />
