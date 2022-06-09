@@ -15,7 +15,7 @@
 <br />
 
 <h3>Profile Page</h3>
-<img width="914" alt="React Boilerplate Meets CRA" src="https://awesomescreenshot.s3.amazonaws.com/image/3305293/27135243-7e8793dc28256690f4a838651d85daf2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSCJQ2NM3XLFPVKA%2F20220513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220513T163711Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&X-Amz-Signature=7191384e3fe6cd130d038471f509ca7539e181c0a9c55edaf2c65f6caecefd44" align="center">
+<img width="914" alt="React Boilerplate Meets CRA" src="https://www.mediafire.com/convkey/7e6b/onqdct4w2rf38xz7g.jpg" align="center">
 
 
 <!-- <div align="center">
