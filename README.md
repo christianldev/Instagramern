@@ -1,5 +1,5 @@
 <h2 align="center" ><strong>New Instagram Web</strong></br>
- Created with stack MERN, Firebase auth with Facebook and AWS S3. 
+ Created with stack MERNG, Firebase auth with Facebook and AWS S3. 
 </h2>
 <br />
 
