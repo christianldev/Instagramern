@@ -5,7 +5,7 @@
 
 <h3>Login Page</h3>
 
-<img width="914" alt="React Boilerplate Meets CRA" src="https://awesomescreenshot.s3.amazonaws.com/image/3305293/27135219-448a85a73fb32a1639da1cce94a41f2e.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSCJQ2NM3XLFPVKA%2F20220513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220513T163638Z&X-Amz-Expires=28800&X-Amz-SignedHeaders=host&X-Amz-Signature=0c9530a76c1928c5f0021f366562ec37f16383dd95c023df5f5d1ba1a73e0a7d" align="center">
+<img width="914" alt="React Boilerplate Meets CRA" src="https://www.mediafire.com/convkey/a3a2/9bpo73l31m8aetx7g.jpg" align="center">
 
 <h3>Home Page</h3>
 
