@@ -7,7 +7,7 @@ import { setContext } from 'apollo-link-context';
 import { getToken } from '../utils/token';
 
 const httpLink = createUploadLink({
-  uri: 'https://insta-merng-server.herokuapp.com/graphql',
+  uri: 'https://instagram-clone-server-production.up.railway.app/graphql',
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors);
     console.log('networkError', networkError);
